@@ -33,7 +33,7 @@ public class LevelManager : MonoBehaviour
         _loaderCanvas.SetActive(true);
 
         do
-        {
+        { 
             _progressBar.fillAmount = scene.progress;
         } while (scene.progress < 0.9f);
 
