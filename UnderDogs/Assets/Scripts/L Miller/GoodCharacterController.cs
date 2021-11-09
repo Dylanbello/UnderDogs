@@ -1,9 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Extension;
+
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(Animator))]
 
 public class GoodCharacterController : MonoBehaviour
 {
+    
     private Animator _animator;
     private Rigidbody _rigidbody;
 
@@ -139,4 +145,5 @@ public class GoodCharacterController : MonoBehaviour
         _triggerBite = false;
         _triggerBark = false;
     }
+    
 }
