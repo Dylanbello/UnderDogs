@@ -582,7 +582,7 @@ GameObject:
   - component: {fileID: 1163006849}
   - component: {fileID: 1163006848}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Pressure Plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -602,7 +602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _onActivate: {fileID: 11400000, guid: 2f9653efdaa69a84e91e98370fc51118, type: 2}
   _onDeactivate: {fileID: 11400000, guid: 39e7c04a6cc08474f854026f5a46d492, type: 2}
-  mechanism: {fileID: 606288349}
+  mechanism: {fileID: 0}
   _activated: 0
 --- !u!65 &1163006849
 BoxCollider:
