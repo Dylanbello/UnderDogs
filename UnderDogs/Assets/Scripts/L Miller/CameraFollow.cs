@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewCharacterController : MonoBehaviour
+public class CameraFollow : MonoBehaviour
 {
     public Action<Vector2> onMovementInput;
     public Action<Vector3> onMovementDirectionInput;
-    
+
     // Start is called before the first frame update
     void Start()
     {
