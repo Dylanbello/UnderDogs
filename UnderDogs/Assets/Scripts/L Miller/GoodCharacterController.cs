@@ -85,9 +85,9 @@ public class GoodCharacterController : MonoBehaviour
         {
             //Move
             if (_isRunning)
-                _rigidbody.velocity = transform.forward * _vertical * _runningSpeed;
+                _rigidbody.velocity = transform.forward * _vertical * _runningSpeed + new Vector3(0, _rigidbody.velocity.y, 0);
             else if (_isWalking)
-                _rigidbody.velocity = transform.forward * _vertical * _walkingSpeed;
+                _rigidbody.velocity = transform.forward * _vertical * _walkingSpeed + new Vector3(0, _rigidbody.velocity.y, 0);
 
             //Rotate
             _rotationVelocity = new Vector3(0f, _rotationSpeed, 0f);
