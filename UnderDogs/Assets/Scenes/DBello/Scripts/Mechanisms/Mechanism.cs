@@ -5,9 +5,6 @@ using UnityEngine;
 public class Mechanism : MonoBehaviour
 {
     private Animator animator;
-    //[Header("Write the name of the animation clip here")]
-    
-    //public string debugName;
 
     private void Awake()
     {
