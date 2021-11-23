@@ -7,7 +7,7 @@ public class PressurePlate : MonoBehaviour
 {
     [SerializeField] GameEvent _onActivate;
     [SerializeField] GameEvent _onDeactivate;
-    public GameObject mechanism;
+    //public GameObject mechanism;
 
     public bool _activated;
 
@@ -31,9 +31,9 @@ public class PressurePlate : MonoBehaviour
         _activated = true;
     }
 
-    private void Deactivate()
+    void Deactivate()
     {
-        _onDeactivate.Invoke();
+        _onDeactivate?.Invoke();
         Debug.Log("Deactivated");
         _activated = false;
     }
