@@ -9,16 +9,21 @@ using Extension;
 
 public class GoodCharacterController : MonoBehaviour
 {
-    
+    public CharacterController _controller;
+
     private Animator _animator;
     private Rigidbody _rigidbody;
 
+    private float _smoothTurnVelocity;
+    private Vector3 _direction;
+    public float _smoothTurnTime = 0.3f;
+
     private Quaternion _rotation;
     private Vector3 _rotationVelocity;
-    private float _rotationSpeed;
-    private float _rotationDefaultSpeed = 180f;
-    private float _walkingSpeed = 1f;
-    private float _runningSpeed = 3f;
+    public float _rotationSpeed;
+    public float _rotationDefaultSpeed = 180f;
+    public float _walkingSpeed = 1f;
+    public float _runningSpeed = 3f;
     private float _horizontal;
     private float _vertical;
 
@@ -32,6 +37,8 @@ public class GoodCharacterController : MonoBehaviour
     private bool _triggerBark;
     private bool _triggerBite;
     private bool _triggerDeath;
+
+    public Transform cam;
 
     // Use this for initialization
     void Start()
@@ -72,6 +79,9 @@ public class GoodCharacterController : MonoBehaviour
         _triggerBark = Input.GetKeyDown(KeyCode.E);
         _triggerDeath = Input.GetKeyDown(KeyCode.T);
 
+
+        _direction = new Vector3(_horizontal, 0f, _vertical).normalized;
+
         if (Methods.AnimationBeingPlayed(_animator, AnimationNames.SitIdle) || Methods.AnimationBeingPlayed(_animator, AnimationNames.LyingDownIdle))
             _triggerGetUp = Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.LeftAlt) || _isWalking;
     }
@@ -81,13 +91,26 @@ public class GoodCharacterController : MonoBehaviour
     /// </summary>
     private void Move()
     {
-        if (Methods.AnimationBeingPlayed(_animator, AnimationNames.Walk) || Methods.AnimationBeingPlayed(_animator, AnimationNames.Run) || Methods.AnimationBeingPlayed(_animator, AnimationNames.Jump))
+        //if (Methods.AnimationBeingPlayed(_animator, AnimationNames.Walk) || Methods.AnimationBeingPlayed(_animator, AnimationNames.Run) || Methods.AnimationBeingPlayed(_animator, AnimationNames.Jump))
+        if(_direction.magnitude > 0.1f)
         {
+
+            //float _targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg * cam.eulerAngles.y;
+            //float _angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetAngle, ref _smoothTurnVelocity, _smoothTurnTime);
+
+            //Vector3 _moveDirection = Quaternion.Euler(0f, _targetAngle, 0f) * Vector3.forward;
+            //transform.rotation = Quaternion.Euler(0f, _targetAngle, 0f);
+
             //Move
             if (_isRunning)
-                _rigidbody.velocity = transform.forward * _vertical * _runningSpeed + new Vector3(0, _rigidbody.velocity.y, 0);
+                //_controller.Move(_moveDirection.normalized * _walkingSpeed * Time.deltaTime);
+            _rigidbody.velocity = transform.forward * _vertical * _runningSpeed + new Vector3(0, _rigidbody.velocity.y, 0);
+
             else if (_isWalking)
-                _rigidbody.velocity = transform.forward * _vertical * _walkingSpeed + new Vector3(0, _rigidbody.velocity.y, 0);
+                //_controller.Move(_moveDirection.normalized * _runningSpeed * Time.deltaTime);
+            _rigidbody.velocity = transform.forward * _vertical * _walkingSpeed + new Vector3(0, _rigidbody.velocity.y, 0);
+
+
 
             //Rotate
             _rotationVelocity = new Vector3(0f, _rotationSpeed, 0f);
