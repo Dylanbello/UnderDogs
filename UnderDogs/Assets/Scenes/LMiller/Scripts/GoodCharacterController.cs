@@ -64,13 +64,23 @@ public class GoodCharacterController : MonoBehaviour
     {
         _isWalking = false;
         _isRunning = false;
+
+        //Get MovementInput
+        Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
         _horizontal = Input.GetAxis(AxisNames.Horizontal);
         _vertical = Input.GetAxis(AxisNames.Vertical);
+
+        //Get DirectionalInput
+        var cameraForwardDirection = Camera.main.transform.forward;
+        var directionToMoveIn = Vector3.Scale(cameraForwardDirection, (Vector3.right + Vector3.forward));
 
         //Get input
         _isWalking = (_vertical > 0f) || (_horizontal != 0f);
         _isRunning = (_vertical > 0f) && Input.GetKey(KeyCode.LeftShift);
         _rotationSpeed = (_horizontal > 0f) ? _rotationDefaultSpeed : ((_horizontal < 0f) ? (_rotationDefaultSpeed * -1) : 0f);
+
+
         _triggerSit = Input.GetKeyDown(KeyCode.LeftControl);
         _triggerLieDown = Input.GetKeyDown(KeyCode.LeftAlt);
         _triggerJump = Input.GetKeyDown(KeyCode.Space);
