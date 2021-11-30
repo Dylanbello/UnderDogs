@@ -8,4 +8,10 @@ public class ChangeSceneButton : MonoBehaviour
     {
         LevelManager.Instance.LoadScene(sceneName);
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 }
