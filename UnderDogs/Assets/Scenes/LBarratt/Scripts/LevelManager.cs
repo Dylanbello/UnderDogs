@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject _loaderCanvas;
     [SerializeField] private Image _progressBar;
     
-    // Youtube (Tarodev) Tutorial Link: https://www.youtube.com/watch?v=OmobsXZSRKo
+    // Reference To Youtube (Tarodev) Tutorial Link Used To Help Create This Script: https://www.youtube.com/watch?v=OmobsXZSRKo
     void Awake()
     {
         if (Instance == null)
