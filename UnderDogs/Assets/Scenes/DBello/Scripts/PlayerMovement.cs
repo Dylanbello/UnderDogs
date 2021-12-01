@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     CharacterController controller;
+    Animator animator;
+
     public float rotationSpeed, movementSpeed, gravity = 20;
     Vector3 movementVector = Vector3.zero;
     private float desiredRotationAngle = 0;
@@ -12,6 +14,22 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        if (controller.isGrounded)
+        {
+            if (movementVector.magnitude > 0)
+            {
+                var animationSpeedMultiplyer = SetCorrectAnimation();
+                RotatePlayer();
+                movementVector *= animationSpeedMultiplyer;
+            }
+        }
+        movementVector.y -= gravity;
+        controller.Move(movementVector * Time.deltaTime);
     }
 
     public void HandleMovement(Vector2 input)
@@ -25,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 movementVector = Vector3.zero;
+                animator.SetFloat("Move", 0);
             }
         }
     }
@@ -47,16 +66,32 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Update()
+    private float SetCorrectAnimation()
     {
-        if(controller.isGrounded)
+        float currentAnimationSpeed = animator.GetFloat("Move");
+        if(desiredRotationAngle > 10 || desiredRotationAngle < -10)
         {
-            if (movementVector.magnitude > 0) 
+            if (currentAnimationSpeed < 0.2f)
             {
-                RotatePlayer();
+                currentAnimationSpeed += Time.deltaTime * 2;
+                currentAnimationSpeed = Mathf.Clamp(currentAnimationSpeed, 0, 0.2f);
             }
+            animator.SetFloat("Move", currentAnimationSpeed);
         }
-        movementVector.y -= gravity;
-        controller.Move(movementVector * Time.deltaTime);
+        else
+        {
+            if(currentAnimationSpeed < 1)
+            {
+                currentAnimationSpeed += Time.deltaTime * 2;
+            }
+            else
+            {
+                currentAnimationSpeed = 1;
+            }
+            animator.SetFloat("Move", currentAnimationSpeed);
+        }
+        return currentAnimationSpeed;
     }
+
+    
 }
