@@ -14,6 +14,26 @@ public class PressurePlate : MonoBehaviour
 
     //public bool _activated;
 
+    private void OnTriggerEnter(Collider other)
+    {
+        //Check which character is on the pressure plate.
+        //or check objects weight, etc.
+
+
+        if (other.CompareTag("character1")) { plateActivation.Invoke(); }
+        else return;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        //Check which character is on the pressure plate.
+        //or check objects weight, etc.
+
+
+        if (other.CompareTag("character1")) { plateDeactivation.Invoke(); }
+        else return;
+    }
+
     //private void OnTriggerEnter(Collider other)
     //{
     //    if (_activated == false)
@@ -41,23 +61,5 @@ public class PressurePlate : MonoBehaviour
     //    _activated = false;
     //}
 
-    private void OnTriggerEnter(Collider other)
-    {
-        //Check which character is on the pressure plate.
-        //or check objects weight, etc.
-        
 
-            if (other.CompareTag("character1")) { plateActivation.Invoke(); }
-        else return;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        //Check which character is on the pressure plate.
-        //or check objects weight, etc.
-       
-
-            if (other.CompareTag("character1")) { plateDeactivation.Invoke(); }
-        else return;
-    }
 }
