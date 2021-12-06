@@ -17,6 +17,7 @@ public class GoodCharacterController : MonoBehaviour
     private float _smoothTurnVelocity;
     private Vector3 _direction;
     public float _smoothTurnTime = 0.3f;
+    private Vector3 directionToMoveIn;
 
     private Quaternion _rotation;
     private Vector3 _rotationVelocity;
@@ -73,7 +74,7 @@ public class GoodCharacterController : MonoBehaviour
 
         //Get DirectionalInput
         var cameraForwardDirection = Camera.main.transform.forward;
-        var directionToMoveIn = Vector3.Scale(cameraForwardDirection, (Vector3.right + Vector3.forward));
+        directionToMoveIn = Vector3.Scale(cameraForwardDirection, (Vector3.right + Vector3.forward));
 
         //Get input
         _isWalking = (_vertical > 0f) || (_horizontal != 0f);
@@ -114,11 +115,11 @@ public class GoodCharacterController : MonoBehaviour
             //Move
             if (_isRunning)
                 //_controller.Move(_moveDirection.normalized * _walkingSpeed * Time.deltaTime);
-            _rigidbody.velocity = transform.forward * _vertical * _runningSpeed + new Vector3(0, _rigidbody.velocity.y, 0);
+            _rigidbody.velocity = directionToMoveIn * _vertical * _runningSpeed + new Vector3(0, _rigidbody.velocity.y, 0);
 
             else if (_isWalking)
                 //_controller.Move(_moveDirection.normalized * _runningSpeed * Time.deltaTime);
-            _rigidbody.velocity = transform.forward * _vertical * _walkingSpeed + new Vector3(0, _rigidbody.velocity.y, 0);
+            _rigidbody.velocity = directionToMoveIn * _vertical * _walkingSpeed + new Vector3(0, _rigidbody.velocity.y, 0);
 
 
 
