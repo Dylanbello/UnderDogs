@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Active - In Use, Dyls Scene
 public class PlayerMovement : MonoBehaviour
 {
     CharacterController controller;
@@ -45,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
                 movementVector = Vector3.zero;
                 animator.SetFloat("Move", 0);
             }
+
+            print(movementVector);
         }
     }
 
