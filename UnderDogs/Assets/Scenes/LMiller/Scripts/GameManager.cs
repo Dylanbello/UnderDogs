@@ -1,9 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+    public GameState State;
+
+    public static event Action<GameState> OnGameStateChanged;
+
     private static GameManager _instance;
     public static GameManager Instance
     {
@@ -18,21 +24,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        UpdateGameState(GameState.MainMenu);
+    }
+
     private void Awake()
     {
         _instance = this;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void UpdateGameState(GameState newState)
     {
-        
-    }
+        State = newState;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        switch (newState)
+        {
+            case GameState.MainMenu:
+                break;
+            case GameState.Cutscene:
+                break;
+            case GameState.Playing:
+                break;
+            case GameState.Paused:
+                break;
+            case GameState.GameOver:
+                break;
+        }
+
+        OnGameStateChanged?.Invoke(newState);
     }
 
     public enum GameState
