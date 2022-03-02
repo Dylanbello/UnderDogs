@@ -7,6 +7,7 @@ public class Ailocomotion : MonoBehaviour
 {
     public float maxTime, maxDistance = 1.0f;
     float timer = 0.0f;
+    
 
     NavMeshAgent agent;
 
@@ -28,11 +29,9 @@ public class Ailocomotion : MonoBehaviour
             float sgdistance = (playerTransform.position - agent.destination).sqrMagnitude;
             if(sgdistance > maxDistance*maxDistance)
             {
-                agent.destination = playerTransform.position;
+                //agent.destination = playerTransform.position;
             }
             timer = maxTime;
-
-            agent.destination = playerTransform.position;
         }
 
         animator.SetFloat("Speed", agent.velocity.magnitude);
