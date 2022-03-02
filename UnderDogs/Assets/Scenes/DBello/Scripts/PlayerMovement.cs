@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetFloat("Move", 0);
             }
 
-            print(movementVector);
+            //print(movementVector);
         }
     }
 
