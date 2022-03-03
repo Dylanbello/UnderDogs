@@ -1,30 +1,41 @@
 using System.Collections;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 [RequireComponent(typeof(CharacterController))]
 public class BC_CharacterControllerMovement : MonoBehaviour
 {
     CharacterController controller;
-    [SerializeField] Transform cam;
+    Transform cam;
+    CinemachineFreeLook cmFreeLook;
     Animator animator;
 
-    private Vector3 playerVelocity;
-    private Vector3 moveInput;
+    Vector3 playerVelocity;
+    Vector3 moveInput;
     
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float jumpHeight = 1.0f;
     private float gravityValue = -9.81f;
 
     [SerializeField] float turnSmoothTime = 0.1f;
-    private float turnSmoothVelocity;
 
-    public bool grounded;
 
-    private void Start()
+    private void Awake()
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
-        
+        cam = GetComponentInChildren<Camera>().transform;
+        cmFreeLook = GetComponentInChildren<CinemachineFreeLook>();
+    }
+
+    private void Start()
+    {
+        cmFreeLook.Follow = transform;
+        cmFreeLook.LookAt = transform;
+
+        if(Cursor.visible) { Cursor.lockState = CursorLockMode.Confined; Cursor.visible = false; }
+
         canJump = true;
     }
 
@@ -33,7 +44,8 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         CheckFalling();
         Movement();
         Rotation();
-        SetAnimation();
+        
+        animator.SetFloat("Move", SetCorrectAnimation());
     }
 
     #region Inputs
@@ -44,7 +56,6 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     #endregion
 
     #region Movement & Falling
-
     void Movement()
     {
         Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
@@ -56,7 +67,7 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     void Rotation()
     {
-        if(moveInput == Vector3.zero) { return; }
+        if(moveInput == Vector3.zero) { return; }   //Comment out this line to allow turning while stationary.
 
         float targetAngle = Mathf.Atan2(moveInput.x, moveInput.y) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
         Quaternion rotation = Quaternion.Euler(0f, targetAngle, 0f);
@@ -86,10 +97,12 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     private void Jump()
     {
-        if (jumpCount == 1 || !canJump) return;
+        if (jumpCount == 1 || !canJump) return;     //Guard clause for double jumping.
+        //animator.SetTrigger("Jump");
 
         canJump = false;
         jumpCount += 1;
+
 
         playerVelocity.y += Mathf.Sqrt(jumpHeight * -3 * gravityValue);
         StartCoroutine(JumpCooldown());
@@ -98,18 +111,18 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     IEnumerator JumpCooldown()
     {
         yield return new WaitForSeconds(0.2f);
+        //animator.ResetTrigger("Jump");
         canJump = true;
-        Debug.Log("Can jump");
     }
 
     #endregion
 
     #region Applying Animation Values
-
+    /*
     private float SetCorrectAnimation()
     {
         float currentAnimationSpeed = animator.GetFloat("Move");
-        if (moveSpeed > 1 || moveSpeed < -1)    //moveSpeed isn't being changed anywhere
+        if (moveSpeed > 1 || moveSpeed < -1)
         {
             if (currentAnimationSpeed < 0.2f)
             {
@@ -126,15 +139,29 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         }
         return currentAnimationSpeed;
     }
+    */
 
-    //Experimenting with simpler animation code
-    void SetAnimation()
+
+    /// <summary>
+    /// This method gets the movement input for both axis and return a float for the animator to use.
+    /// </summary>
+    /// <returns>Speed in which the player is animating betweek 0, 1</returns>
+    private float SetCorrectAnimation()
     {
-        float verticalMovement = moveInput.y;
+        float charMoveSpeed = 0;
+        float moveX = moveInput.x;
+        float moveY = moveInput.y;
 
-        if(moveInput.z != 0 && moveInput.y == 0) { verticalMovement = moveInput.z / 2; }
+        if (moveX == 0 && moveY == 0) charMoveSpeed = 0;
+        else if (moveX > 0.8f || moveY > 0.8f) charMoveSpeed = 1;
+        else if (moveX < -0.8f || moveY < -0.8f) charMoveSpeed = 1;
+        else if (moveX < 0.7f || moveY < 0.7f) charMoveSpeed = 0.5f;
+        else if (moveX > -0.7f || moveY > -0.7f) charMoveSpeed = 0.5f;
 
-        animator.SetFloat("Move", verticalMovement);
+        //Sprinting
+        //if(isSprinting) charMoveSpeed = 2;
+
+        return charMoveSpeed;
     }
 
     #endregion
