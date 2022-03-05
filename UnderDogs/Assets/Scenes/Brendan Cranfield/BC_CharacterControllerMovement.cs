@@ -48,6 +48,10 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         animator.SetFloat("Move", SetCorrectAnimation());
     }
 
+    public void OnEnableControls() { GetComponent<PlayerInput>().enabled = true; }
+
+    public void OnDisableControls() { GetComponent<PlayerInput>().enabled = false; }
+
     #region Inputs
 
     public void Movement(InputAction.CallbackContext context) { moveInput = context.ReadValue<Vector2>(); }
