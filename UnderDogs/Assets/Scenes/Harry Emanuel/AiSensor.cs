@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class AiSensor : MonoBehaviour
 {
     public float distance = 10;
@@ -118,7 +117,7 @@ public class AiSensor : MonoBehaviour
         vertices[vert++] = bottomCenter;
         vertices[vert++] = topCenter;
         vertices[vert++] = topRight;
-
+        
         vertices[vert++] = topRight;
         vertices[vert++] = bottomRight;
         vertices[vert++] = bottomCenter;

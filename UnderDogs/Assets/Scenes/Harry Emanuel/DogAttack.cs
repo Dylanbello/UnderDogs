@@ -8,10 +8,11 @@ public class DogAttack : MonoBehaviour
     public float power;
     public int grenadeDamage;
     public float radius;
-    public float delay = 3f;
+    public float delay = 0f;
     private float countdown;
-    bool hasExploded = false;
+    //bool hasExploded = false;
 
+    public AIHealth aIHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -23,10 +24,11 @@ public class DogAttack : MonoBehaviour
     void Update()
     {
         countdown -= Time.deltaTime;
-        if (countdown <= 0f && !hasExploded)//TODO: if the dog has attacked to the explode
+        if (Input.GetKeyDown(KeyCode.X))//TODO: if the dog has attacked to the explode
         {
             Explode();
-            hasExploded = true;
+            //hasExploded = true;
+            Debug.Log("Dog Attacked");
         }
     }
 
@@ -40,13 +42,16 @@ public class DogAttack : MonoBehaviour
 
             if (rb != null)
             {
+                Debug.Log("Enemy Hit");
                 rb.AddExplosionForce(power, explosionPos, radius, 3.0F, ForceMode.Impulse);
 
-                /*if (rb.gameObject.GetComponent<AIHealth>())
+                if (rb.gameObject.GetComponent<AIHealth>())
                 {
-                    rb.gameObject.GetComponent<AIHealth>().TakeDamage(grenadeDamage);//TODO change Takadamage feild
+                    rb.gameObject.GetComponent<AIHealth>().TakeDamage(1);
+                    Debug.Log("Enemy Attacked");
+                
                 }
-                */
+                
             }
         }
     }
