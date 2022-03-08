@@ -130,7 +130,7 @@ Material:
     m_Floats:
     - _AO: 0.415
     - _Alphacutoff: 0.594
-    - _AmbientOcclusion: 0
+    - _AmbientOcclusion: 0.201
     - _BumpScale: 1
     - _CheckerOpacity: 0
     - _ColorVarHeu: 0
@@ -146,7 +146,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
-    - _GradientBrightness: 1.88
+    - _GradientBrightness: 0.745
     - _MaskClipValue: 0.5
     - _Metallic: 0
     - _Mode: 1
