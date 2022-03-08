@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AIHealthBar : MonoBehaviour
+public class AIUIHealthBar : MonoBehaviour
 {
 	public Slider slider;
 	public Gradient gradient;

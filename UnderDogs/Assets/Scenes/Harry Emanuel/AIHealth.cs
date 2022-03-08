@@ -7,7 +7,7 @@ public class AIHealth : MonoBehaviour
     public int maxHeatlh = 100;
     [HideInInspector]
     public int currentHealth;
-    public AIHealthBar healthBar;
+    public AIUIHealthBar healthBar;
 
     void Start()
     {

@@ -7,23 +7,41 @@ using UnityEngine.AI;
 //Acqquired on: 1/03/2022
 public class AILocomotion : MonoBehaviour
 {
-    [Header("AIMovement")]
-    public NavMeshAgent navMeshAgent;               //  Nav mesh agent component
-    public float startWaitTime = 4;                 //  Wait time of every action
-    public float timeToRotate = 2;                  //  Wait time when the enemy detect near the player without seeing
-    public float speedWalk = 6;                     //  Walking speed, speed in the nav mesh agent
-    public float speedRun = 9;                      //  Running speed
+    [Header("NavMeshComponent")]
+    [Tooltip("Nav mesh agent component")]
+    public NavMeshAgent navMeshAgent; 
+    
     [Space]
+
+    [Header("AILocomotion")]
+    [Tooltip("Wait time of every action")]              
+    public float startWaitTime = 4;                
+    [Tooltip("Wait time when the enemy detect near the player without seeing")]
+    public float timeToRotate = 2;
+    [Tooltip("Walking speed, speed in the nav mesh agent")] 
+    public float speedWalk = 6;
+    [Tooltip("Running speed")]                     
+    public float speedRun = 9;                      
+
+    [Space]
+
     [Header("AIDetection")]
-    public float viewRadius = 15;                   //  Radius of the enemy view
-    public float viewAngle = 90;                    //  Angle of the enemy view
-    public LayerMask playerMask,obstacleMask;       //  To detect the player with the raycast and detect obstacles in view
-    public float meshResolution = 1.0f;             //  How many rays will cast per degree
-    public int edgeIterations = 4;                  //  Number of iterations to get a better performance of the mesh filter when the raycast hit an obstacule
-    public float edgeDistance = 0.5f;               //  Max distance to calcule the a minumun and a maximum raycast when hits something
+    [Tooltip("Radius of the enemy view")]
+    public float viewRadius = 15;                   
+    [Tooltip("Angle of the enemy view")]
+    public float viewAngle = 90;                   
+    [Tooltip("To detect the player with the raycast and detect obstacles in view")]
+    public LayerMask playerMask,obstacleMask;     
+    [Tooltip("How many rays will cast per degree")]  
+    public float meshResolution = 1.0f; 
+    [Tooltip("Number of iterations to get a better performance of the mesh filter when the raycast hit an obstacule")]            
+    public int edgeIterations = 4;
+    [Tooltip("Max distance to calcule the a minumun and a maximum raycast when hits something")]                   
+    public float edgeDistance = 0.5f;               
  
     [Header("WavePoints")]
     public Transform[] waypoints;                   //  All the waypoints where the enemy patrols
+
     int m_CurrentWaypointIndex;                     //  Current waypoint where the enemy is going to
  
     Vector3 playerLastPosition = Vector3.zero;      //  Last position of the player when was near the enemy
@@ -56,7 +74,7 @@ public class AILocomotion : MonoBehaviour
  
     private void Update()
     {
-            EnviromentView();                       //  Check whether or not the player is in the enemy's field of vision
+        EnviromentView();   //  Check whether or not the player is in the enemy's field of vision
  
         if (!m_IsPatrol)
         {

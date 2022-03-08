@@ -281,14 +281,14 @@ MonoBehaviour:
   distance: 15
   angle: 15
   height: 0.2
-  meshColor: {r: 1, g: 0, b: 0, a: 0.22745098}
+  meshColor: {r: 1, g: 0, b: 0, a: 0.18431373}
   scanFrequency: 30
   layers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   occlusionLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
 --- !u!1 &184324008
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,8 +298,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 184324009}
-  - component: {fileID: 184324011}
   - component: {fileID: 184324010}
+  - component: {fileID: 184324011}
   m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
@@ -345,11 +345,11 @@ MonoBehaviour:
   gradient:
     serializedVersion: 2
     key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 1, g: 0.47726548, b: 0, a: 1}
-    key2: {r: 1, g: 0.8724341, b: 0, a: 1}
-    key3: {r: 0.46423966, g: 0.764151, b: 0.17661981, a: 0}
-    key4: {r: 0.46363258, g: 0.9408563, b: 0.002676016, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
+    key1: {r: 1, g: 0.42592356, b: 0, a: 1}
+    key2: {r: 1, g: 0.7823086, b: 0, a: 0}
+    key3: {r: 0.42855275, g: 0.91156286, b: 0, a: 0}
+    key4: {r: 0.03756249, g: 1, b: 0, a: 0}
+    key5: {r: 0.03756249, g: 1, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
@@ -357,12 +357,12 @@ MonoBehaviour:
     ctime2: 32768
     ctime3: 49151
     ctime4: 65535
-    ctime5: 0
+    ctime5: 65535
     ctime6: 0
     ctime7: 0
     atime0: 0
-    atime1: 32768
-    atime2: 65535
+    atime1: 65535
+    atime2: 0
     atime3: 0
     atime4: 0
     atime5: 0
@@ -370,7 +370,7 @@ MonoBehaviour:
     atime7: 0
     m_Mode: 0
     m_NumColorKeys: 5
-    m_NumAlphaKeys: 3
+    m_NumAlphaKeys: 2
   fill: {fileID: 989027819}
 --- !u!114 &184324011
 MonoBehaviour:
@@ -1221,9 +1221,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 800127137}
-  - component: {fileID: 800127136}
-  - component: {fileID: 800127135}
   - component: {fileID: 800127139}
+  - component: {fileID: 800127135}
+  - component: {fileID: 800127136}
   - component: {fileID: 800127140}
   - component: {fileID: 800127141}
   m_Layer: 0
@@ -1247,11 +1247,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 800127136}
   startWaitTime: 4
-  timeToRotate: 0.01
+  timeToRotate: 2
   speedWalk: 6
-  speedRun: 3
+  speedRun: 4
   viewRadius: 15
-  viewAngle: 130
+  viewAngle: 15
   playerMask:
     serializedVersion: 2
     m_Bits: 256
@@ -1260,7 +1260,7 @@ MonoBehaviour:
     m_Bits: 512
   meshResolution: 1
   edgeIterations: 4
-  edgeDistance: 1
+  edgeDistance: 0.5
   waypoints:
   - {fileID: 1521874435}
   - {fileID: 319255136}
@@ -1317,7 +1317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHeatlh: 100
   currentHealth: 0
-  healthBar: {fileID: 184324010}
+  healthBar: {fileID: 0}
 --- !u!54 &800127140
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1957,7 +1957,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1302494090}
-  m_LocalRotation: {x: -0.051451866, y: 0.0000000021756545, z: 1.09231076e-10, w: 0.9986755}
+  m_LocalRotation: {x: -0.051451866, y: -0.0000000021756539, z: -1.0923108e-10, w: 0.9986755}
   m_LocalPosition: {x: 1.29, y: 0.8299999, z: -9.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2030,7 +2030,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1438265224}
-  m_LocalRotation: {x: -0.05145185, y: 0.0000000021479492, z: 1.10662535e-10, w: 0.9986755}
+  m_LocalRotation: {x: -0.05145185, y: -0.0000000021479487, z: -1.10662514e-10, w: 0.9986755}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
