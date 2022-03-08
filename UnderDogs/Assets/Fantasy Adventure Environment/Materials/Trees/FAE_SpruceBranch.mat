@@ -130,24 +130,24 @@ Material:
     m_Floats:
     - _AO: 1
     - _Alphacutoff: 0.594
-    - _AmbientOcclusion: 0.475
+    - _AmbientOcclusion: 0.683
     - _BumpScale: 1
     - _CheckerOpacity: 0
     - _ColorVarHeu: 0
     - _ColorVariation: 0
     - _Cull: 0
-    - _Cutoff: 0.5
+    - _Cutoff: 0.525
     - _Debug: 0
     - _DetailNormalMapScale: 1
     - _Dist: 0
     - _DstBlend: 0
-    - _FlatLighting: 0
+    - _FlatLighting: 0.163
     - _Float8: 0.1
     - _Gloss: 0.5
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
-    - _GradientBrightness: 1
+    - _GradientBrightness: 0.99
     - _MaskClipValue: 0.5
     - _MaxWindStrength: 0.5
     - _Metallic: 0
@@ -157,7 +157,7 @@ Material:
     - _Shadows: 1
     - _Shininess: 0.1
     - _SmoothShading: 0
-    - _Smoothness: 0
+    - _Smoothness: 0.065
     - _SmoothnessTextureChannel: 0
     - _Snow: 0.988
     - _SnowHeight: 0.083
