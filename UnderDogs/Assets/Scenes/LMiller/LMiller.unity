@@ -1578,8 +1578,9 @@ GameObject:
   - component: {fileID: 1150423722}
   - component: {fileID: 1150423721}
   - component: {fileID: 1150423720}
+  - component: {fileID: 1150423724}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Cog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1655,13 +1656,27 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1150423719}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
   m_LocalPosition: {x: 193.312, y: 82.41, z: 322.89}
   m_LocalScale: {x: 0.5, y: 0.1, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &1150423724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150423719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea2c98a84ced2d142a6dd553d3a8c938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cogValue: 0
+  cogSpinSpeed: 0
 --- !u!114 &1279350484 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5278016110432020095, guid: c8e30b417111422449b748fac7f50433, type: 3}
