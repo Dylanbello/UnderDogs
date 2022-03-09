@@ -1,7 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+//THIS IS A APA7TH SCRIPT/CODE from https://uark.libguides.com/CSCE/CitingCode
+Title: AIAttacking
+Aurther: Muddy Wolf
+Date: <2021>
+Availability https://youtu.be/VOdYtqV_meo
+*/
 public class DogsHealth : MonoBehaviour
 {
     [SerializeField]private float health = 0f;

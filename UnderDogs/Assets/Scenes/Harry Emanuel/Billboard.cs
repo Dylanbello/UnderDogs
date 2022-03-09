@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+    THIS IS A APA7TH SCRIPT/CODE from https://uark.libguides.com/CSCE/CitingCode
+Title: AI Health
+Aurther: Brackeys
+Date: <2020>
+Availability https://youtu.be/ieyHlYp5SLQ
+*/
 public class Billboard : MonoBehaviour
-//This script tells the canvus to position anything in it towards the front of the camera as it will always follow it.
 {
    public Transform cam1;
-   //public Transform cam2;
-
     void LateUpdate()
     {
         transform.LookAt(transform.position + cam1.forward);
-        //transform.LookAt(transform.position + cam2.forward);
     }
 }
