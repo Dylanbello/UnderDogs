@@ -35,6 +35,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Diffuse:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -72,6 +76,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Shadermap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture0:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -114,11 +122,12 @@ Material:
     - _Reflection: 0.33
     - _RefractionAmount: 0.136
     - _RimDistance: 0.1
-    - _RimRize: 0.71
+    - _RimRize: 0.51
     - _RimSize: 0.61
     - _RimTiling: 0.025
     - _Rimfalloff: 0.21
     - _Rimtiling: 2
+    - _Speed: 1
     - _SrcBlend: 1
     - _SurfaceHighlight: 0.05
     - _SurfaceHightlighttiling: 0.25
