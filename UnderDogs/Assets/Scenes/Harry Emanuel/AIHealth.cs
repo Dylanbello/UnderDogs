@@ -1,44 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/*
-    THIS IS A APA7TH SCRIPT/CODE from https://uark.libguides.com/CSCE/CitingCode
-Title: AI Health
-Aurther: Brackeys
-Date: <2020>
-Availability https://youtu.be/ieyHlYp5SLQ
-*/
+using UnityEngine.UI;
+
 public class AIHealth : MonoBehaviour
 {
     public int maxHeatlh = 100;
-    [HideInInspector]
-    public int currentHealth;
-    public AIUIHealthBar healthBar;
+    public HealthSystem healthSystem;
+
+    [Space(10), Tooltip("This is a list for the sliders seen by both player 1 and player 2")]
+    public List<Slider> healthSliders;
 
     void Start()
     {
-        currentHealth = maxHeatlh;
+        healthSystem = new HealthSystem(maxHeatlh);
+
+        healthSystem.OnHealthChanged += HealthSystem_OnHealthChanged;
+        healthSystem.OnDead += HealthSystem_OnDead;
+
+        for (int i = 0; i < healthSliders.Count; i++) { healthSliders[i].maxValue = maxHeatlh; }
+
+        Debug.Log(healthSystem.GetHealth());
     }
 
-    void Update()
+    private void HealthSystem_OnHealthChanged(object sender, System.EventArgs e)    // This method is called when the AI's health changes via damage, healing, etc.
     {
-    
+        Debug.Log(healthSystem.GetHealth());
+        for (int i = 0; i < healthSliders.Count; i++) { healthSliders[i].value = healthSystem.GetHealth(); }    // Sets healthbar value from health system.
     }
-    public void TakeDamage(int damage)
+
+    private void HealthSystem_OnDead(object sender, System.EventArgs e)     // This method is called when the AI dies.
     {
-        currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
-
-        if(currentHealth<= 0)
-        {
-            Die();
-        }
-    }
-
-    void Die(){
         //Wait for Delay Destory Object 
         //Play Particles
         //Play animation
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }

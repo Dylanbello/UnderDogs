@@ -8,44 +8,43 @@ public class HealthSystem
 
     int healthMax;
     int health;
-    public int Health 
-    {
-        get { return health; }
-        set 
-        {
-            if (health <= 0)
-            {
-                health = 0;
-                Die();
-            }
-            else if (health >= healthMax) { health = healthMax; }
-            else { health = value; } 
-        }
-    }
-    public bool IsDead { get { return Health <= 0; } }
-    public float GetHealthPercent { get { return (float)Health / healthMax; } }
+
+    public bool IsDead { get { return health <= 0; } }
+    public float GetHealthPercent { get { return (float)health / healthMax; } }
 
     public HealthSystem(int healthMax)
     {
         this.healthMax = healthMax;
-        Health = healthMax;
+        health = healthMax;
     }
+
+    public int GetHealth() { return health; }
+    public int GetMaxHealth() { return healthMax; }
 
     public void SetHealthAmount(int health)
     {
-        this.Health = health;
+        this.health = health;
         if (OnHealthChanged != null) OnHealthChanged(this, EventArgs.Empty);
     }
 
     public void Damage(int amount)
     {
-        Health -= amount;
+        health -= amount;
+        if (health <= 0)
+        {
+            health = 0;
+            Die();
+        }
+
         if (OnHealthChanged != null) OnHealthChanged(this, EventArgs.Empty);
     }
 
     public void Heal(int amount)
     {
-        Health += amount;
+        health += amount;
+
+        if (health >= healthMax) health = healthMax;
+
         if (OnHealthChanged != null) OnHealthChanged(this, EventArgs.Empty);
     }
 

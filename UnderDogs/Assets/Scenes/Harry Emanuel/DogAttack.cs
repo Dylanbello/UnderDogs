@@ -6,10 +6,10 @@ using UnityEngine.InputSystem;
 
 public class DogAttack : MonoBehaviour
 {
-    public float power;
-    public int attackDamage;
-    public float radius;
-    public float delay = 0f;
+    public float power = 1;
+    public int attackDamage = 20;
+    public float radius = 1;
+    public float delay = 0;
     private float countdown;
 
     public AIHealth aIHealth;
@@ -35,7 +35,7 @@ public class DogAttack : MonoBehaviour
             if (rb != null){
                 rb.AddExplosionForce(power, explosionPos, radius, 3.0F, ForceMode.Impulse);
                 if (rb.gameObject.GetComponent<AIHealth>()){
-                    rb.gameObject.GetComponent<AIHealth>().TakeDamage(15);
+                    rb.gameObject.GetComponent<AIHealth>().healthSystem.Damage(attackDamage);
                 }
             }
         }
