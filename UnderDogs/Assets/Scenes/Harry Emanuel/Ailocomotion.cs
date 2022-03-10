@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-//Original Script Owner : DanCS
-//Video link https://youtu.be/ieyHlYp5SLQ
-//Acqquired on: 1/03/2022
+using UnityEngine.InputSystem;
+/*
+    THIS IS A APA7TH SCRIPT/CODE from https://uark.libguides.com/CSCE/CitingCode
+Title: AILocomotion
+Aurther: DanCS
+Date: <2021>
+Availability https://youtu.be/ieyHlYp5SLQ
+*/
 public class AILocomotion : MonoBehaviour
 {
     [Header("NavMeshComponent")]
     [Tooltip("Nav mesh agent component")]
     public NavMeshAgent navMeshAgent; 
-    
     [Space]
-
     [Header("AILocomotion")]
     [Tooltip("Wait time of every action")]              
     public float startWaitTime = 4;                
@@ -22,9 +25,7 @@ public class AILocomotion : MonoBehaviour
     public float speedWalk = 6;
     [Tooltip("Running speed")]                     
     public float speedRun = 9;                      
-
     [Space]
-
     [Header("AIDetection")]
     [Tooltip("Radius of the enemy view")]
     public float viewRadius = 15;                   
@@ -46,6 +47,8 @@ public class AILocomotion : MonoBehaviour
  
     Vector3 playerLastPosition = Vector3.zero;      //  Last position of the player when was near the enemy
     Vector3 m_PlayerPosition;                       //  Last position of the player when the player is seen by the enemy
+    public Transform currentPlayer;                 //  Follows the player that has only be caught and leave the other one alone XD
+    Vector3 lastPlayerPosition;
  
     float m_WaitTime;                               //  Variable of the wait time that makes the delay
     float m_TimeToRotate;                           //  Variable of the wait time to rotate when the player is near that makes the delay
@@ -100,8 +103,7 @@ public class AILocomotion : MonoBehaviour
         }
         if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)    //  Control if the enemy arrive to the player location
         {
-
-                if (m_WaitTime <= 0 && !m_CaughtPlayer && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("character1").transform.position) >= 6f)
+            if (m_WaitTime <= 0 && !m_CaughtPlayer && Vector3.Distance(transform.position, currentPlayer.position) >= 6f)
             {
                 
                 //  Check if the enemy is not near to the player, returns to patrol after the wait time delay
@@ -114,11 +116,11 @@ public class AILocomotion : MonoBehaviour
             }
             else
             {
-                if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("character1").transform.position) >= 2.5f)
-                    //  Wait if the current position is not the player position
-                    Stop();
-
-                m_WaitTime -= Time.deltaTime;
+                if(Vector3.Distance(transform.position, lastPlayerPosition) >= 2.5f){
+                 Stop(); 
+                 m_WaitTime -= Time.deltaTime;
+                }
+                
             }
         }
     }
@@ -214,6 +216,10 @@ public class AILocomotion : MonoBehaviour
         for (int i = 0; i < playerInRange.Length; i++)
         {
             Transform player = playerInRange[i].transform;
+            if(playerInRange[i].GetComponent<BC_CharacterControllerMovement>() && currentPlayer == null)
+            {
+                currentPlayer = playerInRange[i].transform;
+            }
             Vector3 dirToPlayer = (player.position - transform.position).normalized;
             if (Vector3.Angle(transform.forward, dirToPlayer) < viewAngle / 2)
             {
@@ -226,9 +232,11 @@ public class AILocomotion : MonoBehaviour
                 else
                 {
                     /*
-                     *  If the player is behind a obstacle the player position will not be registered
-                     * */
+                    If the player is behind a obstacle the player position will not be registered
+                    */
                     m_playerInRange = false;
+                    lastPlayerPosition = currentPlayer.position;
+                    currentPlayer = null;
                 }
             }
             if (Vector3.Distance(transform.position, player.position) > viewRadius)
