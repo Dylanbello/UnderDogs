@@ -2,53 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem;
-/*
-    THIS IS A APA7TH SCRIPT/CODE from https://uark.libguides.com/CSCE/CitingCode
-Title: AILocomotion
-Aurther: DanCS
-Date: <2021>
-Availability https://youtu.be/ieyHlYp5SLQ
-*/
 public class AILocomotion : MonoBehaviour
 {
-    [Header("NavMeshComponent")]
-    [Tooltip("Nav mesh agent component")]
-    public NavMeshAgent navMeshAgent; 
-    [Space]
-    [Header("AILocomotion")]
-    [Tooltip("Wait time of every action")]              
-    public float startWaitTime = 4;                
-    [Tooltip("Wait time when the enemy detect near the player without seeing")]
-    public float timeToRotate = 2;
-    [Tooltip("Walking speed, speed in the nav mesh agent")] 
-    public float speedWalk = 6;
-    [Tooltip("Running speed")]                     
-    public float speedRun = 9;                      
-    [Space]
-    [Header("AIDetection")]
-    [Tooltip("Radius of the enemy view")]
-    public float viewRadius = 15;                   
-    [Tooltip("Angle of the enemy view")]
-    public float viewAngle = 90;                   
-    [Tooltip("To detect the player with the raycast and detect obstacles in view")]
-    public LayerMask playerMask,obstacleMask;     
-    [Tooltip("How many rays will cast per degree")]  
-    public float meshResolution = 1.0f; 
-    [Tooltip("Number of iterations to get a better performance of the mesh filter when the raycast hit an obstacule")]            
-    public int edgeIterations = 4;
-    [Tooltip("Max distance to calcule the a minumun and a maximum raycast when hits something")]                   
-    public float edgeDistance = 0.5f;               
+    public NavMeshAgent navMeshAgent;               //  Nav mesh agent component
+    public float startWaitTime = 4;                 //  Wait time of every action
+    public float timeToRotate = 2;                  //  Wait time when the enemy detect near the player without seeing
+    public float speedWalk = 6;                     //  Walking speed, speed in the nav mesh agent
+    public float speedRun = 9;                      //  Running speed
  
-    [Header("WavePoints")]
+    public float viewRadius = 15;                   //  Radius of the enemy view
+    public float viewAngle = 90;                    //  Angle of the enemy view
+    public LayerMask playerMask;                    //  To detect the player with the raycast
+    public LayerMask obstacleMask;                  //  To detect the obstacules with the raycast
+    public float meshResolution = 1.0f;             //  How many rays will cast per degree
+    public int edgeIterations = 4;                  //  Number of iterations to get a better performance of the mesh filter when the raycast hit an obstacule
+    public float edgeDistance = 0.5f;               //  Max distance to calcule the a minumun and a maximum raycast when hits something
+ 
+ 
     public Transform[] waypoints;                   //  All the waypoints where the enemy patrols
-
     int m_CurrentWaypointIndex;                     //  Current waypoint where the enemy is going to
  
     Vector3 playerLastPosition = Vector3.zero;      //  Last position of the player when was near the enemy
     Vector3 m_PlayerPosition;                       //  Last position of the player when the player is seen by the enemy
-    public Transform currentPlayer;                 //  Follows the player that has only be caught and leave the other one alone XD
-    Vector3 lastPlayerPosition;
  
     float m_WaitTime;                               //  Variable of the wait time that makes the delay
     float m_TimeToRotate;                           //  Variable of the wait time to rotate when the player is near that makes the delay
@@ -77,7 +52,7 @@ public class AILocomotion : MonoBehaviour
  
     private void Update()
     {
-        EnviromentView();   //  Check whether or not the player is in the enemy's field of vision
+            EnviromentView();                       //  Check whether or not the player is in the enemy's field of vision
  
         if (!m_IsPatrol)
         {
@@ -99,13 +74,11 @@ public class AILocomotion : MonoBehaviour
         {
             Move(speedRun);
             navMeshAgent.SetDestination(m_PlayerPosition);          //  set the destination of the enemy to the player location
-            m_WaitTime = startWaitTime;
         }
         if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)    //  Control if the enemy arrive to the player location
         {
-            if (m_WaitTime <= 0 && !m_CaughtPlayer && Vector3.Distance(transform.position, currentPlayer.position) >= 6f)
+            if (m_WaitTime <= 0 && !m_CaughtPlayer && Vector3.Distance(transform.position, GameObject.FindWithTag("character1").transform.position) >= 6f)
             {
-                
                 //  Check if the enemy is not near to the player, returns to patrol after the wait time delay
                 m_IsPatrol = true;
                 m_PlayerNear = false;
@@ -116,11 +89,10 @@ public class AILocomotion : MonoBehaviour
             }
             else
             {
-                if(Vector3.Distance(transform.position, lastPlayerPosition) >= 2.5f){
-                 Stop(); 
-                 m_WaitTime -= Time.deltaTime;
-                }
-                
+                if (Vector3.Distance(transform.position,GameObject.FindWithTag("character1").transform.position) >= 2.5f)
+                    //  Wait if the current position is not the player position
+                    Stop();
+                m_WaitTime -= Time.deltaTime;
             }
         }
     }
@@ -164,7 +136,12 @@ public class AILocomotion : MonoBehaviour
             }
         }
     }
-
+ 
+    private void OnAnimatorMove()
+    {
+ 
+    }
+ 
     public void NextPoint()
     {
         m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
@@ -216,10 +193,6 @@ public class AILocomotion : MonoBehaviour
         for (int i = 0; i < playerInRange.Length; i++)
         {
             Transform player = playerInRange[i].transform;
-            if(playerInRange[i].GetComponent<BC_CharacterControllerMovement>() && currentPlayer == null)
-            {
-                currentPlayer = playerInRange[i].transform;
-            }
             Vector3 dirToPlayer = (player.position - transform.position).normalized;
             if (Vector3.Angle(transform.forward, dirToPlayer) < viewAngle / 2)
             {
@@ -232,16 +205,13 @@ public class AILocomotion : MonoBehaviour
                 else
                 {
                     /*
-                    If the player is behind a obstacle the player position will not be registered
-                    */
+                     *  If the player is behind a obstacle the player position will not be registered
+                     * */
                     m_playerInRange = false;
-                    lastPlayerPosition = currentPlayer.position;
-                    currentPlayer = null;
                 }
             }
             if (Vector3.Distance(transform.position, player.position) > viewRadius)
             {
-                
                 /*
                  *  If the player is further than the view radius, then the enemy will no longer keep the player's current position.
                  *  Or the enemy is a safe zone, the enemy will no chase
@@ -253,10 +223,8 @@ public class AILocomotion : MonoBehaviour
                 /*
                  *  If the enemy no longer sees the player, then the enemy will go to the last position that has been registered
                  * */
-                m_PlayerPosition = player.transform.position;   //  Save the player's current position if the player is in range of vision
+                m_PlayerPosition = player.transform.position;       //  Save the player's current position if the player is in range of vision
             }
         }
-        
     }
 }
- 
