@@ -12,14 +12,17 @@ public class AIAttack : MonoBehaviour
 {  
     [SerializeField] private float attackDamage = 50f;
     [SerializeField] private float attackSpeed = 1f;
+    [SerializeField]private AudioSource attackSound;
     private float canAttack;
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.CompareTag("character1")){
+        if(other.CompareTag("character1") || other.CompareTag("character2")){
             if(attackSpeed <= canAttack){
                 other.gameObject.GetComponent<DogsHealth>().UpdateHealth(-attackDamage);
+                attackSound.Play();
                 canAttack = 0f;
+                Debug.Log("Attack Dog");
             }else{
                 canAttack += Time.deltaTime;
             }
