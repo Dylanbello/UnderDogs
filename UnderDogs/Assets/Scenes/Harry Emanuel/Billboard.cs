@@ -10,7 +10,7 @@ Availability https://youtu.be/ieyHlYp5SLQ
 */
 public class Billboard : MonoBehaviour
 {
-   public Transform cam;//the assigned specific game camera
+   public Transform cam;
     void LateUpdate()
     {
         transform.LookAt(transform.position + cam.forward);//Will make the canvus face forwards towards the specific camera
