@@ -28,7 +28,7 @@ public class CogCollectible : MonoBehaviour
     {
         if (other.GetComponent<PlayerInput>()) 
         {
-            //Increment UI
+            //Increment UI Coin Value
             Destroy(this.gameObject);
         }
     }
