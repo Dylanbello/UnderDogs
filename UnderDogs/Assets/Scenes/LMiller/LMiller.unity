@@ -1675,8 +1675,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea2c98a84ced2d142a6dd553d3a8c938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cogValue: 0
-  cogSpinSpeed: 0
+  cogValue: 5
+  cogSpinSpeed: 70
 --- !u!114 &1279350484 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5278016110432020095, guid: c8e30b417111422449b748fac7f50433, type: 3}
