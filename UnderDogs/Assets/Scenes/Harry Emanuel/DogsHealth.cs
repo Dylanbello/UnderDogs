@@ -26,6 +26,7 @@ public class DogsHealth : MonoBehaviour
         }else if(health <= 0f){
             health = 0f;
             Debug.Log("Player is Dead");
+            //TODO: Destory or play death sequence
         }
     }
 }

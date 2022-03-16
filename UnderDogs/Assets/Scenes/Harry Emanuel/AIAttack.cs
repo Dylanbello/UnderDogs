@@ -27,5 +27,9 @@ public class AIAttack : MonoBehaviour
                 canAttack += Time.deltaTime;
             }
         }
+        else if(other.CompareTag("character1") || other.CompareTag("character2"))
+        {
+            //TODO: checks the dogs health and if below or equal to 0 return to patrolling
+        }
     }
 }

@@ -11,9 +11,9 @@ public class BodyPartsSpawn : MonoBehaviour
    
     void Start()
     {
-        dirX = Random.Range(-5, 5);
-        dirY = Random.Range(-5, 8);
-        dirZ = Random.Range(-20, 20);
+        dirX = Random.Range(-1,1);
+        dirY = Random.Range(-1,1);
+        dirZ = Random.Range(-7,7);
         
         rb = GetComponent<Rigidbody>();
         rb.AddForce (new Vector3(dirX, dirY,dirZ), ForceMode.Impulse);
@@ -25,6 +25,6 @@ public class BodyPartsSpawn : MonoBehaviour
 
     void DestroyObjectDelayed()
     {
-        Destroy(gameObject, 7);
+        Destroy(gameObject, 10);//the instance parts and how long it takes to destory*
     }
 }
