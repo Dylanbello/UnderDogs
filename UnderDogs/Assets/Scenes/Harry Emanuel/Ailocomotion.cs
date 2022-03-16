@@ -5,11 +5,14 @@ using UnityEngine.AI;
 public class AILocomotion : MonoBehaviour
 {
     public NavMeshAgent navMeshAgent;               //  Nav mesh agent component
+    [Space(20)]
     public float startWaitTime = 4;                 //  Wait time of every action
     public float timeToRotate = 2;                  //  Wait time when the enemy detect near the player without seeing
     public float speedWalk = 6;                     //  Walking speed, speed in the nav mesh agent
     public float speedRun = 9;                      //  Running speed
- 
+    
+    [Space(15)]
+
     public float viewRadius = 15;                   //  Radius of the enemy view
     public float viewAngle = 90;                    //  Angle of the enemy view
     public LayerMask playerMask;                    //  To detect the player with the raycast
@@ -18,7 +21,8 @@ public class AILocomotion : MonoBehaviour
     public int edgeIterations = 4;                  //  Number of iterations to get a better performance of the mesh filter when the raycast hit an obstacule
     public float edgeDistance = 0.5f;               //  Max distance to calcule the a minumun and a maximum raycast when hits something
  
- 
+    [Space(15)]
+
     public Transform[] waypoints;                   //  All the waypoints where the enemy patrols
     int m_CurrentWaypointIndex;                     //  Current waypoint where the enemy is going to
  
@@ -137,10 +141,6 @@ public class AILocomotion : MonoBehaviour
         }
     }
  
-    private void OnAnimatorMove()
-    {
- 
-    }
  
     public void NextPoint()
     {
