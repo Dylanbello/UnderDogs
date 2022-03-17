@@ -224,7 +224,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: CM vcam1 (2)
+    m_DisplayName: CM vcam (Maia)
   - m_Version: 1
     m_Start: 13.733333333333334
     m_ClipIn: 0
@@ -275,7 +275,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: CM vcam1 (1)
+    m_DisplayName: CM vcam (Nala)
   - m_Version: 1
     m_Start: 18.733333333333334
     m_ClipIn: 0
@@ -326,7 +326,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: CM vcam1 (2)
+    m_DisplayName: CM vcam (Maia)
   - m_Version: 1
     m_Start: 23.733333333333334
     m_ClipIn: 0
@@ -395,7 +395,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: CM vcam1 (4)
+    m_DisplayName: CM vcam (Tracks)
   - m_Version: 1
     m_Start: 28.733333333333334
     m_ClipIn: 0
@@ -464,12 +464,12 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: CM vcam1 (2)
+    m_DisplayName: CM vcam (Maia)
   - m_Version: 1
     m_Start: 33.733333333333334
     m_ClipIn: 0
     m_Asset: {fileID: -5128303602663039538}
-    m_Duration: 5
+    m_Duration: 4.016666666666666
     m_TimeScale: 1
     m_ParentTrack: {fileID: -8691893348383740973}
     m_EaseInDuration: 0
@@ -533,9 +533,9 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: CM vcam1 (1)
+    m_DisplayName: CM vcam (Nala)
   - m_Version: 1
-    m_Start: 38.733333333333334
+    m_Start: 37.75
     m_ClipIn: 0
     m_Asset: {fileID: 5954940306250747555}
     m_Duration: 5
@@ -602,9 +602,9 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: CM vcam1 (5)
+    m_DisplayName: CM vcam (End1)
   - m_Version: 1
-    m_Start: 38.733333333333334
+    m_Start: 37.75
     m_ClipIn: 0
     m_Asset: {fileID: 6048662300943664552}
     m_Duration: 5
@@ -671,7 +671,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: CM vcam1 (6)
+    m_DisplayName: CM vcam (End2)
   m_Markers:
     m_Objects: []
 --- !u!114 &-8642856507809674300
