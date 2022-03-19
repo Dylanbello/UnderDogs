@@ -11,12 +11,9 @@ Availability https://youtu.be/ieyHlYp5SLQ
 */
 public class AIHealth : MonoBehaviour
 {
-    public Slider slider;
-	public Gradient gradient;
-	public Image fill;
-
     public int maxHeatlh = 100;
     public HealthSystem healthSystem;
+    [SerializeField] ParticleSystem particleSystem;
 
     public GameObject head, body,L_Track,R_Track,L_Wheels,R_Wheels;
     [SerializeField]private AudioSource lego;
@@ -27,6 +24,7 @@ public class AIHealth : MonoBehaviour
     void Start()
     {
         healthSystem = new HealthSystem(maxHeatlh);
+        particleSystem = GetComponent<ParticleSystem>();
 
         healthSystem.OnHealthChanged += HealthSystem_OnHealthChanged;
         healthSystem.OnDead += HealthSystem_OnDead;
@@ -38,6 +36,7 @@ public class AIHealth : MonoBehaviour
 
     private void HealthSystem_OnHealthChanged(object sender, System.EventArgs e)    // This method is called when the AI's health changes via damage, healing, etc.
     {
+
         Debug.Log(healthSystem.GetHealth());
         for(int i = 0; i < healthSliders.Count; i++) { healthSliders[i].value = healthSystem.GetHealth(); }// Sets healthbar value from health system.
     }
@@ -49,18 +48,6 @@ public class AIHealth : MonoBehaviour
         //Play animation
         Destroy(gameObject);
     }
-
-    public void SetMaxHealth(int health){
-		slider.maxValue = health;
-		slider.value = health;
-
-		fill.color = gradient.Evaluate(1f);
-	}
-
-    public void SetHealth(int health){
-		slider.value = health;
-		fill.color = gradient.Evaluate(slider.normalizedValue);
-	}
 
     void partSpawns(){
         Instantiate(head, transform.position, Quaternion.identity);
