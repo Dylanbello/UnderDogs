@@ -18,6 +18,9 @@ public class AIHealth : MonoBehaviour
     public int maxHeatlh = 100;
     public HealthSystem healthSystem;
 
+    public GameObject head, body,L_Track,R_Track,L_Wheels,R_Wheels;
+    [SerializeField]private AudioSource lego;
+
     [Space(10), Tooltip("This is a list for the sliders seen by both player 1 and player 2")]
     public List<Slider> healthSliders;
 
@@ -36,28 +39,36 @@ public class AIHealth : MonoBehaviour
     private void HealthSystem_OnHealthChanged(object sender, System.EventArgs e)    // This method is called when the AI's health changes via damage, healing, etc.
     {
         Debug.Log(healthSystem.GetHealth());
-        for (int i = 0; i < healthSliders.Count; i++) { healthSliders[i].value = healthSystem.GetHealth(); }    // Sets healthbar value from health system.
+        for(int i = 0; i < healthSliders.Count; i++) { healthSliders[i].value = healthSystem.GetHealth(); }// Sets healthbar value from health system.
     }
 
     private void HealthSystem_OnDead(object sender, System.EventArgs e)     // This method is called when the AI dies.
     {
-        //Wait for Delay Destory Object 
+        partSpawns(); 
         //Play Particles
         //Play animation
         Destroy(gameObject);
     }
 
-    public void SetMaxHealth(int health)
-	{
+    public void SetMaxHealth(int health){
 		slider.maxValue = health;
 		slider.value = health;
 
 		fill.color = gradient.Evaluate(1f);
 	}
 
-    public void SetHealth(int health)
-	{
+    public void SetHealth(int health){
 		slider.value = health;
 		fill.color = gradient.Evaluate(slider.normalizedValue);
 	}
+
+    void partSpawns(){
+        Instantiate(head, transform.position, Quaternion.identity);
+        Instantiate(body, transform.position, Quaternion.identity);
+        Instantiate(L_Track, transform.position, Quaternion.identity);
+        Instantiate(R_Track, transform.position, Quaternion.identity);
+        Instantiate(L_Wheels, transform.position, Quaternion.identity);
+        Instantiate(R_Wheels, transform.position, Quaternion.identity);
+        lego.Play();
+    }
 }

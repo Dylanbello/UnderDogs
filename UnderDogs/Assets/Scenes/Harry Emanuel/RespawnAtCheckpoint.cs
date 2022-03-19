@@ -4,31 +4,21 @@ using UnityEngine;
 
 public class RespawnAtCheckpoint : MonoBehaviour
 {
-    [SerializeField] private Transform[] respawnPoints;
+    public Vector3 spawnPoint = new Vector3(-15,0,8);//These values are the starting spawnpoint
     [SerializeField] private Transform player;
-    private int checkpointCount = 1;
-
-    #if UNITY_EDITOR
-    public GameObject Waypoints;
-
-    private void OnValidate(){
-        respawnPoints = Waypoints.GetComponentsInChildren<Transform>();
-    }
-    #endif
 
     private void OnTriggerEnter(Collider other)
     {
         CharacterController CC = player.GetComponent<CharacterController>();
         if (other.gameObject.tag == "checkpoint")
         {
-            BoxCollider BC = other.gameObject.GetComponent<BoxCollider>();
-            BC.enabled = false;
-            checkpointCount++;
+            spawnPoint = other.transform.position;
         }
+
         if (other.gameObject.tag == "respawn")
         {
             CC.enabled = false;
-            player.transform.position = respawnPoints[checkpointCount].transform.position;
+            player.transform.position = spawnPoint;
             CC.enabled = true;
             
         }
