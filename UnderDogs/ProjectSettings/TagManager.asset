@@ -6,6 +6,8 @@ TagManager:
   tags:
   - character1
   - character2
+  - respawn
+  - checkpoint
   layers:
   - Default
   - TransparentFX
