@@ -10,7 +10,7 @@ Availability https://youtu.be/VOdYtqV_meo
 */
 public class DogsHealth : MonoBehaviour
 {
-    [SerializeField]private float health = 0f;
+    [SerializeField]public float health = 0f;
     [SerializeField] private float maxHealth = 100f;
 
     void Start()
