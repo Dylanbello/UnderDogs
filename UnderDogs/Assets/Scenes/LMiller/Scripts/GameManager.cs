@@ -11,27 +11,19 @@ public class GameManager : MonoBehaviour
     public static event Action<GameState> OnGameStateChanged;
 
     private static GameManager _instance;
-    public static GameManager Instance
-    {
-        get
-        {
-            if(_instance == null)
-            {
-                Debug.LogError("Game Manager is Null");
-            }
+    public static GameManager Instance { get { return _instance; } }
 
-            return _instance;
-        }
+    public int collectablesCounter = 0;
+
+    private void Awake()
+    {
+        if(Instance == null)_instance = this;
+        else if (Instance != this) Destroy(gameObject);
     }
 
     private void Start()
     {
         UpdateGameState(GameState.MainMenu);
-    }
-
-    private void Awake()
-    {
-        _instance = this;
     }
 
     public void UpdateGameState(GameState newState)
@@ -62,5 +54,16 @@ public class GameManager : MonoBehaviour
         Playing,
         Paused,
         GameOver
+    }
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.Save();
+    }
+
+    public void AddToCollection()
+    {
+        collectablesCounter++;
+        PlayerPrefs.SetInt("Collectables", collectablesCounter);
     }
 }

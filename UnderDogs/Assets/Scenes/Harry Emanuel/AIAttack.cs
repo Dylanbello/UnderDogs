@@ -1,35 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/*
-//THIS IS A APA7TH SCRIPT/CODE from https://uark.libguides.com/CSCE/CitingCode
-Title: AIAttacking
-Aurther: Muddy Wolf
-Date: <2021>
-Availability https://youtu.be/VOdYtqV_meo
-*/
+
 public class AIAttack : MonoBehaviour
-{  
-    [SerializeField] private float attackDamage = 50f;
-    [SerializeField] private float attackSpeed = 1f;
-    [SerializeField]private AudioSource attackSound;
-    private float canAttack;
+{
+    Ailocomotion aiLocaomotion;
+    [SerializeField] private int attackDamage = 50;
+    [SerializeField] private float attackDelay = 1;
+    [SerializeField] private AudioSource attackSound;
+    private float attackTimer;
+
+    private void Awake() { aiLocaomotion = GetComponent<Ailocomotion>(); }
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.CompareTag("character1") || other.CompareTag("character2")){
-            if(attackSpeed <= canAttack){
-                other.gameObject.GetComponent<DogsHealth>().UpdateHealth(-attackDamage);
-                attackSound.Play();
-                canAttack = 0f;
-                Debug.Log("Attack Dog");
-            }else{
-                canAttack += Time.deltaTime;
-            }
+        if(!other.TryGetComponent(out DogManager dogManager) && attackTimer < attackDelay) { return; } //Guard clause that stops code unless it detects a player.
+
+        if(dogManager.playerHealth.IsDead)  //If the player is dead, return to patrolling.
+        { 
+            aiLocaomotion.m_IsPatrol = true; 
+            return; 
         }
-        else if(other.CompareTag("character1") || other.CompareTag("character2"))
-        {
-            //TODO: checks the dogs health and if below or equal to 0 return to patrolling
-        }
+
+        //This code runs only if the player isn't dead.
+        dogManager.playerHealth.Damage(attackDamage);
+        attackSound.Play();
     }
+
+    private void Update() { attackTimer += Time.deltaTime; }
 }

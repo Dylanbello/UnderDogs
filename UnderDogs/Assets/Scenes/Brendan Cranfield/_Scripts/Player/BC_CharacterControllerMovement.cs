@@ -1,23 +1,21 @@
 using System.Collections;
-using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Cinemachine;
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(CharacterController)), AddComponentMenu("Player/Player Locomotion")]
 public class BC_CharacterControllerMovement : MonoBehaviour
 {
+    const float gravityValue = -9.81f;
+
     CharacterController controller;
     Transform cam;
     CinemachineFreeLook cmFreeLook;
     Animator animator;
 
     Vector3 playerVelocity;
-    Vector3 moveInput;
+    [HideInInspector] public Vector3 moveInput;
     
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float jumpHeight = 1.0f;
-    private float gravityValue = -9.81f;
-
     [SerializeField] float turnSmoothTime = 0.1f;
 
 
@@ -51,13 +49,6 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     public void OnEnableControls() { GetComponent<PlayerInput>().enabled = true; }
 
     public void OnDisableControls() { GetComponent<PlayerInput>().enabled = false; }
-
-    #region Inputs
-
-    public void Movement(InputAction.CallbackContext context) { moveInput = context.ReadValue<Vector2>(); }
-    public void Jump(InputAction.CallbackContext context) { if(context.performed) Jump(); }
-
-    #endregion
 
     #region Movement & Falling
     void Movement()
@@ -99,7 +90,7 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     bool canJump;
     int jumpCount;
 
-    private void Jump()
+    public void Jump()
     {
         if (jumpCount == 1 || !canJump) return;     //Guard clause for double jumping.
         //animator.SetTrigger("Jump");
@@ -122,34 +113,7 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     #endregion
 
     #region Applying Animation Values
-    /*
-    private float SetCorrectAnimation()
-    {
-        float currentAnimationSpeed = animator.GetFloat("Move");
-        if (moveSpeed > 1 || moveSpeed < -1)
-        {
-            if (currentAnimationSpeed < 0.2f)
-            {
-                currentAnimationSpeed += Time.deltaTime * 2;
-                currentAnimationSpeed = Mathf.Clamp(currentAnimationSpeed, 0, 0.2f);
-            }
-            animator.SetFloat("Move", currentAnimationSpeed);
-        }
-        else
-        {
-            if (currentAnimationSpeed < 1) { currentAnimationSpeed += Time.deltaTime * 2; }
-            else { currentAnimationSpeed = 1; }
-            animator.SetFloat("Move", currentAnimationSpeed);
-        }
-        return currentAnimationSpeed;
-    }
-    */
 
-
-    /// <summary>
-    /// This method gets the movement input for both axis and return a float for the animator to use.
-    /// </summary>
-    /// <returns>Speed in which the player is animating betweek 0, 1</returns>
     private float SetCorrectAnimation()
     {
         float charMoveSpeed = 0;
