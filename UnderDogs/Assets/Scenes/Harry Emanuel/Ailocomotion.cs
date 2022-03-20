@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using UnityEngine.Events;
 public class Ailocomotion : MonoBehaviour
 {
     public NavMeshAgent navMeshAgent;               //  Nav mesh agent component
@@ -25,7 +27,12 @@ public class Ailocomotion : MonoBehaviour
 
     public Transform[] waypoints;                   //  All the waypoints where the enemy patrols
     int m_CurrentWaypointIndex;                     //  Current waypoint where the enemy is going to
- 
+    [Space (15)]
+
+    public Image QMSymbol;
+    public Image EXSymbol;
+    public UnityEvent detection;
+
     Vector3 playerLastPosition = Vector3.zero;      //  Last position of the player when was near the enemy
     Vector3 m_PlayerPosition;                       //  Last position of the player when the player is seen by the enemy
  
@@ -35,12 +42,15 @@ public class Ailocomotion : MonoBehaviour
     bool m_PlayerNear;                              //  If the player is near, state of hearing
     bool m_IsPatrol;                                //  If the enemy is patrol, state of patroling
     bool m_CaughtPlayer;                            //  if the enemy has caught the player
- 
+    bool m_DetectedPlayer;
+
     void Start()
     {
+        
         m_PlayerPosition = Vector3.zero;
         m_IsPatrol = true;
         m_CaughtPlayer = false;
+        m_DetectedPlayer= false;
         m_playerInRange = false;
         m_PlayerNear = false;
         m_WaitTime = startWaitTime;                 //  Set the wait time variable that will change
@@ -56,7 +66,7 @@ public class Ailocomotion : MonoBehaviour
  
     private void Update()
     {
-            EnviromentView();                       //  Check whether or not the player is in the enemy's field of vision
+        EnviromentView();                       //  Check whether or not the player is in the enemy's field of vision
  
         if (!m_IsPatrol)
         {
@@ -76,8 +86,11 @@ public class Ailocomotion : MonoBehaviour
  
         if (!m_CaughtPlayer)
         {
+            
+            m_DetectedPlayer = true;
+            StartCoroutine(ExclamationMark());
             Move(speedRun);
-            navMeshAgent.SetDestination(m_PlayerPosition);          //  set the destination of the enemy to the player location
+            navMeshAgent.SetDestination(m_PlayerPosition);//  set the destination of the enemy to the player location
         }
         if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)    //  Control if the enemy arrive to the player location
         {
@@ -85,6 +98,7 @@ public class Ailocomotion : MonoBehaviour
             {
                 //  Check if the enemy is not near to the player, returns to patrol after the wait time delay
                 m_IsPatrol = true;
+                m_DetectedPlayer= false;
                 m_PlayerNear = false;
                 Move(speedWalk);
                 m_TimeToRotate = timeToRotate;
@@ -94,8 +108,8 @@ public class Ailocomotion : MonoBehaviour
             else
             {
                 if (Vector3.Distance(transform.position,GameObject.FindWithTag("character1").transform.position) >= 2.5f)
-                    //  Wait if the current position is not the player position
-                    Stop();
+                //  Wait if the current position is not the player position
+                Stop();
                 m_WaitTime -= Time.deltaTime;
             }
         }
@@ -140,8 +154,21 @@ public class Ailocomotion : MonoBehaviour
             }
         }
     }
- 
- 
+
+    
+    IEnumerator ExclamationMark()
+    {
+        Debug.Log("im working");
+        yield return new WaitUntil(()=> m_DetectedPlayer = true);
+        EXSymbol.enabled=true;
+
+        if(m_DetectedPlayer == false)
+        {
+            yield return new WaitForSeconds(3);
+            EXSymbol.enabled=false;
+        }
+    }
+
     public void NextPoint()
     {
         m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
@@ -163,6 +190,7 @@ public class Ailocomotion : MonoBehaviour
     void CaughtPlayer()
     {
         m_CaughtPlayer = true;
+        m_DetectedPlayer = true;
     }
  
     void LookingPlayer(Vector3 player)
