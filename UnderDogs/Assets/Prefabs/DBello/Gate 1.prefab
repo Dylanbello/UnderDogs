@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8842957678642042163}
   - component: {fileID: 6576297099643936813}
   - component: {fileID: 2903990580865591355}
+  - component: {fileID: 1729372631267188733}
+  - component: {fileID: 5385288459427132490}
   m_Layer: 0
   m_Name: Gate_Spike
   m_TagString: Untagged
@@ -95,6 +97,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5020665, y: 4.9549227, z: 5.142262}
   m_Center: {x: -0.000000014901161, y: 0.00000011920929, z: 0}
+--- !u!95 &1729372631267188733
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250366317766505777}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 00fa33374620c7f449cb6fbfb6b26b26, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5385288459427132490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250366317766505777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a16c646dab5e834429ab066a9a9c3f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4342347048567447206
 GameObject:
   m_ObjectHideFlags: 0

@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 5889784058718667817}
   - component: {fileID: 7776725901851879088}
   - component: {fileID: 848499328013953785}
+  - component: {fileID: 4065769544803530441}
   m_Layer: 0
   m_Name: Switch
   m_TagString: Untagged
@@ -266,3 +267,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!65 &4065769544803530441
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8280900168521274080}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.67458993, y: 1.4392431, z: 0.6924644}
+  m_Center: {x: 0.009344867, y: 0.7986622, z: -0.00086348585}
