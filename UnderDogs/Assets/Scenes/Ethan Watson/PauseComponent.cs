@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using TMPro;
 
 public class PauseComponent : MonoBehaviour
 {
@@ -10,7 +10,13 @@ public class PauseComponent : MonoBehaviour
 
     public GameObject pauseMenuUI;
     public GameObject inGameUI;
+    public TextMeshProUGUI cogCount;
+    public int currentCogCount;
 
+    private void Start()
+    {
+        currentCogCount = 0;
+    }
     // Update is called once per frame
     public void Update()
     {
@@ -54,4 +60,11 @@ public class PauseComponent : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void incrementScore(int value)
+    {
+        currentCogCount += value;
+        cogCount.text = currentCogCount.ToString();
+    }
+
 }

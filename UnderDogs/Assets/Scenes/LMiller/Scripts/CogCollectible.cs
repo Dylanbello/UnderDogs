@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using TMPro;
 
 public class CogCollectible : MonoBehaviour
 {
     public int cogValue;
     public float cogSpinSpeed;
+    PauseComponent pC;
 
     //Reference to UI;
     
@@ -15,7 +17,7 @@ public class CogCollectible : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        pC = FindObjectOfType<PauseComponent>();
     }
 
     // Update is called once per frame
@@ -26,10 +28,12 @@ public class CogCollectible : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerInput>()) 
+        if (other.GetComponent<CharacterController>()) 
         {
             //Increment UI Coin Value
-            Destroy(this.gameObject);
+            pC.incrementScore(cogValue);
+            this.gameObject.SetActive(false);
+            //Destroy(this.gameObject);
         }
     }
 }

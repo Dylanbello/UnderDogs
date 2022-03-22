@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/MasterScene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
   - enabled: 1
     path: Assets/Scenes/LBarratt/LBarratt.unity
     guid: b6523f4c68e753b42874070a3aee4305
   - enabled: 1
+    path: Assets/Scenes/MasterScene.unity
+    guid: d1c3109bdb54ad54c8a2b2838528e640
+  - enabled: 0
     path: Assets/Scenes/DBello/DBello.unity
     guid: 09add1b3f49e5b64c83cdf382c4dff2a
   m_configObjects: {}
