@@ -150,7 +150,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108388698148746121}
-  m_LocalRotation: {x: 0.3796503, y: 0.00000001591814, z: -0.000000006532407, w: 0.92513007}
+  m_LocalRotation: {x: 0.3796503, y: -0.00000001591814, z: 0.000000006532407, w: 0.92513007}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -658,7 +658,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108388699161737418}
-  m_LocalRotation: {x: 0.25468528, y: -0.000000016602593, z: 0.0000000043726276, w: 0.967024}
+  m_LocalRotation: {x: 0.25468528, y: -0.00000001663884, z: 0.0000000043821737, w: 0.967024}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -809,7 +809,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108388700196146296}
-  m_LocalRotation: {x: 0.36414966, y: 0.000000016469043, z: -0.000000006092635, w: 0.93134046}
+  m_LocalRotation: {x: 0.36414966, y: -0.000000016150663, z: 0.0000000062167214, w: 0.93134046}
   m_LocalPosition: {x: 0, y: 1.6473074, z: -1.6690686}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
@@ -2061,7 +2061,9 @@ GameObject:
   - component: {fileID: 6134522509570594071}
   - component: {fileID: 6088590003056031813}
   - component: {fileID: 4439769350720418357}
+  - component: {fileID: 6985546243274183009}
   - component: {fileID: 6471551424454236781}
+  - component: {fileID: 7746745663968156601}
   - component: {fileID: 6506315065629042303}
   m_Layer: 0
   m_Name: Test_Player2
@@ -2125,6 +2127,24 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.255, z: 0}
+--- !u!114 &6985546243274183009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6136957902888080405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a385f742598a6f042b565525701a8434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  power: 1
+  attackDamage: 20
+  radius: 1
+  currentPickedUp: {fileID: 0}
+  pickupFlag: 0
 --- !u!114 &6471551424454236781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2137,9 +2157,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde2057bac0404847a4440cbcd9fa5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveInput: {x: 0, y: 0, z: 0}
   moveSpeed: 5
   jumpHeight: 0.5
   turnSmoothTime: 5
+--- !u!114 &7746745663968156601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6136957902888080405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baed3b752be3a2b4f901e77fca5b5207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6506315065629042303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2167,8 +2200,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6471551424454236781}
-        m_TargetAssemblyTypeName: BC_CharacterControllerMovement, Assembly-CSharp
+      - m_Target: {fileID: 7746745663968156601}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
         m_MethodName: Movement
         m_Mode: 0
         m_Arguments:
@@ -2187,8 +2220,8 @@ MonoBehaviour:
     m_ActionName: Player/CameraLook[/DualShock4GamepadHID/rightStick,/Mouse/delta]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6471551424454236781}
-        m_TargetAssemblyTypeName: BC_CharacterControllerMovement, Assembly-CSharp
+      - m_Target: {fileID: 7746745663968156601}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
         m_MethodName: Jump
         m_Mode: 0
         m_Arguments:
@@ -2202,7 +2235,19 @@ MonoBehaviour:
     m_ActionId: ac4f1369-98a1-4ac9-9ec6-b1e3c1bdeaeb
     m_ActionName: Player/Jump[/DualShock4GamepadHID/buttonSouth,/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7746745663968156601}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
+        m_MethodName: Attack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 4cc3e79c-d17a-4371-b4a7-38326a7d7fd2
     m_ActionName: Player/Attack[/Keyboard/x]
   m_NeverAutoSwitchControlSchemes: 0

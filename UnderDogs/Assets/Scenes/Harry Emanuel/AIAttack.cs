@@ -15,8 +15,9 @@ public class AIAttack : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         DogManager dogManager = other.GetComponent<DogManager>();
-        if(!dogManager && attackTimer < attackDelay){ return; } //Guard clause that stops code unless it detects a player.
-       
+        if(!dogManager || attackTimer < attackDelay) { return; }
+
+        attackTimer = 0;
         dogManager.playerHealth.Damage(attackDamage);
         attackSound.Play();
     }

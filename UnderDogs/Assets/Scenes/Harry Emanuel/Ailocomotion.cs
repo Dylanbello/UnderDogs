@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -55,7 +56,8 @@ public class Ailocomotion : MonoBehaviour
 
     public Transform[] waypoints;                   //  All the waypoints where the enemy patrols
     int m_CurrentWaypointIndex;                     //  Current waypoint where the enemy is going to
-    
+    Transform playerPos;
+
     [Space (15)]
 
     public Image QMSymbol;
@@ -94,14 +96,18 @@ public class Ailocomotion : MonoBehaviour
  
     private void Update()
     {
+
         EnviromentView();  //  Check whether or not the player is in the enemy's field of vision
  
         if (!m_IsPatrol)
         {
+            if (playerPos == null) { playerPos = GameObject.FindWithTag("character1").transform; }
+
             Chasing();
         }
         else
         {
+            playerPos = null;
             Patroling();
         }
     }
@@ -114,15 +120,13 @@ public class Ailocomotion : MonoBehaviour
  
         if (!m_CaughtPlayer)
         {
-            
-            m_DetectedPlayer = true;
             StartCoroutine(ExclamationMark());
             Move(speedRun);
             navMeshAgent.SetDestination(m_PlayerPosition);//  set the destination of the enemy to the player location
         }
         if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)    //  Control if the enemy arrive to the player location
         {
-            if (m_WaitTime <= 0 && !m_CaughtPlayer && Vector3.Distance(transform.position, GameObject.FindWithTag("character1").transform.position) >= 6f)
+            if (m_WaitTime <= 0 && !m_CaughtPlayer && Vector3.Distance(transform.position, playerPos.position) >= 6f)
             {
                 //  Check if the enemy is not near to the player, returns to patrol after the wait time delay
                 m_IsPatrol = true;
@@ -135,7 +139,7 @@ public class Ailocomotion : MonoBehaviour
             }
             else
             {
-                if (Vector3.Distance(transform.position,GameObject.FindWithTag("character1").transform.position) >= 2.5f)
+                if (Vector3.Distance(transform.position, playerPos.position) >= 2.5f)
                 //  Wait if the current position is not the player position
                 Stop();
                 m_WaitTime -= Time.deltaTime;
@@ -186,13 +190,15 @@ public class Ailocomotion : MonoBehaviour
     
     IEnumerator ExclamationMark()
     {
-        Debug.Log("im working");
         yield return new WaitUntil(()=> m_DetectedPlayer = true);
         EXSymbol.enabled=true;
         if(m_DetectedPlayer == false)
         {
             yield return new WaitForSeconds(0.01f);
             EXSymbol.enabled=false;
+            QMSymbol.enabled = true;
+            yield return new WaitForSeconds(3f);
+            QMSymbol.enabled = false;
         }
     }
 
@@ -217,7 +223,6 @@ public class Ailocomotion : MonoBehaviour
     void CaughtPlayer()
     {
         m_CaughtPlayer = true;
-        m_DetectedPlayer = true;
     }
  
     void LookingPlayer(Vector3 player)
@@ -254,6 +259,7 @@ public class Ailocomotion : MonoBehaviour
                 float dstToPlayer = Vector3.Distance(transform.position, player.position);          //  Distance of the enmy and the player
                 if (!Physics.Raycast(transform.position, dirToPlayer, dstToPlayer, obstacleMask))
                 {
+                    m_DetectedPlayer = true;
                     m_playerInRange = true;             //  The player has been seeing by the enemy and then the nemy starts to chasing the player
                     m_IsPatrol = false;                 //  Change the state to chasing the player
                 }

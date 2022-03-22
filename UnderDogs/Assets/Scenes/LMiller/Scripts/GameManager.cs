@@ -1,25 +1,30 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-
+    [Header("Game States")]
     public GameState State;
-
     public static event Action<GameState> OnGameStateChanged;
+    public bool GameIsPaused = false;
 
+    [Header("UI")]
+    [SerializeField] GameObject pauseMenuUI;
+    [SerializeField] GameObject inGameUI;
+    [SerializeField] TextMeshProUGUI cogCount;
+    public int currentCogCount;
+
+    #region singleton
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
-
-    public int collectablesCounter = 0;
-
     private void Awake()
     {
         if(Instance == null)_instance = this;
         else if (Instance != this) Destroy(gameObject);
     }
+    #endregion
 
     private void Start()
     {
@@ -56,14 +61,41 @@ public class GameManager : MonoBehaviour
         GameOver
     }
 
-    private void OnApplicationQuit()
+    #region UI
+
+    public void Pause()
     {
-        PlayerPrefs.Save();
+        pauseMenuUI.SetActive(true);
+        inGameUI.SetActive(false);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
+    }
+    public void Resume()
+    {
+        pauseMenuUI.SetActive(false);
+        inGameUI.SetActive(true);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+    }
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
-    public void AddToCollection()
+    private void OnApplicationQuit()
     {
-        collectablesCounter++;
-        PlayerPrefs.SetInt("Collectables", collectablesCounter);
+        //PlayerPrefs.Save();
     }
+
+    public void AddToCollection(int value)
+    {
+        currentCogCount += value;
+        cogCount.text = currentCogCount.ToString();
+    }
+
+    #endregion
 }

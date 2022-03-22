@@ -13,8 +13,10 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     Vector3 playerVelocity;
     [HideInInspector] public Vector3 moveInput;
+    [HideInInspector] public bool isSprinting = false;
     
     [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float sprintSpeed = 5f;
     [SerializeField] float jumpHeight = 1.0f;
     [SerializeField] float turnSmoothTime = 0.1f;
 
@@ -42,13 +44,25 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         CheckFalling();
         Movement();
         Rotation();
-        
+        HandleSprinting();
+
+
         animator.SetFloat("Move", SetCorrectAnimation());
     }
 
     public void OnEnableControls() { GetComponent<PlayerInput>().enabled = true; }
 
     public void OnDisableControls() { GetComponent<PlayerInput>().enabled = false; }
+
+    #region Sprinting
+
+    void HandleSprinting()
+    {
+        if (!isSprinting) moveSpeed = 5;
+        else moveSpeed = sprintSpeed;
+    }
+
+    #endregion
 
     #region Movement & Falling
     void Movement()

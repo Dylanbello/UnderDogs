@@ -4,7 +4,7 @@ using UnityEngine;
 public class DogManager : MonoBehaviour
 {
     [Header("Health & Respawning")]
-    [SerializeField] int maxHealth;
+    [SerializeField] int maxHealth = 100;
     public HealthSystem playerHealth;
     Vector3 spawnPoint;
     CharacterController charController;
@@ -24,15 +24,27 @@ public class DogManager : MonoBehaviour
         charController = GetComponent<CharacterController>();
     }
 
-    private void Update() 
-    {
-        Debug.Log(playerHealth.GetHealth());    
-    }
-
     private void Start()
     {
         playerHealth = new HealthSystem(maxHealth);     //Inputs the maximum health for the player.
         spawnPoint = transform.position;                //Sets starting checkpoint.
+
+        playerHealth.OnDead += PlayerHealth_OnDead;
+        playerHealth.OnHealthChanged += PlayerHealth_OnHealthChanged;
+    }
+
+    private void PlayerHealth_OnHealthChanged(object sender, System.EventArgs e)
+    {
+        Debug.Log(playerHealth.GetHealth());
+    }
+
+    private void PlayerHealth_OnDead(object sender, System.EventArgs e)
+    {
+        Debug.Log($"{gameObject.name} is dead");
+        charController.enabled = false;
+        transform.position = spawnPoint;
+        charController.enabled = true;
+        ResetHealth();
     }
 
     /// <summary> Explode creates an overlap sphere that grabs all the objects in it's radius, checks if it has a rigidbody and health and then does damage to the targets. </summary>
@@ -41,9 +53,18 @@ public class DogManager : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         foreach (Collider hit in colliders)
         {
-            if (hit.TryGetComponent(out Rigidbody rigidbody)) { rigidbody.AddExplosionForce(power, transform.position, radius, 3, ForceMode.Impulse); }
-            if (hit.TryGetComponent(out AIHealth aiHealth)) { aiHealth.healthSystem.Damage(attackDamage); }
+            Rigidbody rigidbody = hit.GetComponent<Rigidbody>();
+            AIHealth aiHealth = hit.GetComponent<AIHealth>();
+
+            if (rigidbody) { rigidbody.AddExplosionForce(power, transform.position, radius, 3, ForceMode.Impulse); }
+            if (aiHealth) { aiHealth.healthSystem.Damage(attackDamage); }
         }
+    }
+
+    void ResetHealth()
+    {
+        int giveHealthAmount = maxHealth - playerHealth.GetHealth();
+        playerHealth.Heal(giveHealthAmount);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -58,10 +79,8 @@ public class DogManager : MonoBehaviour
                 charController.enabled = false;
                 transform.position = spawnPoint;
                 charController.enabled = true;
-                break;
-
-            case "collectable":
-                GameManager.Instance.AddToCollection();
+                ResetHealth();
+                
                 break;
 
             case "pickupable":
