@@ -3,35 +3,63 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
-using UnityEngine.Events;
 public class Ailocomotion : MonoBehaviour
 {
-    public NavMeshAgent navMeshAgent;               //  Nav mesh agent component
+    [Header("NavagationMeshAgent")]
+
+    [Tooltip("Nav mesh agent component")]
+    public NavMeshAgent navMeshAgent;
+
     [Space(20)]
-    public float startWaitTime = 4;                 //  Wait time of every action
-    public float timeToRotate = 2;                  //  Wait time when the enemy detect near the player without seeing
-    public float speedWalk = 6;                     //  Walking speed, speed in the nav mesh agent
-    public float speedRun = 9;                      //  Running speed
+
+    [Header("Movement Actions")]
+
+    [Tooltip("Wait time of every action")]
+    public float startWaitTime = 4;
+
+    [Tooltip("Wait time when the enemy detect near the player without seeing")]  
+    public float timeToRotate = 2;
+
+    [Tooltip("Walking speed, speed in the nav mesh agent")]
+    public float speedWalk = 6;
+
+    [Tooltip("Running speed")]
+    public float speedRun = 9;
     
     [Space(15)]
 
-    public float viewRadius = 15;                   //  Radius of the enemy view
-    public float viewAngle = 90;                    //  Angle of the enemy view
-    public LayerMask playerMask;                    //  To detect the player with the raycast
-    public LayerMask obstacleMask;                  //  To detect the obstacules with the raycast
-    public float meshResolution = 1.0f;             //  How many rays will cast per degree
-    public int edgeIterations = 4;                  //  Number of iterations to get a better performance of the mesh filter when the raycast hit an obstacule
-    public float edgeDistance = 0.5f;               //  Max distance to calcule the a minumun and a maximum raycast when hits something
+    [Header("Enemy Cone of Vision")]
+
+    [Tooltip("Radius of the enemy view")]
+    public float viewRadius = 15;
+
+    [Tooltip("Angle of the enemy view")]
+    public float viewAngle = 90;
+
+    [Tooltip("To detect the player with the raycast")]
+    public LayerMask playerMask;
+
+    [Tooltip("To detect the obstacules with the raycast")]
+    public LayerMask obstacleMask;
+
+    [Tooltip("How many rays will cast per degree")]
+    public float meshResolution = 1.0f;
+
+    [Tooltip("Number of iterations to get a better performance of the mesh filter when the raycast hit an obstacule")]
+    public int edgeIterations = 4;
+
+    [Tooltip(" Max distance to calcule the a minumun and a maximum raycast when hits something")]
+    public float edgeDistance = 0.5f;
  
     [Space(15)]
 
     public Transform[] waypoints;                   //  All the waypoints where the enemy patrols
     int m_CurrentWaypointIndex;                     //  Current waypoint where the enemy is going to
+    
     [Space (15)]
 
     public Image QMSymbol;
     public Image EXSymbol;
-    public UnityEvent detection;
 
     Vector3 playerLastPosition = Vector3.zero;      //  Last position of the player when was near the enemy
     Vector3 m_PlayerPosition;                       //  Last position of the player when the player is seen by the enemy
@@ -53,20 +81,20 @@ public class Ailocomotion : MonoBehaviour
         m_DetectedPlayer= false;
         m_playerInRange = false;
         m_PlayerNear = false;
-        m_WaitTime = startWaitTime;                 //  Set the wait time variable that will change
+        m_WaitTime = startWaitTime; //  Set the wait time variable that will change
         m_TimeToRotate = timeToRotate;
  
-        m_CurrentWaypointIndex = 0;                 //  Set the initial waypoint
+        m_CurrentWaypointIndex = 0; //  Set the initial waypoint
         navMeshAgent = GetComponent<NavMeshAgent>();
  
         navMeshAgent.isStopped = false;
-        navMeshAgent.speed = speedWalk;             //  Set the navemesh speed with the normal speed of the enemy
-        navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);    //  Set the destination to the first waypoint
+        navMeshAgent.speed = speedWalk; //  Set the navemesh speed with the normal speed of the enemy
+        navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position); //  Set the destination to the first waypoint
     }
  
     private void Update()
     {
-        EnviromentView();                       //  Check whether or not the player is in the enemy's field of vision
+        EnviromentView();  //  Check whether or not the player is in the enemy's field of vision
  
         if (!m_IsPatrol)
         {
@@ -81,8 +109,8 @@ public class Ailocomotion : MonoBehaviour
     private void Chasing()
     {
         //  The enemy is chasing the player
-        m_PlayerNear = false;                       //  Set false that hte player is near beacause the enemy already sees the player
-        playerLastPosition = Vector3.zero;          //  Reset the player near position
+        m_PlayerNear = false;               //  Set false that hte player is near beacause the enemy already sees the player
+        playerLastPosition = Vector3.zero;  //  Reset the player near position
  
         if (!m_CaughtPlayer)
         {
@@ -161,10 +189,9 @@ public class Ailocomotion : MonoBehaviour
         Debug.Log("im working");
         yield return new WaitUntil(()=> m_DetectedPlayer = true);
         EXSymbol.enabled=true;
-
         if(m_DetectedPlayer == false)
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(0.01f);
             EXSymbol.enabled=false;
         }
     }

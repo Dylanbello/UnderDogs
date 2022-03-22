@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 15
-  attackSpeed: 3
+  attackDelay: 1
   attackSound: {fileID: 2711713068270668259}
 --- !u!82 &2711713068270668259
 AudioSource:
@@ -421,7 +421,6 @@ GameObject:
   - component: {fileID: 2711713068434218028}
   - component: {fileID: 2711713068434218029}
   - component: {fileID: 2711713068434218030}
-  - component: {fileID: 2711713068434218024}
   m_Layer: 7
   m_Name: AI_Health_character2
   m_TagString: Untagged
@@ -523,7 +522,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHeatlh: 100
-  particleSystem: {fileID: 0}
   head: {fileID: 0}
   body: {fileID: 0}
   L_Track: {fileID: 0}
@@ -533,19 +531,6 @@ MonoBehaviour:
   lego: {fileID: 0}
   healthSliders:
   - {fileID: 2711713069767557977}
---- !u!114 &2711713068434218024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2711713068434218026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 818b19eb9c54b6a49b2753b8f59de885, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 0}
 --- !u!1 &2711713068538530713
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,7 +780,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2711713069184280375}
-  - component: {fileID: 2711713069184280374}
+  - component: {fileID: 165742171}
   m_Layer: 0
   m_Name: AI_DEBUG_VisionCone
   m_TagString: Untagged
@@ -817,7 +802,7 @@ Transform:
   m_Father: {fileID: 2711713069634428410}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2711713069184280374
+--- !u!114 &165742171
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -826,20 +811,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2711713069184280368}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8991df40766fb954c9ac99e11204f32a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e6e7d1da23138243803b7d7ab033caa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 10
+  distance: 15
   angle: 30
-  height: 0.1
-  meshColor: {r: 1, g: 0, b: 0, a: 0.09019608}
-  scanFrequency: 30
-  layers:
-    serializedVersion: 2
-    m_Bits: 256
-  occlusionLayers:
-    serializedVersion: 2
-    m_Bits: 512
+  height: 0.3
+  meshColor: {r: 1, g: 0.24056602, b: 0.24056602, a: 0.16862746}
 --- !u!1 &2711713069270614211
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,7 +981,6 @@ GameObject:
   - component: {fileID: 2711713069626583473}
   - component: {fileID: 2711713069626583474}
   - component: {fileID: 2711713069626583478}
-  - component: {fileID: 2711713069626583479}
   m_Layer: 6
   m_Name: AI_Health_character1
   m_TagString: Untagged
@@ -1105,7 +1082,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHeatlh: 100
-  particleSystem: {fileID: 0}
   head: {fileID: 0}
   body: {fileID: 0}
   L_Track: {fileID: 0}
@@ -1115,19 +1091,6 @@ MonoBehaviour:
   lego: {fileID: 0}
   healthSliders:
   - {fileID: 2711713069177006832}
---- !u!114 &2711713069626583479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2711713069626583484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 818b19eb9c54b6a49b2753b8f59de885, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 0}
 --- !u!1 &2711713069634428357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,9 +1164,7 @@ MonoBehaviour:
   - {fileID: 0}
   QMSymbol: {fileID: 1800797006}
   EXSymbol: {fileID: 938196842}
-  detection:
-    m_PersistentCalls:
-      m_Calls: []
+  m_IsPatrol: 0
 --- !u!65 &2711713069634428414
 BoxCollider:
   m_ObjectHideFlags: 0
