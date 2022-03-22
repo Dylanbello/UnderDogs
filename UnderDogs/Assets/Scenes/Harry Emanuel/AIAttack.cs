@@ -14,15 +14,9 @@ public class AIAttack : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(!other.TryGetComponent(out DogManager dogManager) && attackTimer < attackDelay) { return; } //Guard clause that stops code unless it detects a player.
-
-        if(dogManager.playerHealth.IsDead)  //If the player is dead, return to patrolling.
-        { 
-            aiLocaomotion.m_IsPatrol = true; 
-            return; 
-        }
-
-        //This code runs only if the player isn't dead.
+        DogManager dogManager = other.GetComponent<DogManager>();
+        if(!dogManager && attackTimer < attackDelay){ return; } //Guard clause that stops code unless it detects a player.
+       
         dogManager.playerHealth.Damage(attackDamage);
         attackSound.Play();
     }
