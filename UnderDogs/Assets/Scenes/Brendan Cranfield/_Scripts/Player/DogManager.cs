@@ -24,6 +24,11 @@ public class DogManager : MonoBehaviour
         charController = GetComponent<CharacterController>();
     }
 
+    private void Update() 
+    {
+        Debug.Log(playerHealth.GetHealth());    
+    }
+
     private void Start()
     {
         playerHealth = new HealthSystem(maxHealth);     //Inputs the maximum health for the player.
