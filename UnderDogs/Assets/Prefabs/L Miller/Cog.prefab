@@ -109,5 +109,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea2c98a84ced2d142a6dd553d3a8c938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cogValue: 5
+  cogValue: 1
   cogSpinSpeed: 70
