@@ -10,7 +10,6 @@ public class AIHealth : MonoBehaviour
     ParticleSystem particleSystem;
     [Space(10)]
     public GameObject head, body,L_Track,R_Track,L_Wheels,R_Wheels;
-    [SerializeField]private AudioSource lego;
 
     [Space(10)]
     [SerializeField] List<Slider> healthSliders;
@@ -47,6 +46,5 @@ public class AIHealth : MonoBehaviour
         Instantiate(R_Track, transform.position, Quaternion.identity);
         Instantiate(L_Wheels, transform.position, Quaternion.identity);
         Instantiate(R_Wheels, transform.position, Quaternion.identity);
-        lego.Play();
     }
 }
