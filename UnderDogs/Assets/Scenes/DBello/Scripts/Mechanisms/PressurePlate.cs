@@ -20,7 +20,14 @@ public class PressurePlate : MonoBehaviour
         //or check objects weight, etc.
 
 
-        if (other.CompareTag("character1")) { plateActivation.Invoke(); }
+        if (other.CompareTag("character1"))  
+        { 
+            plateActivation.Invoke(); 
+        }
+        else if ( other.CompareTag("character2"))
+        {
+            plateActivation.Invoke();
+        }
         else return;
     }
 
@@ -30,7 +37,14 @@ public class PressurePlate : MonoBehaviour
         //or check objects weight, etc.
 
 
-        if (other.CompareTag("character1")) { plateDeactivation.Invoke(); }
+        if (other.CompareTag("character1")) 
+        { 
+            plateDeactivation.Invoke(); 
+        }
+        else if (other.CompareTag("character2"))
+        {
+            plateDeactivation.Invoke();
+        }
         else return;
     }
 

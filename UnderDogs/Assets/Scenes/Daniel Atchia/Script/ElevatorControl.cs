@@ -12,7 +12,7 @@ public class ElevatorControl : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "character1")
+        if(other.gameObject.tag == "character1" && other.gameObject.tag == "character2") 
         {
             animator.SetBool("Ascending", true);
         }
