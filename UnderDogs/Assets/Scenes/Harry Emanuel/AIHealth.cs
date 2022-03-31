@@ -29,6 +29,7 @@ public class AIHealth : MonoBehaviour
     private void HealthSystem_OnHealthChanged(object sender, System.EventArgs e)    // This method is called when the AI's health changes via damage, healing, etc.
     {
         //Play injured particles.
+        
         healthSliders[0].value = healthSystem.GetHealth();
         healthSliders[1].value = healthSystem.GetHealth();
     }
