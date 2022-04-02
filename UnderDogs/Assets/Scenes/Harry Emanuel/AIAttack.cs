@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("AI/AIAttack")]
 public class AIAttack : MonoBehaviour
 {
     Ailocomotion aiLocaomotion;
@@ -11,6 +12,7 @@ public class AIAttack : MonoBehaviour
     [SerializeField] private Animator ai_Attack;
     private bool _isDistanceCheck = false;
     
+
 
     private float attackTimer;
 
@@ -23,18 +25,15 @@ public class AIAttack : MonoBehaviour
 
         attackTimer = 0;
         dogManager.playerHealth.Damage(attackDamage);
-        attackSound.Play();
-        
-        if(dogManager == true)
-        {
-            ai_Attack.SetBool("Attack",true);
-        }
-        else
-        {
-            ai_Attack.SetBool("Attack",false);
-        }
+        ai_Attack.SetBool("Attack", true);
+        ai_Attack.StartPlayback();
         
     }
 
-    private void Update() { attackTimer += Time.deltaTime; }
+    
+
+    private void Update()
+    { 
+        attackTimer += Time.deltaTime;
+    }
 }
