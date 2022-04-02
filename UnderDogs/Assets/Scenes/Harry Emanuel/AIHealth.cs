@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[AddComponentMenu("AI/AIHealth")]
+
 public class AIHealth : MonoBehaviour
 {
     public int maxHeatlh = 100;
