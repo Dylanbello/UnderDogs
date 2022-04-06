@@ -8,7 +8,13 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] AudioSource audioSource;
     [SerializeField] List<AudioClip> audioClips = new List<AudioClip>();
+    //[SerializeField] AudioMixer mixer;
 
+    void Start()
+    {
+      
+    }
+    
     void Awake()
     {
         if (instance == null)
