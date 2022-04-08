@@ -6,34 +6,30 @@ using UnityEngine;
 public class AIAttack : MonoBehaviour
 {
     Ailocomotion aiLocaomotion;
+    private float attackTimer;
     [SerializeField] private int attackDamage = 50;
     [SerializeField] private float attackDelay = 1;
     [SerializeField] private AudioSource attackSound;
     [SerializeField] private Animator ai_Attack;
+    [SerializeField] float power;
+    [SerializeField] float radius;
+    
     private bool _isDistanceCheck = false;
     
-
-
-    private float attackTimer;
-
     private void Awake() { aiLocaomotion = GetComponent<Ailocomotion>();}
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         DogManager dogManager = other.GetComponent<DogManager>();
-        if(!dogManager || attackTimer < attackDelay) { return; }
-
+        if(!dogManager || attackTimer < attackDelay) {return;}
+        
         attackTimer = 0;
+        attackSound.Play();
         dogManager.playerHealth.Damage(attackDamage);
         ai_Attack.SetBool("Attack", true);
-        ai_Attack.StartPlayback();
-        
     }
 
-    
+    private void OnTriggerExit(Collider other){ai_Attack.SetBool("Attack", false);}
 
-    private void Update()
-    { 
-        attackTimer += Time.deltaTime;
-    }
+    private void Update(){ attackTimer += Time.deltaTime;}
 }
