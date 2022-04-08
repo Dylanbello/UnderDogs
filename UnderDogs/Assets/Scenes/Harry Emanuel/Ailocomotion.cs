@@ -9,14 +9,10 @@ using UnityEngine.UI;
 public class Ailocomotion : MonoBehaviour
 {
     [Header("NavagationMeshAgent")]
-
     [Tooltip("Nav mesh agent component")]
     public NavMeshAgent navMeshAgent;
 
-    [Space(20)]
-
     [Header("Movement Actions")]
-
     [Tooltip("Wait time of every action")]
     public float startWaitTime;
 
@@ -29,10 +25,8 @@ public class Ailocomotion : MonoBehaviour
     [Tooltip("Running speed")]
     public float speedRun;
     
-    [Space(15)]
 
     [Header("Enemy Cone of Vision")]
-
     [Tooltip("Radius of the enemy view")]
     public float viewRadius;
 
@@ -55,15 +49,14 @@ public class Ailocomotion : MonoBehaviour
     public float edgeDistance = 0.5f;
  
     [Space(15)]
-
     public Transform[] waypoints;                   //  All the waypoints where the enemy patrols
     int m_CurrentWaypointIndex;                     //  Current waypoint where the enemy is going to
     Transform playerPos;
 
     [Space (15)]
-
-    public Image QMSymbol;
-    public Image EXSymbol;
+    public Image QMSymbol,EXSymbol;                 // Images that appear above the enemys head to symbols state of enemy condition
+    [Space(15)]
+    [SerializeField]ParticleSystem L_Dirt, R_Dirt;  // Dirt trails emmiting behind enemy
 
     Vector3 playerLastPosition = Vector3.zero;      //  Last position of the player when was near the enemy
     Vector3 m_PlayerPosition;                       //  Last position of the player when the player is seen by the enemy
@@ -76,7 +69,7 @@ public class Ailocomotion : MonoBehaviour
     bool m_CaughtPlayer;                            //  if the enemy has caught the player
     bool m_DetectedPlayer;
     bool canDisplayIcon;
-    [SerializeField]GameObject[] dirtTrail;
+    
 
     void Start()
     {
@@ -86,21 +79,21 @@ public class Ailocomotion : MonoBehaviour
         m_DetectedPlayer= false;
         m_playerInRange = false;
         m_PlayerNear = false;
-        m_WaitTime = startWaitTime; //  Set the wait time variable that will change
+        m_WaitTime = startWaitTime;                  //  Set the wait time variable that will change
         m_TimeToRotate = timeToRotate;
  
-        m_CurrentWaypointIndex = 0; //  Set the initial waypoint
+        m_CurrentWaypointIndex = 0;                  //  Set the initial waypoint
         navMeshAgent = GetComponent<NavMeshAgent>();
  
         navMeshAgent.isStopped = false;
-        navMeshAgent.speed = speedWalk; //  Set the navemesh speed with the normal speed of the enemy
-        navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position); //  Set the destination to the first waypoint
+        navMeshAgent.speed = speedWalk;             //  Set the navemesh speed with the normal speed of the enemy
+        navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);            //  Set the destination to the first waypoint
     }
  
     private void Update()
     {
         iconOff();
-        EnviromentView();  //  Check whether or not the player is in the enemy's field of vision
+        EnviromentView();                           //  Check whether or not the player is in the enemy's field of vision
  
         if (!m_IsPatrol)
         {
@@ -154,14 +147,11 @@ public class Ailocomotion : MonoBehaviour
         if (m_PlayerNear)
         {
             //  Check if the enemy detect near the player, so the enemy will move to that position
-            if (m_TimeToRotate <= 0)
-            {
+            if (m_TimeToRotate <= 0){
                 Move(speedWalk);
                 LookingPlayer(playerLastPosition);
             }
-            else
-            {
-                
+            else{
                 //The enemy wait for a moment and then go to the last player position
                 Stop();
                 m_TimeToRotate -= Time.deltaTime;
@@ -170,14 +160,17 @@ public class Ailocomotion : MonoBehaviour
         else
         {
             canDisplayIcon = true;
-            m_PlayerNear = false;//  The player is no near when the enemy is platroling
+            m_PlayerNear = false;                       //  The player is no near when the enemy is platroling
             playerLastPosition = Vector3.zero;
-            navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);    //  Set the enemy destination to the next waypoint
+            navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);    //  Set the enemy destination to the next waypoint             
             if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
             {
+                var particleDuration = L_Dirt.main;
                 //  If the enemy arrives to the waypoint position then wait for a moment and go to the next
                 if (m_WaitTime <= 0)
                 {
+                    L_Dirt.Play();              
+                    R_Dirt.Play();
                     NextPoint();
                     Move(speedWalk);
                     m_WaitTime = startWaitTime;
@@ -185,6 +178,8 @@ public class Ailocomotion : MonoBehaviour
                 else
                 {
                     Stop();
+                    L_Dirt.Stop();
+                    R_Dirt.Stop();
                     m_WaitTime -= Time.deltaTime;
                 }
             }
@@ -203,28 +198,22 @@ public class Ailocomotion : MonoBehaviour
         }
     }
 
-    public void NextPoint()
-    {
+    public void NextPoint(){
         m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
         navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
     }
  
-    void Stop()
-    {
+    void Stop(){
         navMeshAgent.isStopped = true;
         navMeshAgent.speed = 0;
     }
  
-    void Move(float speed)
-    {
+    void Move(float speed){
         navMeshAgent.isStopped = false;
         navMeshAgent.speed = speed;
     }
  
-    void CaughtPlayer()
-    {
-        m_CaughtPlayer = true;
-    }
+    void CaughtPlayer(){ m_CaughtPlayer = true;}
  
     void LookingPlayer(Vector3 player)
     {
@@ -266,10 +255,7 @@ public class Ailocomotion : MonoBehaviour
                 }
                 else
                 {
-                    /*
-                     *  If the player is behind a obstacle the player position will not be registered
-                     * */
-                    m_playerInRange = false;
+                    m_playerInRange = false; //If the player is behind a obstacle the player position will not be registered
                 }
             }
             if (Vector3.Distance(transform.position, player.position) > viewRadius)
@@ -277,14 +263,14 @@ public class Ailocomotion : MonoBehaviour
                 /*
                  *  If the player is further than the view radius, then the enemy will no longer keep the player's current position.
                  *  Or the enemy is a safe zone, the enemy will no chase
-                 * */
+                */
                 m_playerInRange = false;                //  Change the sate of chasing
             }
             if (m_playerInRange)
             {
                 /*
                  *  If the enemy no longer sees the player, then the enemy will go to the last position that has been registered
-                 * */
+                */
                 m_PlayerPosition = player.transform.position;       //  Save the player's current position if the player is in range of vision
             }
         }
