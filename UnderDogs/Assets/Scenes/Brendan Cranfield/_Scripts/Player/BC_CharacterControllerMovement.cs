@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Cinemachine;
+
 [RequireComponent(typeof(CharacterController)), AddComponentMenu("Player/Player Locomotion")]
 public class BC_CharacterControllerMovement : MonoBehaviour
 {
@@ -15,12 +16,17 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     Vector3 playerVelocity;
     [HideInInspector] public Vector3 moveInput;
     [HideInInspector] public bool isSprinting = false;
-    public bool grounded;
+    bool grounded;
+    bool wasGrounded;
     
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float sprintSpeed = 5f;
     [SerializeField] float jumpHeight = 1.0f;
     [SerializeField] float turnSmoothTime = 0.1f;
+
+    [Header("Particle Effects")]
+    [SerializeField] ParticleSystem landingParticles;
+    [SerializeField] ParticleSystem movementParticles;
 
 
     private void Awake()
@@ -42,7 +48,7 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
         //canJump = true;
     }
-
+    bool landCheck = false;
     private void Update()
     {
         CheckFalling();
@@ -51,8 +57,21 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         HandleSprinting();
         SetCorrectAnimation();
         isGrounded();
+        Idle();
 
-        //if(isGrounded) animator.ResetTrigger("Jump");
+        if (movementParticles != null)
+        {
+            if (moveInput != Vector3.zero) { movementParticles.Play(); }
+            else { movementParticles.Stop(); }
+        }
+
+        if(grounded && !landCheck && landingParticles != null)     //if the player was just grounded
+        {
+            landCheck = true;
+            ParticleSystem landingPart = Instantiate(landingParticles, transform);
+            landingPart.Play();
+            landingPart.transform.parent = null;
+        }
     }
 
     public void OnEnableControls() { GetComponent<PlayerInput>().enabled = true; }
@@ -91,7 +110,6 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     void CheckFalling()
     {
-        //if (isGrounded) jumpCount = 0;
 
         //Stop Falling
         if (playerVelocity.y < 0 && grounded) { playerVelocity.y = 0; }
@@ -103,33 +121,27 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     public void isGrounded()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, .1f, 1 << LayerMask.NameToLayer("Environment"))) { grounded = true; }
+        if (Physics.Raycast(transform.position, Vector3.down, .1f, 1 << LayerMask.NameToLayer("Environment"))) { grounded = true; wasGrounded = false; }
         else { grounded = false; }
     }
     #endregion
 
     #region Jumping
 
-    //bool canJump = true;
 
     public void Jump()
     {
         if (!grounded) return;     //Guard clause for double jumping.
-        //animator.SetTrigger("Jump");
 
-        //canJump = false;
-        //jumpCount += 1;
+        if(grounded) 
+        { 
+            wasGrounded = true;
+            landCheck = false;
+        }
 
         playerVelocity.y += Mathf.Sqrt(jumpHeight * -3 * gravityValue);
-        //StartCoroutine(JumpCooldown());
     }
-    /*
-    IEnumerator JumpCooldown()
-    {
-        yield return new WaitForSeconds(0.2f);
-        canJump = true;
-    }
-    */
+
     #endregion
 
     #region Applying Animation Values
@@ -143,22 +155,40 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         if (moveX == 0 && moveY == 0) charMoveSpeed = 0;
         else if (moveX > 0.8f || moveY > 0.8f) charMoveSpeed = 1;
         else if (moveX < -0.8f || moveY < -0.8f) charMoveSpeed = 1;
-        else if (moveX < 0.7f || moveY < 0.7f) charMoveSpeed = 0.5f;
-        else if (moveX > -0.7f || moveY > -0.7f) charMoveSpeed = 0.5f;
 
         //Sprinting
-        if(isSprinting) 
-        { 
-            animator.SetBool("isRunning", true); 
-            animator.SetBool("isWalking", false); 
+        if (charMoveSpeed != 0 && isSprinting)
+        {
+            animator.SetBool("IsRunning", true);
+            animator.SetBool("IsWalking", false);
+            charMoveSpeed = 2;
         }
-        else 
-        { 
-            animator.SetBool("isRunning", false); 
-            animator.SetBool("isWalking", true); 
+        else if (charMoveSpeed != 0 && !isSprinting)
+        {
+            animator.SetBool("IsRunning", false);
+            animator.SetBool("IsWalking", true);
+        }
+        else
+        {
+            animator.SetBool("IsRunning", false);
+            animator.SetBool("IsWalking", false);
         }
 
         animator.SetFloat("Move", charMoveSpeed);
+    }
+
+    #endregion
+
+    #region Idle
+
+    float idleTimer;
+
+    void Idle()
+    {
+        if (moveInput == Vector3.zero) { idleTimer += Time.deltaTime; }
+        else { idleTimer = 0; animator.SetTrigger("GetUp"); }
+
+        if(idleTimer >= 60 && idleTimer < 300) { animator.SetTrigger("Sit"); idleTimer = 60; }
     }
 
     #endregion
