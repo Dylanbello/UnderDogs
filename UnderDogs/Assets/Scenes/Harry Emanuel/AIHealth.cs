@@ -16,6 +16,8 @@ public class AIHealth : MonoBehaviour
     [Space(10)]
     [SerializeField] List<Slider> healthSliders;
 
+    void Awake() { SoundManager.Initialize();}
+
     void Start()
     {
         healthSystem = new HealthSystem(maxHeatlh);
@@ -28,10 +30,12 @@ public class AIHealth : MonoBehaviour
         healthSliders[1].maxValue = maxHeatlh;
     }
 
+
+
     private void HealthSystem_OnHealthChanged(object sender, System.EventArgs e)    // This method is called when the AI's health changes via damage, healing, etc.
     {
         //Play injured particles.
-        
+        //SoundManager.PlaySound(SoundManager.Sound.EnemyTakeDamage, GetPosition);
         healthSliders[0].value = healthSystem.GetHealth();
         healthSliders[1].value = healthSystem.GetHealth();
     }

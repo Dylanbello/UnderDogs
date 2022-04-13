@@ -9,7 +9,6 @@ public class AIAttack : MonoBehaviour
     private float attackTimer;
     [SerializeField] private int attackDamage = 50;
     [SerializeField] private float attackDelay = 1;
-    [SerializeField] private AudioSource attackSound;
     [SerializeField] private Animator ai_Attack;
     [SerializeField] float power;
     [SerializeField] float radius;
@@ -24,7 +23,6 @@ public class AIAttack : MonoBehaviour
         if(!dogManager || attackTimer < attackDelay) {return;}
         
         attackTimer = 0;
-        attackSound.Play();
         dogManager.playerHealth.Damage(attackDamage);
         ai_Attack.SetBool("Attack", true);
     }
