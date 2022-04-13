@@ -16,8 +16,8 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     Vector3 playerVelocity;
     [HideInInspector] public Vector3 moveInput;
     [HideInInspector] public bool isSprinting = false;
-    bool grounded;
-    bool wasGrounded;
+    [SerializeField] bool grounded;
+    [SerializeField] bool wasGrounded;
     
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float sprintSpeed = 5f;
@@ -27,6 +27,11 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     [Header("Particle Effects")]
     [SerializeField] ParticleSystem landingParticles;
     [SerializeField] ParticleSystem movementParticles;
+
+
+    private const string startJump = "Jump_Launch";
+    private const string InAir = "Jump_Air";
+    private const string landJump = "Jump_Land";
 
 
     private void Awake()
@@ -44,6 +49,8 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         cmFreeLook.Follow = transform;
         cmFreeLook.LookAt = transform;
 
+        movementParticles.Stop();
+
         if(Cursor.visible) { Cursor.lockState = CursorLockMode.Confined; Cursor.visible = false; }
 
         //canJump = true;
@@ -60,13 +67,18 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         Idle();
 
         if(movementParticles != null && moveInput != Vector3.zero) { movementParticles.Play(); }
+        else { movementParticles.Stop(); }
 
-        if(grounded && !landCheck && landingParticles != null)     //if the player was just grounded
+        if(grounded && !landCheck)     //if the player was just grounded
         {
             landCheck = true;
-            ParticleSystem landingPart = Instantiate(landingParticles, transform);
-            landingPart.Play();
-            landingPart.transform.parent = null;
+            animator.CrossFade(landJump, 0.2f);
+            if (landingParticles != null)
+            {
+                ParticleSystem landingPart = Instantiate(landingParticles, transform);
+                landingPart.Play();
+                landingPart.transform.parent = null;
+            }
         }
     }
 
@@ -117,11 +129,11 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     public void isGrounded()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, .1f, 1 << LayerMask.NameToLayer("Environment"))) 
+        if (Physics.Raycast(transform.position, Vector3.down, .2f, 1 << LayerMask.NameToLayer("Environment"))) 
         { 
             grounded = true; 
             wasGrounded = false;
-            animator.ResetTrigger("Jump");
+            //animator.ResetTrigger("Jump");
         }
         else { grounded = false; }
     }
@@ -133,6 +145,9 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     {
         if (!grounded) return;     //Guard clause for double jumping.
 
+        //animator.SetTrigger("Jump");
+
+        animator.CrossFade(startJump, 0.2f);
         if(grounded) 
         { 
             wasGrounded = true;
@@ -155,25 +170,8 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         else if (moveX > 0.8f || moveY > 0.8f) charMoveSpeed = 1;
         else if (moveX < -0.8f || moveY < -0.8f) charMoveSpeed = 1;
 
-        //Sprinting
-        if (charMoveSpeed != 0 && isSprinting)
-        {
-            animator.SetBool("IsRunning", true);
-            animator.SetBool("IsWalking", false);
-            charMoveSpeed = 2;
-        }
-        else if (charMoveSpeed != 0 && !isSprinting)
-        {
-            animator.SetBool("IsRunning", false);
-            animator.SetBool("IsWalking", true);
-        }
-        else
-        {
-            animator.SetBool("IsRunning", false);
-            animator.SetBool("IsWalking", false);
-        }
-
         animator.SetFloat("Move", charMoveSpeed);
+
     }
 
     #endregion

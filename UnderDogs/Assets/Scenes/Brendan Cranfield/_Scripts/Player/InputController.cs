@@ -15,7 +15,7 @@ public class InputController : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context) { dogManager.Explode(); }
     public void Movement(InputAction.CallbackContext context) { characterControllerMovement.moveInput = context.ReadValue<Vector2>(); }
-    public void Jump(InputAction.CallbackContext context) { characterControllerMovement.animator.SetTrigger("Jump"); }
+    public void Jump(InputAction.CallbackContext context) { characterControllerMovement.Jump(); }
     public void Pause(InputAction.CallbackContext context)
     { 
         if(!GameManager.Instance.GameIsPaused) { GameManager.Instance.Pause(); }
