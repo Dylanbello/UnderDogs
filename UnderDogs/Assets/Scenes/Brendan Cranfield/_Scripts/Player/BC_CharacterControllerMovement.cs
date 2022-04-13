@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
@@ -11,7 +12,6 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     Transform cam;
     CinemachineFreeLook cmFreeLook;
     Animator animator;
-    Rigidbody rigidbody;
 
     Vector3 playerVelocity;
     [HideInInspector] public Vector3 moveInput;
@@ -59,11 +59,7 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         isGrounded();
         Idle();
 
-        if (movementParticles != null)
-        {
-            if (moveInput != Vector3.zero) { movementParticles.Play(); }
-            else { movementParticles.Stop(); }
-        }
+        if(movementParticles != null && moveInput != Vector3.zero) { movementParticles.Play(); }
 
         if(grounded && !landCheck && landingParticles != null)     //if the player was just grounded
         {
@@ -121,24 +117,29 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     public void isGrounded()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, .1f, 1 << LayerMask.NameToLayer("Environment"))) { grounded = true; wasGrounded = false; }
+        if (Physics.Raycast(transform.position, Vector3.down, .1f, 1 << LayerMask.NameToLayer("Environment"))) 
+        { 
+            grounded = true; 
+            wasGrounded = false;
+            animator.ResetTrigger("Jump");
+        }
         else { grounded = false; }
     }
     #endregion
 
     #region Jumping
 
-
     public void Jump()
     {
         if (!grounded) return;     //Guard clause for double jumping.
+
+        animator.SetTrigger("Jump");
 
         if(grounded) 
         { 
             wasGrounded = true;
             landCheck = false;
         }
-
         playerVelocity.y += Mathf.Sqrt(jumpHeight * -3 * gravityValue);
     }
 
@@ -179,6 +180,7 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     #endregion
 
+    // This is just a small thing that plays an animation when the player is idle for a while.
     #region Idle
 
     float idleTimer;
@@ -188,7 +190,7 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         if (moveInput == Vector3.zero) { idleTimer += Time.deltaTime; }
         else { idleTimer = 0; animator.SetTrigger("GetUp"); }
 
-        if(idleTimer >= 60 && idleTimer < 300) { animator.SetTrigger("Sit"); idleTimer = 60; }
+        if(idleTimer >= 20) { animator.SetTrigger("Sit"); idleTimer = 20; }
     }
 
     #endregion
