@@ -387,6 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroupUI: {fileID: 48365093}
   fadeIn: 1
+  fadeInDelay: 3
 --- !u!225 &48365093
 CanvasGroup:
   m_ObjectHideFlags: 0

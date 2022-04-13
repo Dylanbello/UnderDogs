@@ -9,6 +9,9 @@ public class UIFade : MonoBehaviour
 
     [SerializeField] private bool fadeIn = true;
 
+    public float fadeInDelay;
+    private float delayTimer = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +21,13 @@ public class UIFade : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(canvasGroupUI.alpha < 1 && fadeIn == true)
+        if(delayTimer < fadeInDelay)
+        {
+            delayTimer += Time.deltaTime;
+        }
+
+
+        if(canvasGroupUI.alpha < 1 && fadeIn == true && delayTimer >= fadeInDelay)
         {
             canvasGroupUI.alpha += Time.deltaTime;
 
