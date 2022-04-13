@@ -17,7 +17,7 @@ public class AIAttack : MonoBehaviour
     
     private void Awake() { aiLocaomotion = GetComponent<Ailocomotion>();}
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         DogManager dogManager = other.GetComponent<DogManager>();
         if(!dogManager || attackTimer < attackDelay) {return;}
@@ -27,7 +27,10 @@ public class AIAttack : MonoBehaviour
         ai_Attack.SetBool("Attack", true);
     }
 
-    private void OnTriggerExit(Collider other){ai_Attack.SetBool("Attack", false);}
+    private void OnTriggerExit(Collider other)
+    {
+        ai_Attack.SetBool("Attack", false);
+    }
 
     private void Update(){ attackTimer += Time.deltaTime;}
 }

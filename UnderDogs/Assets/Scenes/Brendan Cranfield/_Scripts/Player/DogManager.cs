@@ -13,6 +13,7 @@ public class DogManager : MonoBehaviour
     [SerializeField] float power = 1;
     [SerializeField] int attackDamage = 20;
     [SerializeField] float radius = 1;
+    Animator animator;
 
     [Header("Pickup")]
     [SerializeField] Transform currentPickedUp;
@@ -22,6 +23,7 @@ public class DogManager : MonoBehaviour
     private void Awake()
     {
         charController = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();//Gets dog animator
     }
 
     private void Start()
@@ -50,15 +52,17 @@ public class DogManager : MonoBehaviour
     /// <summary> Explode creates an overlap sphere that grabs all the objects in it's radius, checks if it has a rigidbody and health and then does damage to the targets. </summary>
     public void Explode()
     {
+        animator.CrossFade("SpinAttack",0);//Get spin attack in animator
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
-        foreach (Collider hit in colliders)
+        for(int i=0;i<colliders.Length;i++)
         {
-            Rigidbody rigidbody = hit.GetComponent<Rigidbody>();
-            AIHealth aiHealth = hit.GetComponent<AIHealth>();
+            Rigidbody rigidbody = colliders[i].GetComponent<Rigidbody>();
+            AIHealth aiHealth = colliders[i].GetComponent<AIHealth>();
 
             if (rigidbody) { rigidbody.AddExplosionForce(power, transform.position, radius, 3, ForceMode.Impulse); }
             if (aiHealth) { aiHealth.healthSystem.Damage(attackDamage); }
         }
+        
     }
 
     void ResetHealth()
