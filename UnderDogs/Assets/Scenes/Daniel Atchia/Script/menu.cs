@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 public class menu : MonoBehaviour
 {
-
+    public ChangeSceneButton changeScene;
     public TextMeshProUGUI option1;
     public TextMeshProUGUI option2;
     public TextMeshProUGUI option3;
@@ -116,7 +116,7 @@ public class menu : MonoBehaviour
             switch (selectedOption) //Set the visual indicator for which option you are on.
             {
                 case 1:
-                    /*Do option one*/
+                    SceneManager.LoadScene("MasterScene");
                     break;
                 case 2:
                     /*Do option two*/
