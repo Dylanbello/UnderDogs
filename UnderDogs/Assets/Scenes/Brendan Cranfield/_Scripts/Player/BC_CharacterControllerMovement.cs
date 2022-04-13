@@ -11,7 +11,7 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     CharacterController controller;
     Transform cam;
     CinemachineFreeLook cmFreeLook;
-    Animator animator;
+    [HideInInspector] public Animator animator;
 
     Vector3 playerVelocity;
     [HideInInspector] public Vector3 moveInput;
@@ -132,8 +132,6 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     public void Jump()
     {
         if (!grounded) return;     //Guard clause for double jumping.
-
-        animator.SetTrigger("Jump");
 
         if(grounded) 
         { 
