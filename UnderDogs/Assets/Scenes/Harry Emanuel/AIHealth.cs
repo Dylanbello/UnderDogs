@@ -43,6 +43,7 @@ public class AIHealth : MonoBehaviour
     private void HealthSystem_OnDead(object sender, System.EventArgs e)     // This method is called when the AI dies.
     {
         partSpawns();
+        SoundManager.Play3DSound(SoundManager.Sound.EnemyDie, transform.position);
         Destroy(gameObject);
     }
 

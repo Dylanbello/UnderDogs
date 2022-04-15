@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 963307900298974684}
   - component: {fileID: 3078962581393973526}
   - component: {fileID: -7245764322728845129}
+  - component: {fileID: 1958283710680643187}
   m_Layer: 0
   m_Name: 'Cog '
   m_TagString: Untagged
@@ -26,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3583264790972891331}
-  m_LocalRotation: {x: -0.27059805, y: -0.27059805, z: 0.6532815, w: 0.6532815}
+  m_LocalRotation: {x: -0.5, y: -0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 390.91, y: 10.499, z: 301.22}
-  m_LocalScale: {x: 76.80992, y: 76.80992, z: 76.80993}
+  m_LocalScale: {x: 40, y: 40, z: 40}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -45, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 90}
 --- !u!33 &963307900298974684
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -96,3 +97,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cogValue: 1
   cogSpinSpeed: 70
+--- !u!136 &1958283710680643187
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3583264790972891331}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.0056243925
+  m_Height: 0.0025000018
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Requires Void Awake{ "SoundManager.Initialize(); }" on Dog Characters 
-//2D Requires SoundManager.PlaySound(SoundManager.Sound.SoundName);
-//3D Requires SoundManager.PlaySound(SoundManager.Sound.SoundName, GetPosition());
+//2D Requires SoundManager.PlaySound(SoundManager.Sound SoundName);
+//3D Requires SoundManager.PlaySound(SoundManager.Sound SoundName, GetPosition());
 public static class SoundManager
 {
     
@@ -36,7 +36,7 @@ public static class SoundManager
     }
 
     //Play 3D Sound
-    public static void PlaySound(Sound sound, Vector3 position)
+    public static void Play3DSound(Sound sound, Vector3 position)
     {
         if (canPlaySound(sound))
         {
@@ -55,7 +55,7 @@ public static class SoundManager
     }
 
     //Play 2D Sound
-    public static void PlaySound(Sound sound)
+    public static void Play2DSound(Sound sound)
     {
         if (canPlaySound(sound))
         {
