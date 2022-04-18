@@ -52,6 +52,7 @@ public class DogManager : MonoBehaviour
     /// <summary> Explode creates an overlap sphere that grabs all the objects in it's radius, checks if it has a rigidbody and health and then does damage to the targets. </summary>
     public void Explode()
     {
+        animator.SetTrigger("GetUp");
         animator.CrossFade("SpinAttack",0);//Get spin attack in animator
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         for(int i=0;i<colliders.Length;i++)
@@ -62,7 +63,6 @@ public class DogManager : MonoBehaviour
             if (rigidbody) { rigidbody.AddExplosionForce(power, transform.position, radius, 3, ForceMode.Impulse); }
             if (aiHealth) { aiHealth.healthSystem.Damage(attackDamage); }
         }
-        
     }
 
     void ResetHealth()

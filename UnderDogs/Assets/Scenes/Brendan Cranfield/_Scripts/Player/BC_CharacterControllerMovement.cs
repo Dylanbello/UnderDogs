@@ -143,7 +143,7 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     public void Jump()
     {
-        if (!grounded) return;     //Guard clause for double jumping.
+        if (!grounded || animator.GetBool("Sit") == true) return;     //Guard clause for double jumping.
 
         //animator.SetTrigger("Jump");
 
@@ -162,16 +162,28 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     private void SetCorrectAnimation()
     {
-        float charMoveSpeed = 0;
-        float moveX = moveInput.x;
-        float moveY = moveInput.y;
+        float CharMoveSpeed;
+        /*
+        if (moveInput.x > 0 && moveInput.x < .55f) { moveX = .5f; }
+        else if (moveInput.x > .55f) { moveX = 1; }
+        else if (moveInput.x < 0 && moveInput.x > -.55f) { moveX = -.5f; }
+        else if (moveInput.x < -.55f) { moveX = -1; }
+        else { moveX = 0; }
 
-        if (moveX == 0 && moveY == 0) charMoveSpeed = 0;
-        else if (moveX > 0.8f || moveY > 0.8f) charMoveSpeed = 1;
-        else if (moveX < -0.8f || moveY < -0.8f) charMoveSpeed = 1;
+        if (moveInput.y > 0 && moveInput.y < .55f) { moveY = .5f; }
+        else if (moveInput.y > .55f) { moveY = 1; }
+        else if (moveInput.y < 0 && moveInput.y > -.55f) { moveY = -.5f; }
+        else if (moveInput.y < -.55f) { moveY = -1; }
+        else { moveY = 0; }
+        */
 
-        animator.SetFloat("Move", charMoveSpeed);
+        if(moveInput.x > 0 && moveInput.x < 0.55f || moveInput.y > 0 && moveInput.y < 0.55f) { CharMoveSpeed = 0.5f; }
+        else if(moveInput.x > 0.55f || moveInput.y > 0.55f) { CharMoveSpeed = 1; }
+        else if(moveInput.x < 0 && moveInput.x > -0.55f || moveInput.y < 0 && moveInput.y > -0.55f) { CharMoveSpeed = 0.5f; }
+        else if(moveInput.x < -0.55f || moveInput.y < -0.55f) { CharMoveSpeed = 1; }
+        else { CharMoveSpeed = 0; }
 
+        animator.SetFloat("Move", CharMoveSpeed, .1f, Time.deltaTime);
     }
 
     #endregion
@@ -183,8 +195,8 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     void Idle()
     {
-        if (moveInput == Vector3.zero) { idleTimer += Time.deltaTime; }
-        else { idleTimer = 0; animator.SetTrigger("GetUp"); }
+        if(moveInput != Vector3.zero || animator.GetBool("GetUp") == true) { idleTimer = 0; return; }
+        else { idleTimer += Time.deltaTime; }
 
         if(idleTimer >= 20) { animator.SetTrigger("Sit"); idleTimer = 20; }
     }
