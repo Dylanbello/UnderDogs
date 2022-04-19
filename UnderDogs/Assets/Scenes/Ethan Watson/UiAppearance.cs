@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class UiAppearance : MonoBehaviour
 {
+ 
+
     [SerializeField] private Image customImage;
+
 
     void OnTriggerEnter(Collider other)
     {
@@ -19,6 +22,7 @@ public class UiAppearance : MonoBehaviour
         
         {
             customImage.enabled = false;
+            Destroy(gameObject);
         }
     }
 }
