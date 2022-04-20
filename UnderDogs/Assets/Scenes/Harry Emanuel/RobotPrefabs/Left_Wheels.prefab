@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4199228715456536695}
   - component: {fileID: 4199228715456536692}
   - component: {fileID: 4199228715456536698}
-  - component: {fileID: 4784915394618765586}
+  - component: {fileID: -244157635268516216}
   m_Layer: 0
   m_Name: Left_Wheels
   m_TagString: Untagged
@@ -112,7 +112,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &4784915394618765586
+--- !u!65 &-244157635268516216
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,5 +123,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.67431045, y: 0.2917092, z: 0.10289856}
+  m_Size: {x: 1.3486209, y: 0.5834184, z: 0.20579712}
   m_Center: {x: 0, y: 0, z: 0}

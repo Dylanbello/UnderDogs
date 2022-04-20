@@ -7,10 +7,11 @@ using UnityEngine.UI;
 
 public class AIHealth : MonoBehaviour
 {
+    
     public int maxHeatlh = 100;
-    public HealthSystem healthSystem;
     ParticleSystem particleSystem;
-    [Space(10)]
+    public HealthSystem healthSystem;
+    
     public GameObject head, body,L_Track,R_Track,L_Wheels,R_Wheels;
 
     [Space(10)]
@@ -32,15 +33,13 @@ public class AIHealth : MonoBehaviour
 
 
 
-    private void HealthSystem_OnHealthChanged(object sender, System.EventArgs e)    // This method is called when the AI's health changes via damage, healing, etc.
+    private void HealthSystem_OnHealthChanged(object sender, System.EventArgs e) // This method is called when the AI's health changes via damage, healing, etc.
     {
-        //Play injured particles.
-        //SoundManager.PlaySound(SoundManager.Sound.EnemyTakeDamage, GetPosition);
         healthSliders[0].value = healthSystem.GetHealth();
         healthSliders[1].value = healthSystem.GetHealth();
     }
 
-    private void HealthSystem_OnDead(object sender, System.EventArgs e)     // This method is called when the AI dies.
+    private void HealthSystem_OnDead(object sender, System.EventArgs e) // This method is called when the AI dies.
     {
         partSpawns();
         SoundManager.Play3DSound(SoundManager.Sound.EnemyDie, transform.position);

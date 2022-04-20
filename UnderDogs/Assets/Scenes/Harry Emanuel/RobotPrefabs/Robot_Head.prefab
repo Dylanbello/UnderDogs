@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9024438489394767576}
   - component: {fileID: 9024438489394767583}
   - component: {fileID: 9024438489394767581}
-  - component: {fileID: 1839389325942090867}
+  - component: {fileID: -1863597088779801236}
   m_Layer: 0
   m_Name: Robot_Head
   m_TagString: Untagged
@@ -112,8 +112,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &1839389325942090867
-SphereCollider:
+--- !u!65 &-1863597088779801236
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -123,5 +123,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.29648224
+  m_Size: {x: 1.185929, y: 0.56374323, z: 1.1545868}
   m_Center: {x: 0, y: 0, z: 0}

@@ -19,12 +19,7 @@ public class BodyPartsSpawn : MonoBehaviour
         rb.AddForce (new Vector3(dirX, dirY,dirZ), ForceMode.Impulse);
     }
 
-    private void Update(){
-        DestroyObjectDelayed();
-    }
+    private void Update(){ DestroyObjectDelayed(); }
 
-    void DestroyObjectDelayed()
-    {
-        Destroy(gameObject, 10);//the instance parts and how long it takes to destory*
-    }
+    void DestroyObjectDelayed(){ Destroy(gameObject, 10); }
 }
