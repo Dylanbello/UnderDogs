@@ -53,14 +53,16 @@ public class Ailocomotion : MonoBehaviour
     int m_CurrentWaypointIndex;                     //  Current waypoint where the enemy is going to
     Transform playerPos;
 
-    [Space (15)]
     public Image QMSymbol,EXSymbol;                 // Images that appear above the enemys head to symbols state of enemy condition
-    [Space(15)]
+
     [SerializeField]ParticleSystem L_Dirt, R_Dirt;  // Dirt trails emmiting behind enemy
 
     Vector3 playerLastPosition = Vector3.zero;      //  Last position of the player when was near the enemy
     Vector3 m_PlayerPosition;                       //  Last position of the player when the player is seen by the enemy
  
+    public AudioSource enemyMoving,enemyIdle;
+
+    //Checking stats
     float m_WaitTime;                               //  Variable of the wait time that makes the delay
     float m_TimeToRotate;                           //  Variable of the wait time to rotate when the player is near that makes the delay
     bool m_playerInRange;                           //  If the player is in range of vision, state of chasing
@@ -71,8 +73,7 @@ public class Ailocomotion : MonoBehaviour
     bool canDisplayIcon;
     
 
-    void Start()
-    {
+    void Start(){
         m_PlayerPosition = Vector3.zero;
         m_IsPatrol = true;
         m_CaughtPlayer = false;
@@ -89,11 +90,11 @@ public class Ailocomotion : MonoBehaviour
         navMeshAgent.speed = speedWalk;             //  Set the navemesh speed with the normal speed of the enemy
         navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);            //  Set the destination to the first waypoint
     }
- 
+
     private void Update()
     {
         iconOff();
-        EnviromentView();                           //  Check whether or not the player is in the enemy's field of vision
+        EnviromentView();  //  Check whether or not the player is in the enemy's field of vision
  
         if (!m_IsPatrol)
         {
@@ -107,7 +108,8 @@ public class Ailocomotion : MonoBehaviour
             Patroling();
         }
     }
- 
+    
+    #region Chasing
     private void Chasing()
     {
         //  The enemy is chasing the player
@@ -141,7 +143,9 @@ public class Ailocomotion : MonoBehaviour
             }
         }
     }
+    #endregion
  
+    #region Patroling
     private void Patroling()
     {
         if (m_PlayerNear)
@@ -171,6 +175,7 @@ public class Ailocomotion : MonoBehaviour
                 {
                     L_Dirt.Play();              
                     R_Dirt.Play();
+                    enemyMoving.Play();
                     NextPoint();
                     Move(speedWalk);
                     m_WaitTime = startWaitTime;
@@ -180,62 +185,17 @@ public class Ailocomotion : MonoBehaviour
                     Stop();
                     L_Dirt.Stop();
                     R_Dirt.Stop();
+                    enemyMoving.time = 19f;
+                    enemyMoving.Stop();
+
                     m_WaitTime -= Time.deltaTime;
                 }
             }
         }
     }
+    #endregion
 
-    
-    IEnumerator ExclamationMark(){yield return new WaitForSeconds(5f);EXSymbol.enabled=false;}
-    void iconOff()
-    {
-        if(m_DetectedPlayer&&canDisplayIcon)
-        {
-            canDisplayIcon=false;
-            EXSymbol.enabled=true;
-            StartCoroutine(ExclamationMark());
-        }
-    }
-
-    public void NextPoint(){
-        m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
-        navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
-    }
- 
-    void Stop(){
-        navMeshAgent.isStopped = true;
-        navMeshAgent.speed = 0;
-    }
- 
-    void Move(float speed){
-        navMeshAgent.isStopped = false;
-        navMeshAgent.speed = speed;
-    }
- 
-    void CaughtPlayer(){ m_CaughtPlayer = true;}
- 
-    void LookingPlayer(Vector3 player)
-    {
-        navMeshAgent.SetDestination(player);
-        if (Vector3.Distance(transform.position, player) <= 0.3)
-        {
-            if (m_WaitTime <= 0)
-            {
-                m_PlayerNear = false;
-                Move(speedWalk);
-                navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
-                m_WaitTime = startWaitTime;
-                m_TimeToRotate = timeToRotate;
-            }
-            else
-            {
-                Stop();
-                m_WaitTime -= Time.deltaTime;
-            }
-        }
-    }
- 
+    #region EnviromentView
     void EnviromentView()
     {
         Collider[] playerInRange = Physics.OverlapSphere(transform.position, viewRadius, playerMask);   //  Make an overlap sphere around the enemy to detect the playermask in the view radius
@@ -275,4 +235,57 @@ public class Ailocomotion : MonoBehaviour
             }
         }
     }
+    #endregion
+
+    #region LookingPlayer
+    void LookingPlayer(Vector3 player)
+    {
+        navMeshAgent.SetDestination(player);
+        if (Vector3.Distance(transform.position, player) <= 0.3)
+        {
+            if (m_WaitTime <= 0)
+            {
+                m_PlayerNear = false;
+                Move(speedWalk);
+                navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+                m_WaitTime = startWaitTime;
+                m_TimeToRotate = timeToRotate;
+            }
+            else
+            {
+                m_WaitTime -= Time.deltaTime;
+            }
+        }
+    }
+    #endregion
+
+    #region Icon
+    IEnumerator ExclamationMark(){yield return new WaitForSeconds(5f);EXSymbol.enabled=false;}
+    void iconOff()
+    {
+        if(m_DetectedPlayer&&canDisplayIcon)
+        {
+            canDisplayIcon=false;
+            EXSymbol.enabled=true;
+            StartCoroutine(ExclamationMark());
+        }
+    }
+    #endregion
+
+    public void NextPoint(){
+        m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
+        navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+    }
+
+    void Stop(){
+        navMeshAgent.isStopped = true;
+        navMeshAgent.speed = 0;
+    }
+
+    void Move(float speed){
+        navMeshAgent.isStopped = false;
+        navMeshAgent.speed = speed;
+    }
+
+    void CaughtPlayer(){ m_CaughtPlayer = true;}
 }

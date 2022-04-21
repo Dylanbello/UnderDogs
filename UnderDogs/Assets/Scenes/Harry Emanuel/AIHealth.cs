@@ -7,12 +7,13 @@ using UnityEngine.UI;
 
 public class AIHealth : MonoBehaviour
 {
-    
     public int maxHeatlh = 100;
     ParticleSystem particleSystem;
     public HealthSystem healthSystem;
     
     public GameObject head, body,L_Track,R_Track,L_Wheels,R_Wheels;
+
+    public GameObject Heart;
 
     [Space(10)]
     [SerializeField] List<Slider> healthSliders;
@@ -37,12 +38,15 @@ public class AIHealth : MonoBehaviour
     {
         healthSliders[0].value = healthSystem.GetHealth();
         healthSliders[1].value = healthSystem.GetHealth();
+        SoundManager.Play3DSound(SoundManager.Sound.EnemyTakeDamage, transform.position);
+
     }
 
     private void HealthSystem_OnDead(object sender, System.EventArgs e) // This method is called when the AI dies.
     {
         partSpawns();
         SoundManager.Play3DSound(SoundManager.Sound.EnemyDie, transform.position);
+        Instantiate(Heart,transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
