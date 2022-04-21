@@ -8,7 +8,7 @@ public class CogCollectible : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(0f, Time.deltaTime * cogSpinSpeed, 0f);
+        transform.Rotate(Time.deltaTime * cogSpinSpeed, 0f, 0f);
     }
 
     private void OnTriggerEnter(Collider other)
