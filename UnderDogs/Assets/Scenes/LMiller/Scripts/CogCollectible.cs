@@ -5,6 +5,11 @@ public class CogCollectible : MonoBehaviour
     public int cogValue;
     public float cogSpinSpeed;
 
+    private void Start()
+    {
+        GameManager.Instance.CountCogsInLevel();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -15,10 +20,10 @@ public class CogCollectible : MonoBehaviour
     {
         if (other.GetComponent<CharacterController>()) 
         {
-            //Increment UI Coin Value
+            
             GameManager.Instance.AddToCollection(cogValue);
             gameObject.SetActive(false);
-            //Destroy(this.gameObject);
+            
         }
     }
 }

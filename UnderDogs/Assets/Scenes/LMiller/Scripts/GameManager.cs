@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject inGameUI;
     [SerializeField] TextMeshProUGUI cogCount;
     public int currentCogCount;
+    public int levelCogCount;
 
     #region singleton
     private static GameManager _instance;
@@ -94,8 +95,12 @@ public class GameManager : MonoBehaviour
     public void AddToCollection(int value)
     {
         currentCogCount += value;
-        cogCount.text = currentCogCount.ToString();
+        cogCount.text = (currentCogCount + "/" + levelCogCount);
     }
 
+    public void CountCogsInLevel()
+    {
+        levelCogCount++;
+    }
     #endregion
 }
