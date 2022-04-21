@@ -57,10 +57,12 @@ public class Ailocomotion : MonoBehaviour
 
     [SerializeField]ParticleSystem L_Dirt, R_Dirt;  // Dirt trails emmiting behind enemy
 
+    public AudioSource enemyMoving;
+
     Vector3 playerLastPosition = Vector3.zero;      //  Last position of the player when was near the enemy
     Vector3 m_PlayerPosition;                       //  Last position of the player when the player is seen by the enemy
  
-    public AudioSource enemyMoving,enemyIdle;
+    
 
     //Checking stats
     float m_WaitTime;                               //  Variable of the wait time that makes the delay
@@ -187,7 +189,6 @@ public class Ailocomotion : MonoBehaviour
                     R_Dirt.Stop();
                     enemyMoving.time = 19f;
                     enemyMoving.Stop();
-
                     m_WaitTime -= Time.deltaTime;
                 }
             }

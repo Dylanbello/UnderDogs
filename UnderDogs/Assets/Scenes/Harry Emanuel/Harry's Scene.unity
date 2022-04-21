@@ -825,102 +825,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2711713069634428357, guid: bdc473dde159954458b13b94040dd430, type: 3}
   m_PrefabInstance: {fileID: 2711713069090268507}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &767553315
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 767553314}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e8ac44e5486ec054c8685747f20a9bdc, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.498
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 4.168233
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!82 &767553321
 AudioSource:
   m_ObjectHideFlags: 0
@@ -933,7 +837,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4cfdbfc8e03555a4b8ccd4e2473a0254, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.498
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -941,7 +845,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 3.7048328
+  MinDistance: 3.0754576
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 1
@@ -1986,11 +1890,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8157562574747421847, guid: 0855bb9195dc89c49b2de80e42d9ef06, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000017329459
+      value: 0.000000017329459
       objectReference: {fileID: 0}
     - target: {fileID: 8157562574747421847, guid: 0855bb9195dc89c49b2de80e42d9ef06, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 6.1254196e-10
+      value: -6.1254196e-10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0855bb9195dc89c49b2de80e42d9ef06, type: 3}
@@ -2343,15 +2247,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1108388699161737412, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.25468522
+      value: 0.25468525
       objectReference: {fileID: 0}
     - target: {fileID: 1108388699161737412, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000020657064
+      value: 0.000000014801102
       objectReference: {fileID: 0}
     - target: {fileID: 1108388699161737412, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000005440453
+      value: -0.000000003898168
       objectReference: {fileID: 0}
     - target: {fileID: 1108388699679670736, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3699,6 +3603,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!82 &1953861573 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2711713068270668259, guid: bdc473dde159954458b13b94040dd430, type: 3}
+  m_PrefabInstance: {fileID: 2711713069090268507}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1967017658
 GameObject:
   m_ObjectHideFlags: 0
@@ -3856,6 +3765,22 @@ PrefabInstance:
       propertyPath: Heart
       value: 
       objectReference: {fileID: 919132149155446097, guid: d01a75d7b726b5947bca8ea290fad677, type: 3}
+    - target: {fileID: 2711713068270668259, guid: bdc473dde159954458b13b94040dd430, type: 3}
+      propertyPath: MaxDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2711713068270668259, guid: bdc473dde159954458b13b94040dd430, type: 3}
+      propertyPath: MinDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2711713068270668259, guid: bdc473dde159954458b13b94040dd430, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 433d332d605621c4c8a5d306fa3c9c0e, type: 3}
+    - target: {fileID: 2711713068270668269, guid: bdc473dde159954458b13b94040dd430, type: 3}
+      propertyPath: attackIng
+      value: 
+      objectReference: {fileID: 1953861573}
     - target: {fileID: 2711713069634428356, guid: bdc473dde159954458b13b94040dd430, type: 3}
       propertyPath: enemyIdel
       value: 
@@ -3863,7 +3788,7 @@ PrefabInstance:
     - target: {fileID: 2711713069634428356, guid: bdc473dde159954458b13b94040dd430, type: 3}
       propertyPath: enemyIdle
       value: 
-      objectReference: {fileID: 767553315}
+      objectReference: {fileID: 0}
     - target: {fileID: 2711713069634428356, guid: bdc473dde159954458b13b94040dd430, type: 3}
       propertyPath: enemyMoving
       value: 

@@ -14871,7 +14871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ac632deee4ce64bba826134274faeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 1
+  attackDamage: 15
   attackDelay: 0.5
   ai_Attack: {fileID: 2711713069090268509}
   power: 20
@@ -15586,6 +15586,7 @@ MonoBehaviour:
   EXSymbol: {fileID: 938196842}
   L_Dirt: {fileID: 6034170636018732654}
   R_Dirt: {fileID: 639709804468685039}
+  enemyMoving: {fileID: 0}
   m_IsPatrol: 0
 --- !u!114 &1448618058298122685
 MonoBehaviour:
@@ -15606,6 +15607,7 @@ MonoBehaviour:
   R_Track: {fileID: 4567506623114447236, guid: f5d8979cf7692a04e986070225a66668, type: 3}
   L_Wheels: {fileID: 4199228715456536699, guid: 98bae17f823b974499ee180afefe998c, type: 3}
   R_Wheels: {fileID: 2649455521156650714, guid: 252f9934a65223d48a412f37aaef95a9, type: 3}
+  Heart: {fileID: 0}
   healthSliders:
   - {fileID: 2711713069177006832}
   - {fileID: 2711713069767557977}

@@ -12,6 +12,7 @@ public class AIAttack : MonoBehaviour
     [SerializeField] private Animator ai_Attack;
     [SerializeField] float power;
     [SerializeField] float radius;
+    [SerializeField] AudioSource attackIng;
     
     private bool _isDistanceCheck = false;
     
@@ -23,13 +24,15 @@ public class AIAttack : MonoBehaviour
         if(!dogManager || attackTimer < attackDelay) {return;}
         
         attackTimer = 0;
+
+        attackIng.Play();
         dogManager.playerHealth.Damage(attackDamage);
         ai_Attack.SetBool("Attack", true);
     }
 
-    private void OnTriggerExit(Collider other)
-    {
+    private void OnTriggerExit(Collider other){
         ai_Attack.SetBool("Attack", false);
+        attackIng.Stop();
     }
 
     private void Update(){ attackTimer += Time.deltaTime;}
