@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("AI/BodyPartsSpawn")]
 public class BodyPartsSpawn : MonoBehaviour
 {
     Rigidbody rb;
@@ -19,7 +20,7 @@ public class BodyPartsSpawn : MonoBehaviour
         rb.AddForce (new Vector3(dirX, dirY,dirZ), ForceMode.Impulse);
     }
 
-    private void Update() { DestroyObjectDelayed(); }
+    private void Update() { DestroyObjectDelayed(); } //call specific function in update
 
-    void DestroyObjectDelayed() { Destroy(gameObject, 10); }
+    void DestroyObjectDelayed() { Destroy(gameObject, 10); } //Game objects destory after 10 seconds
 }

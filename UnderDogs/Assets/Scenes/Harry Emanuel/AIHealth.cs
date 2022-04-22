@@ -4,16 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [AddComponentMenu("AI/AIHealth")]
-
 public class AIHealth : MonoBehaviour
 {
     public int maxHeatlh = 100;
-    ParticleSystem particleSystem;
     public HealthSystem healthSystem;
     
-    public GameObject head, body,L_Track,R_Track,L_Wheels,R_Wheels;
-
-    public GameObject Heart;
+    public GameObject head, body,L_Track,R_Track,L_Wheels,R_Wheels,Heart; //Prefabs that will Instantiate from enemy
 
     [Space(10)]
     [SerializeField] List<Slider> healthSliders;
@@ -23,16 +19,12 @@ public class AIHealth : MonoBehaviour
     void Start()
     {
         healthSystem = new HealthSystem(maxHeatlh);
-        particleSystem = GetComponent<ParticleSystem>();
-
         healthSystem.OnHealthChanged += HealthSystem_OnHealthChanged;
         healthSystem.OnDead += HealthSystem_OnDead;
 
         healthSliders[0].maxValue = maxHeatlh;
         healthSliders[1].maxValue = maxHeatlh;
     }
-
-
 
     private void HealthSystem_OnHealthChanged(object sender, System.EventArgs e) // This method is called when the AI's health changes via damage, healing, etc.
     {
@@ -50,7 +42,7 @@ public class AIHealth : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void partSpawns(){
+    void partSpawns(){//Body parts that spawn with their attached script to fly off
         Instantiate(head, transform.position, Quaternion.identity);
         Instantiate(body, transform.position, Quaternion.identity);
         Instantiate(L_Track, transform.position, Quaternion.identity);

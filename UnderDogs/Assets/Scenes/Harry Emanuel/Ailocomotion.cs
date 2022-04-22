@@ -63,8 +63,7 @@ public class Ailocomotion : MonoBehaviour
     Vector3 m_PlayerPosition;                       //  Last position of the player when the player is seen by the enemy
  
     
-
-    //Checking stats
+    //Checking Veriables & bools for current stats
     float m_WaitTime;                               //  Variable of the wait time that makes the delay
     float m_TimeToRotate;                           //  Variable of the wait time to rotate when the player is near that makes the delay
     bool m_playerInRange;                           //  If the player is in range of vision, state of chasing
@@ -175,10 +174,10 @@ public class Ailocomotion : MonoBehaviour
                 //  If the enemy arrives to the waypoint position then wait for a moment and go to the next
                 if (m_WaitTime <= 0)
                 {
+                    NextPoint();
                     L_Dirt.Play();              
                     R_Dirt.Play();
                     enemyMoving.Play();
-                    NextPoint();
                     Move(speedWalk);
                     m_WaitTime = startWaitTime;
                 }
@@ -187,7 +186,6 @@ public class Ailocomotion : MonoBehaviour
                     Stop();
                     L_Dirt.Stop();
                     R_Dirt.Stop();
-                    enemyMoving.time = 19f;
                     enemyMoving.Stop();
                     m_WaitTime -= Time.deltaTime;
                 }

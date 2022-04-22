@@ -10,13 +10,13 @@ public class AIAttack : MonoBehaviour
     [SerializeField] private int attackDamage = 50;
     [SerializeField] private float attackDelay = 1;
     [SerializeField] private Animator ai_Attack;
-    [SerializeField] float power;
-    [SerializeField] float radius;
     [SerializeField] AudioSource attackIng;
     
     private bool _isDistanceCheck = false;
     
     private void Awake() { aiLocaomotion = GetComponent<Ailocomotion>();}
+
+    private void Update(){ attackTimer += Time.deltaTime; }
 
     private void OnTriggerStay(Collider other)
     {
@@ -30,10 +30,5 @@ public class AIAttack : MonoBehaviour
         ai_Attack.SetBool("Attack", true);
     }
 
-    private void OnTriggerExit(Collider other){
-        ai_Attack.SetBool("Attack", false);
-        attackIng.Stop();
-    }
-
-    private void Update(){ attackTimer += Time.deltaTime;}
+    private void OnTriggerExit(Collider other){ ai_Attack.SetBool("Attack", false); attackIng.Stop(); }
 }
