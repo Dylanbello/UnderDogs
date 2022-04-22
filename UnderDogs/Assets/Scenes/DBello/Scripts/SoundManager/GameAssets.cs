@@ -25,5 +25,15 @@ public class GameAssets : MonoBehaviour
     {
         public SoundManager.Sound sound;
         public AudioClip audioClip;
+        public ParticleSystem particleEffect;
     }
+
+    /*public ParticleEffectClip[] particleFXClipArray;
+
+    [System.Serializable]
+    public class ParticleEffectClip
+    {
+        public SoundManager.Sound sound;
+        public ParticleSystem particleEffect;
+    }*/
 }

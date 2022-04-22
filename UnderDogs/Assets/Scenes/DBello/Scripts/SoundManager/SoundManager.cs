@@ -43,12 +43,15 @@ public static class SoundManager
             GameObject soundGameObject = new GameObject("Sound");
             soundGameObject.transform.position = position;
             AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
+            ParticleSystem particleEffect = soundGameObject.AddComponent<ParticleSystem>();
             audioSource.clip = GetAudioClip(sound);
+            particleEffect = GetParticleEffect(sound);
             audioSource.spatialBlend = 1f;
             audioSource.time = .15f;
             audioSource.pitch = Random.Range(0.5f, 0.6f);
             audioSource.rolloffMode = AudioRolloffMode.Linear;
             audioSource.Play();
+            particleEffect.Play();
 
             Object.Destroy(soundGameObject, audioSource.clip.length);
         }
@@ -113,5 +116,16 @@ public static class SoundManager
         return null;
     }
 
-    
+    private static ParticleSystem GetParticleEffect(Sound sound)
+    {
+        foreach (GameAssets.SoundAudioClip soundAudioClip in GameAssets.i.soundFXAudioClipArray)
+        {
+            if (soundAudioClip.sound == sound)
+            {
+                return soundAudioClip.particleEffect;
+            }
+        }
+        Debug.LogError("Particle " + sound + " Not Found!");
+        return null;
+    }
 }

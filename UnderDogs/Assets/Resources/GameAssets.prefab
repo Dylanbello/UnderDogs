@@ -70,3 +70,6 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 65600e57bb5ba98448462c33248ac486, type: 3}
   - sound: 11
     audioClip: {fileID: 8300000, guid: d045539c3f7112047bf3bacc7ed14caa, type: 3}
+  particleFXClipArray:
+  - sound: 0
+    particleEffect: {fileID: 0}
