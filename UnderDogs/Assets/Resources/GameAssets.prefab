@@ -46,30 +46,43 @@ MonoBehaviour:
   soundFXAudioClipArray:
   - sound: 0
     audioClip: {fileID: 0}
+    particleEffect: {fileID: 0}
   - sound: 1
     audioClip: {fileID: 0}
+    particleEffect: {fileID: 0}
   - sound: 2
     audioClip: {fileID: 0}
+    particleEffect: {fileID: 0}
   - sound: 3
     audioClip: {fileID: 0}
+    particleEffect: {fileID: 0}
   - sound: 4
     audioClip: {fileID: 0}
+    particleEffect: {fileID: 0}
   - sound: 5
     audioClip: {fileID: 0}
+    particleEffect: {fileID: 0}
   - sound: 6
     audioClip: {fileID: 0}
+    particleEffect: {fileID: 0}
   - sound: 0
     audioClip: {fileID: 0}
+    particleEffect: {fileID: 0}
   - sound: 7
     audioClip: {fileID: 0}
+    particleEffect: {fileID: 0}
   - sound: 8
     audioClip: {fileID: 8300000, guid: 4081c7da679dc5d47afb1c84eabbfba1, type: 3}
+    particleEffect: {fileID: 0}
   - sound: 9
     audioClip: {fileID: 0}
+    particleEffect: {fileID: 0}
   - sound: 10
     audioClip: {fileID: 8300000, guid: 65600e57bb5ba98448462c33248ac486, type: 3}
+    particleEffect: {fileID: 0}
   - sound: 11
     audioClip: {fileID: 8300000, guid: d045539c3f7112047bf3bacc7ed14caa, type: 3}
-  particleFXClipArray:
-  - sound: 0
+    particleEffect: {fileID: 0}
+  - sound: 12
+    audioClip: {fileID: 8300000, guid: c42a02462ed93ec4bbf8bf763cdb4dce, type: 3}
     particleEffect: {fileID: 0}

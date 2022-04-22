@@ -178,6 +178,7 @@ public class Ailocomotion : MonoBehaviour
                     L_Dirt.Play();              
                     R_Dirt.Play();
                     enemyMoving.Play();
+                    enemyMoving.volume = 1f;
                     Move(speedWalk);
                     m_WaitTime = startWaitTime;
                 }
@@ -186,7 +187,7 @@ public class Ailocomotion : MonoBehaviour
                     Stop();
                     L_Dirt.Stop();
                     R_Dirt.Stop();
-                    enemyMoving.Stop();
+                    enemyMoving.volume = 0.5f;
                     m_WaitTime -= Time.deltaTime;
                 }
             }

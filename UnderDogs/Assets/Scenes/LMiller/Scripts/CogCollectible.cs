@@ -22,6 +22,7 @@ public class CogCollectible : MonoBehaviour
         {
             
             GameManager.Instance.AddToCollection(cogValue);
+            SoundManager.Play2DSound(SoundManager.Sound.CogCollected);
             gameObject.SetActive(false);
             
         }
