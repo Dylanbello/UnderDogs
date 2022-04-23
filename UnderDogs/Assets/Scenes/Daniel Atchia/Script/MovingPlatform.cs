@@ -44,14 +44,12 @@ public class MovingPlatform : MonoBehaviour
         if(detected == true)
         {
             StartCoroutine(DelayElevator(destination.transform.position));
-            //transform.position = Vector3.MoveTowards(transform.position, destination.transform.position, (8.5f * Time.deltaTime));
         }
         if(detected == false)
         {
             if(this.transform.position.y > 11.43)
             {
                 StartCoroutine(DelayElevator(origin.transform.position));
-                //transform.position = Vector3.MoveTowards(transform.position, origin.transform.position, (8.5f * Time.deltaTime));
             }
         }
     }
