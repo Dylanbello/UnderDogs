@@ -22,7 +22,8 @@ public static class SoundManager
         EnemyAttack,
         EnemyTakeDamage,
         EnemyDie,
-        CogCollected
+        CogCollected,
+        HeartCollected
     }
 
     private static Dictionary<Sound, float> soundTimerDictionary;
