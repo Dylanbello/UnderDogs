@@ -82,10 +82,6 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         }
     }
 
-    public void OnEnableControls() { GetComponent<PlayerInput>().enabled = true; }
-
-    public void OnDisableControls() { GetComponent<PlayerInput>().enabled = false; }
-
     #region Sprinting
 
     void HandleSprinting()

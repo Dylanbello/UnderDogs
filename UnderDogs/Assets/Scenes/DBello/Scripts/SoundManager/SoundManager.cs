@@ -23,7 +23,8 @@ public static class SoundManager
         EnemyTakeDamage,
         EnemyDie,
         CogCollected,
-        HeartCollected
+        HeartCollected,
+        UISelection
     }
 
     private static Dictionary<Sound, float> soundTimerDictionary;
@@ -100,7 +101,6 @@ public static class SoundManager
                 {
                     return true;
                 }
-                break;
         }
     }
 

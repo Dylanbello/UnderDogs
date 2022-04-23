@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4766320867720788595}
   - component: {fileID: 6797474301495510951}
   - component: {fileID: 8252560859999101942}
+  - component: {fileID: 547237858895239977}
   m_Layer: 0
   m_Name: Jumping_Landing Effect
   m_TagString: Untagged
@@ -4862,3 +4863,15 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &547237858895239977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3267420585718475500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3383c5156c9967644ae1ecfb17e978b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

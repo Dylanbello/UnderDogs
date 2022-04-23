@@ -13,9 +13,11 @@ public class AIAttack : MonoBehaviour
     [SerializeField] private Animator ai_Attack;
     [SerializeField] AudioSource s_attack;
     
-    private bool _isDistanceCheck = false;
-    
-    private void Awake() { aiLocomotion = GetComponentInParent<Ailocomotion>();}
+    private void Awake() 
+    { 
+        aiLocomotion = GetComponentInParent<Ailocomotion>();
+        s_attack = GetComponent<AudioSource>();
+    }
 
     private void Update()
     { 
@@ -34,12 +36,12 @@ public class AIAttack : MonoBehaviour
             ai_Attack.SetBool("Attack", false);
             s_attack.Stop();
         }
-        
+        /*
         if(dogManager.playerHealth.IsDead)
         {
             Debug.Log("if the fucking enemy is still attacking im done");
         }
-
+        */
         if(!dogManager || attackTimer < attackDelay) {return;}
         
         attackTimer = 0;

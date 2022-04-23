@@ -5,12 +5,14 @@ using UnityEngine.InputSystem;
 public class InputController : MonoBehaviour
 {
     DogManager dogManager;
+    PlayerInput playerInput;
     BC_CharacterControllerMovement characterControllerMovement;
 
     void Awake()
     {
         characterControllerMovement = GetComponent<BC_CharacterControllerMovement>();
         dogManager = GetComponent<DogManager>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
     public void Attack(InputAction.CallbackContext context) { dogManager.Explode(); }
@@ -18,8 +20,16 @@ public class InputController : MonoBehaviour
     public void Jump(InputAction.CallbackContext context) { characterControllerMovement.Jump(); }
     public void Pause(InputAction.CallbackContext context)
     { 
-        if(!GameManager.Instance.GameIsPaused) { GameManager.Instance.Pause(); }
-        else { GameManager.Instance.Resume(); }
+        if(!GameManager.Instance.GameIsPaused) 
+        { 
+            GameManager.Instance.Pause();
+            //playerInput.SwitchCurrentActionMap("UI");
+        }
+        else 
+        { 
+            GameManager.Instance.Resume();
+            //playerInput.SwitchCurrentActionMap("Player");
+        }
     }
     public void Sprint(InputAction.CallbackContext context) 
     {
