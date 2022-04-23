@@ -5,12 +5,12 @@ using UnityEngine;
 public class HeartCollectible : MonoBehaviour
 {
     public float heartSpinSpeed;
+    //private AudioSource audioSource;
     //public HealthSystem playerHealth;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        //audioSource = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -19,7 +19,12 @@ public class HeartCollectible : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<CharacterController>())
+        if (other.TryGetComponent(out DogManager dog)) { dog.playerHealth.Heal(10);
+            //audioSource.PlayDelayed(.2f);
+            SoundManager.Play2DSound(SoundManager.Sound.HeartCollected);
+            gameObject.SetActive(false);}
+
+        /*if (other.GetComponent<CharacterController>())
         {
             //playerHealth.Heal(10);
             gameObject.SetActive(false);
@@ -28,6 +33,6 @@ public class HeartCollectible : MonoBehaviour
             
             
 
-        }
+        }*/
     }
 }
