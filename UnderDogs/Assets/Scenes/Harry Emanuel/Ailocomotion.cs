@@ -67,7 +67,7 @@ public class Ailocomotion : MonoBehaviour
     float m_WaitTime;                               //  Variable of the wait time that makes the delay
     float m_TimeToRotate;                           //  Variable of the wait time to rotate when the player is near that makes the delay
     bool m_playerInRange;                           //  If the player is in range of vision, state of chasing
-    bool m_PlayerNear;                              //  If the player is near, state of hearing
+    public bool m_PlayerNear;                              //  If the player is near, state of hearing
     [HideInInspector] public bool m_IsPatrol;       //  If the enemy is patrol, state of patroling
     bool m_CaughtPlayer;                            //  if the enemy has caught the player
     bool m_DetectedPlayer;
@@ -115,6 +115,7 @@ public class Ailocomotion : MonoBehaviour
     {
         //  The enemy is chasing the player
         m_PlayerNear = false;               //  Set false that hte player is near beacause the enemy already sees the player
+
         playerLastPosition = Vector3.zero;  //  Reset the player near position
  
         if (!m_CaughtPlayer)
@@ -130,6 +131,7 @@ public class Ailocomotion : MonoBehaviour
                 m_IsPatrol = true;
                 m_DetectedPlayer= false;
                 m_PlayerNear = false;
+                
                 Move(speedWalk);
                 m_TimeToRotate = timeToRotate;
                 m_WaitTime = startWaitTime;

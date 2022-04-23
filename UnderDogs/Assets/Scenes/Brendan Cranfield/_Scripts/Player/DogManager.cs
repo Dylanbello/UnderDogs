@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [AddComponentMenu("Player/Player Manager")]
@@ -43,10 +45,20 @@ public class DogManager : MonoBehaviour
     private void PlayerHealth_OnDead(object sender, System.EventArgs e)
     {
         Debug.Log($"{gameObject.name} is dead");
+        StartCoroutine(ded());
+        
+        ResetHealth();
+    }
+    
+    IEnumerator ded()
+    { 
         charController.enabled = false;
+        animator.SetTrigger("Die");
+        Debug.Log(animator.GetBool("Die"));
+        yield return new WaitForSeconds(5); 
+
         transform.position = spawnPoint;
         charController.enabled = true;
-        ResetHealth();
     }
 
     /// <summary> Explode creates an overlap sphere that grabs all the objects in it's radius, checks if it has a rigidbody and health and then does damage to the targets. </summary>
@@ -69,6 +81,7 @@ public class DogManager : MonoBehaviour
     {
         int giveHealthAmount = maxHealth - playerHealth.GetHealth();
         playerHealth.Heal(giveHealthAmount);
+        animator.ResetTrigger("Die");
     }
 
     private void OnTriggerEnter(Collider other)
