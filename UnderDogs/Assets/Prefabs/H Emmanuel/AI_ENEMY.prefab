@@ -14871,10 +14871,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ac632deee4ce64bba826134274faeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dogManager: {fileID: 0}
   attackDamage: 15
   attackDelay: 0.5
   ai_Attack: {fileID: 2711713069090268509}
-  attackIng: {fileID: 2711713068270668259}
+  s_attack: {fileID: 0}
 --- !u!82 &2711713068270668259
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15587,6 +15588,7 @@ MonoBehaviour:
   L_Dirt: {fileID: 6034170636018732654}
   R_Dirt: {fileID: 639709804468685039}
   enemyMoving: {fileID: 8394442103689711791}
+  m_PlayerNear: 0
   m_IsPatrol: 0
 --- !u!114 &1448618058298122685
 MonoBehaviour:
@@ -15638,7 +15640,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1.5
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

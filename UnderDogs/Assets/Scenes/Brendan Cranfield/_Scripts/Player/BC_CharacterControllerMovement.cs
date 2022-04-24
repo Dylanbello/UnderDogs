@@ -16,8 +16,10 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     Vector3 playerVelocity;
     [HideInInspector] public Vector3 moveInput;
     [HideInInspector] public bool isSprinting = false;
+
+
     [SerializeField] bool grounded;
-    [SerializeField] bool wasGrounded;
+    [SerializeField] bool jumping;
     
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float sprintSpeed = 5f;
@@ -49,11 +51,7 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         cmFreeLook.Follow = transform;
         cmFreeLook.LookAt = transform;
 
-        movementParticles.Stop();
-
         if(Cursor.visible) { Cursor.lockState = CursorLockMode.Confined; Cursor.visible = false; }
-
-        //canJump = true;
     }
     bool landCheck = false;
     private void Update()
@@ -64,30 +62,25 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         HandleSprinting();
         SetCorrectAnimation();
         isGrounded();
-        Idle();
-
-        if(movementParticles != null && moveInput != Vector3.zero) { movementParticles.Play(); }
-        else { movementParticles.Stop(); }
-
-        if(grounded && !landCheck)     //if the player was just grounded
-        {
-            landCheck = true;
-            animator.CrossFade(landJump, 0.2f);
-            if (landingParticles != null)
-            {
-                ParticleSystem landingPart = Instantiate(landingParticles, transform);
-                landingPart.Play();
-                landingPart.transform.parent = null;
-            }
-        }
     }
 
     #region Sprinting
 
     void HandleSprinting()
     {
-        if (!isSprinting) moveSpeed = 5;
-        else moveSpeed = sprintSpeed;
+        if (grounded)
+        {
+            if (!isSprinting)
+            {
+                moveSpeed = 5;
+                if (movementParticles.isPlaying) movementParticles.Stop();
+            }
+            else
+            {
+                moveSpeed = sprintSpeed;
+                if(movementParticles.isPlaying) movementParticles.Play();
+            }
+        }
     }
 
     #endregion
@@ -125,13 +118,23 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     public void isGrounded()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, .2f, 1 << LayerMask.NameToLayer("Environment"))) 
-        { 
-            grounded = true; 
-            wasGrounded = false;
-            //animator.ResetTrigger("Jump");
+        if (Physics.Raycast(transform.position, Vector3.down, .1f, 1 << LayerMask.NameToLayer("Environment"))) 
+        {
+            animator.SetBool("Grounded", true);
+            grounded = true;
+
+            animator.SetBool("Jumping", false);
+            jumping = false;
+
+            animator.SetBool("Falling", false);
         }
-        else { grounded = false; }
+        else 
+        { 
+            animator.SetBool("Grounded", false);
+            grounded = false;
+
+            animator.SetBool("Falling", true);
+        }
     }
     #endregion
 
@@ -139,16 +142,9 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     public void Jump()
     {
-        if (!grounded || animator.GetBool("Sit") == true) return;     //Guard clause for double jumping.
+        if (!grounded) return;     //Guard clause
 
-        //animator.SetTrigger("Jump");
-
-        animator.CrossFade(startJump, 0.2f);
-        if(grounded) 
-        { 
-            wasGrounded = true;
-            landCheck = false;
-        }
+        animator.SetBool("Jumping", true);
         playerVelocity.y += Mathf.Sqrt(jumpHeight * -3 * gravityValue);
     }
 
@@ -159,19 +155,6 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     private void SetCorrectAnimation()
     {
         float CharMoveSpeed;
-        /*
-        if (moveInput.x > 0 && moveInput.x < .55f) { moveX = .5f; }
-        else if (moveInput.x > .55f) { moveX = 1; }
-        else if (moveInput.x < 0 && moveInput.x > -.55f) { moveX = -.5f; }
-        else if (moveInput.x < -.55f) { moveX = -1; }
-        else { moveX = 0; }
-
-        if (moveInput.y > 0 && moveInput.y < .55f) { moveY = .5f; }
-        else if (moveInput.y > .55f) { moveY = 1; }
-        else if (moveInput.y < 0 && moveInput.y > -.55f) { moveY = -.5f; }
-        else if (moveInput.y < -.55f) { moveY = -1; }
-        else { moveY = 0; }
-        */
 
         if(moveInput.x > 0 && moveInput.x < 0.55f || moveInput.y > 0 && moveInput.y < 0.55f) { CharMoveSpeed = 0.5f; }
         else if(moveInput.x > 0.55f || moveInput.y > 0.55f) { CharMoveSpeed = 1; }
@@ -184,18 +167,8 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     #endregion
 
-    // This is just a small thing that plays an animation when the player is idle for a while.
-    #region Idle
-
-    float idleTimer;
-
-    void Idle()
+    public void PlayJumpParticles()
     {
-        if(moveInput != Vector3.zero || animator.GetBool("GetUp") == true) { idleTimer = 0; return; }
-        else { idleTimer += Time.deltaTime; }
-
-        if(idleTimer >= 20) { animator.SetTrigger("Sit"); idleTimer = 20; }
+        landingParticles.Play();
     }
-
-    #endregion
 }
