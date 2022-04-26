@@ -26,6 +26,12 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     [SerializeField] float jumpHeight = 1.0f;
     [SerializeField] float turnSmoothTime = 0.1f;
 
+    //Values to prevent errors in ground check
+    [SerializeField] float isGroundedDistanceCheck = 0.1f;
+    [SerializeField] Vector3 groundedCheckOffset;
+    [SerializeField] float gravityScale;
+
+
     [Header("Particle Effects")]
     [SerializeField] ParticleSystem landingParticles;
     [SerializeField] ParticleSystem movementParticles;
@@ -112,14 +118,17 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         if (playerVelocity.y < 0 && grounded) { playerVelocity.y = 0; }
 
         //Applies gravity
-        playerVelocity.y += gravityValue * Time.deltaTime;
+        playerVelocity.y += gravityValue * gravityScale;
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
     public void isGrounded()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, .1f, 1 << LayerMask.NameToLayer("Environment"))) 
+        
+        if (Physics.Raycast(transform.position + groundedCheckOffset, Vector3.down, isGroundedDistanceCheck, 1 << LayerMask.NameToLayer("Environment"))) 
         {
+            Debug.DrawRay(transform.position + groundedCheckOffset, Vector3.down * isGroundedDistanceCheck, Color.red, 5f);
+
             animator.SetBool("Grounded", true);
             grounded = true;
 
@@ -129,7 +138,9 @@ public class BC_CharacterControllerMovement : MonoBehaviour
             animator.SetBool("Falling", false);
         }
         else 
-        { 
+        {
+            Debug.DrawRay(transform.position + groundedCheckOffset, Vector3.down * isGroundedDistanceCheck, Color.blue, 5f);
+
             animator.SetBool("Grounded", false);
             grounded = false;
 
