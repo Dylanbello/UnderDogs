@@ -47,8 +47,8 @@ MonoBehaviour:
   - sound: 1
     audioClip: {fileID: 0}
     particleEffect: {fileID: 0}
-  - sound: 9
-    audioClip: {fileID: 0}
+  - sound: 2
+    audioClip: {fileID: 8300000, guid: 9d02685940b92b2428ee583efb3856a8, type: 3}
     particleEffect: {fileID: 0}
   - sound: 10
     audioClip: {fileID: 8300000, guid: 65600e57bb5ba98448462c33248ac486, type: 3}
@@ -60,5 +60,14 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: c42a02462ed93ec4bbf8bf763cdb4dce, type: 3}
     particleEffect: {fileID: 0}
   - sound: 13
+    audioClip: {fileID: 8300000, guid: c42a02462ed93ec4bbf8bf763cdb4dce, type: 3}
+    particleEffect: {fileID: 0}
+  - sound: 13
+    audioClip: {fileID: 8300000, guid: c42a02462ed93ec4bbf8bf763cdb4dce, type: 3}
+    particleEffect: {fileID: 0}
+  - sound: 3
+    audioClip: {fileID: 8300000, guid: 8b07250d785236c49ba7e9a0e0bd85a2, type: 3}
+    particleEffect: {fileID: 0}
+  - sound: 4
     audioClip: {fileID: 8300000, guid: c42a02462ed93ec4bbf8bf763cdb4dce, type: 3}
     particleEffect: {fileID: 0}

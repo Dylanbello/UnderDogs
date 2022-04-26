@@ -127,20 +127,14 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         
         if (Physics.Raycast(transform.position + groundedCheckOffset, Vector3.down, isGroundedDistanceCheck, 1 << LayerMask.NameToLayer("Environment"))) 
         {
-            Debug.DrawRay(transform.position + groundedCheckOffset, Vector3.down * isGroundedDistanceCheck, Color.red, 5f);
-
             animator.SetBool("Grounded", true);
             grounded = true;
 
-            animator.SetBool("Jumping", false);
-            jumping = false;
-
+            
             animator.SetBool("Falling", false);
         }
         else 
         {
-            Debug.DrawRay(transform.position + groundedCheckOffset, Vector3.down * isGroundedDistanceCheck, Color.blue, 5f);
-
             animator.SetBool("Grounded", false);
             grounded = false;
 
@@ -151,12 +145,21 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     #region Jumping
 
+    void EndJumping()
+    {
+        animator.SetBool("Jumping", false);
+        jumping = false;
+    }
+
     public void Jump()
     {
         if (!grounded) return;     //Guard clause
 
         animator.SetBool("Jumping", true);
         playerVelocity.y += Mathf.Sqrt(jumpHeight * -3 * gravityValue);
+        SoundManager.Play2DSound(SoundManager.Sound.PlayerJump);
+
+        Invoke("EndJumping", 0.3f);
     }
 
     #endregion
