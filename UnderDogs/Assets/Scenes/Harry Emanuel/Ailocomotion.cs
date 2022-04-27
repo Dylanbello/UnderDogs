@@ -58,6 +58,7 @@ public class Ailocomotion : MonoBehaviour
     [SerializeField]ParticleSystem L_Dirt, R_Dirt;  // Dirt trails emmiting behind enemy
 
     public AudioSource enemyMoving;
+    public float enemyDetectVolume;
 
     Vector3 playerLastPosition = Vector3.zero;      //  Last position of the player when was near the enemy
     Vector3 m_PlayerPosition;                       //  Last position of the player when the player is seen by the enemy
@@ -120,6 +121,7 @@ public class Ailocomotion : MonoBehaviour
  
         if (!m_CaughtPlayer)
         {
+            //StartCoroutine(DetectionSound());
             Move(speedRun);
             navMeshAgent.SetDestination(m_PlayerPosition);//  set the destination of the enemy to the player location
         }
@@ -136,6 +138,7 @@ public class Ailocomotion : MonoBehaviour
                 m_TimeToRotate = timeToRotate;
                 m_WaitTime = startWaitTime;
                 navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+                
             }
             else
             {
@@ -212,6 +215,7 @@ public class Ailocomotion : MonoBehaviour
                 if (!Physics.Raycast(transform.position, dirToPlayer, dstToPlayer, obstacleMask))
                 {
                     m_DetectedPlayer = true;
+                    //SoundManager.Play2DSound(SoundManager.Sound.EnemyDetection, enemyDetectVolume);
                     m_playerInRange = true;             //  The player has been seeing by the enemy and then the nemy starts to chasing the player
                     m_IsPatrol = false;                 //  Change the state to chasing the player
                 }
@@ -290,4 +294,12 @@ public class Ailocomotion : MonoBehaviour
     }
 
     void CaughtPlayer(){ m_CaughtPlayer = true;}
+
+    IEnumerator DetectionSound()
+    {
+        
+        SoundManager.Play3DSound(SoundManager.Sound.EnemyDetection, transform.position, enemyDetectVolume);
+
+        yield return null;
+    }
 }

@@ -19,6 +19,7 @@ public static class SoundManager
         PlayerDie,
         EnemyIdle,
         EnemyMove,
+        EnemyDetection,
         EnemyAttack,
         EnemyTakeDamage,
         EnemyDie,
@@ -51,10 +52,10 @@ public static class SoundManager
             audioSource.clip = GetAudioClip(sound);
             //particleEffect = GetParticleEffect(sound);
             //audioSource.volume = 0.3f;
-            audioSource.spatialBlend = 1f;
-            audioSource.time = .15f;
-            audioSource.pitch = Random.Range(0.5f, 0.6f);
-            audioSource.rolloffMode = AudioRolloffMode.Linear;
+            //audioSource.spatialBlend = 1f;
+            //audioSource.time = .15f;
+            //audioSource.pitch = Random.Range(0.5f, 0.6f);
+            //audioSource.rolloffMode = AudioRolloffMode.Linear;
             audioSource.Play();
             //particleEffect.Play();
 
@@ -63,7 +64,7 @@ public static class SoundManager
     }
 
     //Play 2D Sound
-    public static void Play2DSound(Sound sound)
+    public static void Play2DSound(Sound sound, float volume)
     {
         if (canPlaySound(sound))
         {
@@ -71,7 +72,8 @@ public static class SoundManager
             {
                 oneShotGameObject = new GameObject("One Shot Sound");
                 oneShotAudioSource = oneShotGameObject.AddComponent<AudioSource>();
-                
+                oneShotAudioSource.volume = volume;
+
             }
             oneShotAudioSource.PlayOneShot(GetAudioClip(sound));
         }

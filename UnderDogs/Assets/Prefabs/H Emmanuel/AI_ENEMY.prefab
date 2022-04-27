@@ -14871,11 +14871,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ac632deee4ce64bba826134274faeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dogManager: {fileID: 0}
   attackDamage: 15
   attackDelay: 0.5
   ai_Attack: {fileID: 2711713069090268509}
-  s_attack: {fileID: 0}
+  as_attack: {fileID: 0}
+  attackVolume: 0
 --- !u!82 &2711713068270668259
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15588,6 +15588,7 @@ MonoBehaviour:
   L_Dirt: {fileID: 6034170636018732654}
   R_Dirt: {fileID: 639709804468685039}
   enemyMoving: {fileID: 8394442103689711791}
+  enemyDetectVolume: 0
   m_PlayerNear: 0
   m_IsPatrol: 0
 --- !u!114 &1448618058298122685
@@ -15613,6 +15614,8 @@ MonoBehaviour:
   healthSliders:
   - {fileID: 2711713069177006832}
   - {fileID: 2711713069767557977}
+  damageVolume: 0
+  enemyDieVolume: 0
 --- !u!65 &2711713069634428414
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16019,6 +16022,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8298603683116596317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2981551706249583947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cee70436d68d4b459898cb6ec3eb81f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2711713068158729743
 PrefabInstance:
   m_ObjectHideFlags: 0

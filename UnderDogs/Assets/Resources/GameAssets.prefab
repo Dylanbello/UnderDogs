@@ -48,29 +48,35 @@ MonoBehaviour:
     audioClip: {fileID: 0}
     particleEffect: {fileID: 0}
   - sound: 2
-    audioClip: {fileID: 8300000, guid: 9d02685940b92b2428ee583efb3856a8, type: 3}
+    audioClip: {fileID: 8300000, guid: 8747db26ea9bc5a4c9fa27bfb050a5ff, type: 3}
+    particleEffect: {fileID: 0}
+  - sound: 3
+    audioClip: {fileID: 8300000, guid: e63f20282d6ca584cb6eb250f9168fa0, type: 3}
+    particleEffect: {fileID: 0}
+  - sound: 4
+    audioClip: {fileID: 8300000, guid: b6fb1b6b1ad65b742a69e02981e4591e, type: 3}
+    particleEffect: {fileID: 0}
+  - sound: 5
+    audioClip: {fileID: 8300000, guid: f7f8c71f45f24b04ebcee5dd44a5d7f7, type: 3}
+    particleEffect: {fileID: 0}
+  - sound: 6
+    audioClip: {fileID: 8300000, guid: 86765bda237e7fb44baff9413f85b33c, type: 3}
+    particleEffect: {fileID: 0}
+  - sound: 9
+    audioClip: {fileID: 8300000, guid: 7174fcb9c783e244995879fd16826fbe, type: 3}
     particleEffect: {fileID: 0}
   - sound: 10
     audioClip: {fileID: 8300000, guid: 65600e57bb5ba98448462c33248ac486, type: 3}
     particleEffect: {fileID: 0}
   - sound: 11
-    audioClip: {fileID: 8300000, guid: d045539c3f7112047bf3bacc7ed14caa, type: 3}
+    audioClip: {fileID: 8300000, guid: 975188574ae15374d8144c5047da3ced, type: 3}
     particleEffect: {fileID: 0}
   - sound: 12
-    audioClip: {fileID: 8300000, guid: c42a02462ed93ec4bbf8bf763cdb4dce, type: 3}
+    audioClip: {fileID: 8300000, guid: d045539c3f7112047bf3bacc7ed14caa, type: 3}
     particleEffect: {fileID: 0}
   - sound: 13
     audioClip: {fileID: 8300000, guid: c42a02462ed93ec4bbf8bf763cdb4dce, type: 3}
     particleEffect: {fileID: 0}
-  - sound: 13
-    audioClip: {fileID: 8300000, guid: c42a02462ed93ec4bbf8bf763cdb4dce, type: 3}
-    particleEffect: {fileID: 0}
-  - sound: 3
-    audioClip: {fileID: 8300000, guid: 8b07250d785236c49ba7e9a0e0bd85a2, type: 3}
-    particleEffect: {fileID: 0}
-  - sound: 4
-    audioClip: {fileID: 8300000, guid: 0629922fb0cb1ed4f98c10acda63871a, type: 3}
-    particleEffect: {fileID: 0}
-  - sound: 5
+  - sound: 14
     audioClip: {fileID: 8300000, guid: c42a02462ed93ec4bbf8bf763cdb4dce, type: 3}
     particleEffect: {fileID: 0}

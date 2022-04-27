@@ -31756,6 +31756,107 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000010509172042, guid: daf963f55dae25f47949ddb85d06c0f7, type: 3}
   m_PrefabInstance: {fileID: 735821784}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &736360114 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2981551706249583947, guid: bdc473dde159954458b13b94040dd430, type: 3}
+  m_PrefabInstance: {fileID: 753740600}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &736360119
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736360114}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 564b7489076230e4ab9bc46592c46d05, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.148
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &738099763
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32424,6 +32525,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2711713069634428356, guid: bdc473dde159954458b13b94040dd430, type: 3}
+      propertyPath: enemyDetectVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2711713069634428356, guid: bdc473dde159954458b13b94040dd430, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 988423851}
@@ -32498,6 +32603,14 @@ PrefabInstance:
     - target: {fileID: 2711713069982791857, guid: bdc473dde159954458b13b94040dd430, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298603683116596317, guid: bdc473dde159954458b13b94040dd430, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298603683116596317, guid: bdc473dde159954458b13b94040dd430, type: 3}
+      propertyPath: attackVolume
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8394442103689711791, guid: bdc473dde159954458b13b94040dd430, type: 3}
       propertyPath: m_Volume
@@ -43889,6 +44002,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5412834326500926483, guid: 0855bb9195dc89c49b2de80e42d9ef06, type: 3}
+      propertyPath: attackVolume
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5412834326500926483, guid: 0855bb9195dc89c49b2de80e42d9ef06, type: 3}
+      propertyPath: damageVolume
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 6252706953911640440, guid: 0855bb9195dc89c49b2de80e42d9ef06, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -0.0000008537737
@@ -44172,6 +44293,14 @@ PrefabInstance:
     - target: {fileID: 6253421700279786896, guid: 0855bb9195dc89c49b2de80e42d9ef06, type: 3}
       propertyPath: jumpHeight
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253421700279786896, guid: 0855bb9195dc89c49b2de80e42d9ef06, type: 3}
+      propertyPath: jumpVolume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253421700279786896, guid: 0855bb9195dc89c49b2de80e42d9ef06, type: 3}
+      propertyPath: landVolume
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6253421700279786896, guid: 0855bb9195dc89c49b2de80e42d9ef06, type: 3}
       propertyPath: gravityScale
@@ -44643,7 +44772,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8157562574747421847, guid: 0855bb9195dc89c49b2de80e42d9ef06, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.035324715
+      value: -0.03532471
       objectReference: {fileID: 0}
     - target: {fileID: 8157562574747421847, guid: 0855bb9195dc89c49b2de80e42d9ef06, type: 3}
       propertyPath: m_LocalRotation.y
@@ -44651,7 +44780,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8157562574747421847, guid: 0855bb9195dc89c49b2de80e42d9ef06, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000033527613
+      value: 0.000000031664968
       objectReference: {fileID: 0}
     - target: {fileID: 8157562574747421849, guid: 0855bb9195dc89c49b2de80e42d9ef06, type: 3}
       propertyPath: m_Layer
@@ -45345,6 +45474,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1323751618}
     m_Modifications:
+    - target: {fileID: 1448618058298122685, guid: bdc473dde159954458b13b94040dd430, type: 3}
+      propertyPath: damageVolume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448618058298122685, guid: bdc473dde159954458b13b94040dd430, type: 3}
+      propertyPath: enemyDieVolume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2711713069634428356, guid: bdc473dde159954458b13b94040dd430, type: 3}
+      propertyPath: enemyDetectVolume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2711713069634428356, guid: bdc473dde159954458b13b94040dd430, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
@@ -45420,6 +45561,14 @@ PrefabInstance:
     - target: {fileID: 2711713069982791857, guid: bdc473dde159954458b13b94040dd430, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298603683116596317, guid: bdc473dde159954458b13b94040dd430, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298603683116596317, guid: bdc473dde159954458b13b94040dd430, type: 3}
+      propertyPath: attackVolume
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdc473dde159954458b13b94040dd430, type: 3}
@@ -45934,19 +46083,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1108388699679670736, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.9502712
+      value: -0.9502713
       objectReference: {fileID: 0}
     - target: {fileID: 1108388699679670736, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.31142354
+      value: -0.3114235
       objectReference: {fileID: 0}
     - target: {fileID: 1108388699679670736, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000154227
+      value: -0.0000015869737
       objectReference: {fileID: 0}
     - target: {fileID: 1108388699679670736, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000051222736
+      value: 0.00000052154064
       objectReference: {fileID: 0}
     - target: {fileID: 1108388699679670742, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_Layer
@@ -45982,15 +46131,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1108388700196146299, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.3641494
+      value: -0.36414936
       objectReference: {fileID: 0}
     - target: {fileID: 1108388700196146299, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000001527369
+      value: -0.0000015348196
       objectReference: {fileID: 0}
     - target: {fileID: 1108388700196146299, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000059604645
+      value: 0.0000005904585
       objectReference: {fileID: 0}
     - target: {fileID: 4439769350720418357, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_Height
@@ -46597,6 +46746,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6471551424454236781, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
+      propertyPath: jumpVolume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471551424454236781, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
+      propertyPath: landVolume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471551424454236781, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: gravityScale
       value: 0.13
       objectReference: {fileID: 0}
@@ -46651,6 +46808,14 @@ PrefabInstance:
     - target: {fileID: 6985546243274183009, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: maxHealth
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6985546243274183009, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
+      propertyPath: attackVolume
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6985546243274183009, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
+      propertyPath: damageVolume
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
@@ -94639,6 +94804,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1448618058298122685, guid: bdc473dde159954458b13b94040dd430, type: 3}
+      propertyPath: damageVolume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448618058298122685, guid: bdc473dde159954458b13b94040dd430, type: 3}
+      propertyPath: enemyDieVolume
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2226565526617769560, guid: bdc473dde159954458b13b94040dd430, type: 3}
       propertyPath: m_StoppingDistance
       value: 2.3
@@ -94657,6 +94830,10 @@ PrefabInstance:
       objectReference: {fileID: 901668352}
     - target: {fileID: 2711713069634428356, guid: bdc473dde159954458b13b94040dd430, type: 3}
       propertyPath: startWaitTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2711713069634428356, guid: bdc473dde159954458b13b94040dd430, type: 3}
+      propertyPath: enemyDetectVolume
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2711713069634428356, guid: bdc473dde159954458b13b94040dd430, type: 3}
@@ -94738,6 +94915,14 @@ PrefabInstance:
     - target: {fileID: 2711713069982791857, guid: bdc473dde159954458b13b94040dd430, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298603683116596317, guid: bdc473dde159954458b13b94040dd430, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298603683116596317, guid: bdc473dde159954458b13b94040dd430, type: 3}
+      propertyPath: attackVolume
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdc473dde159954458b13b94040dd430, type: 3}

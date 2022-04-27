@@ -21,6 +21,10 @@ public class DogManager : MonoBehaviour
     [SerializeField] Transform currentPickedUp;
     [HideInInspector] public bool pickupFlag;
 
+    [Header("SFX Volume")]
+    public float damageVolume;
+    public float attackVolume;
+
 
     private void Awake()
     {
@@ -40,7 +44,7 @@ public class DogManager : MonoBehaviour
 
     private void PlayerHealth_OnHealthDamaged(object sender, System.EventArgs e)
     {
-        SoundManager.Play2DSound(SoundManager.Sound.PlayerTakeDamage);
+        SoundManager.Play2DSound(SoundManager.Sound.PlayerTakeDamage, damageVolume);
     }
 
     private void PlayerHealth_OnHealthChanged(object sender, System.EventArgs e)
@@ -77,7 +81,7 @@ public class DogManager : MonoBehaviour
     {
         animator.SetTrigger("GetUp");
         animator.CrossFade("SpinAttack",0);//Get spin attack in animator
-        SoundManager.Play2DSound(SoundManager.Sound.PlayerAttack);
+        SoundManager.Play2DSound(SoundManager.Sound.PlayerAttack, attackVolume);
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         for(int i=0;i<colliders.Length;i++)
         {

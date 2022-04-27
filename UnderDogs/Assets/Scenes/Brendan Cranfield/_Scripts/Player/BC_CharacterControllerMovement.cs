@@ -20,7 +20,7 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     [SerializeField] bool grounded;
     [SerializeField] bool jumping;
-    
+
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float sprintSpeed = 5f;
     [SerializeField] float jumpHeight = 1.0f;
@@ -35,6 +35,10 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     [Header("Particle Effects")]
     [SerializeField] ParticleSystem landingParticles;
     [SerializeField] ParticleSystem movementParticles;
+
+    [Header("SFX Volume")]
+    public float jumpVolume;
+    public float landVolume;
 
 
     private const string startJump = "Jump_Launch";
@@ -162,7 +166,7 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
         animator.SetBool("Jumping", true);
         playerVelocity.y += Mathf.Sqrt(jumpHeight * -3 * gravityValue);
-        SoundManager.Play2DSound(SoundManager.Sound.PlayerJump);
+        SoundManager.Play2DSound(SoundManager.Sound.PlayerJump, jumpVolume);
 
         Invoke("EndJumping", 0.3f);
         
@@ -189,7 +193,7 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     public void PlayJumpParticles()
     {
-        SoundManager.Play2DSound(SoundManager.Sound.PlayerLand);
+        SoundManager.Play2DSound(SoundManager.Sound.PlayerLand, landVolume);
         landingParticles.Play();
     }
 }

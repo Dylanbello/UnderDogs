@@ -5,6 +5,7 @@ using UnityEngine;
 public class HeartCollectible : MonoBehaviour
 {
     public float heartSpinSpeed;
+    public float heartVolume;
     //private AudioSource audioSource;
     //public HealthSystem playerHealth;
 
@@ -21,7 +22,7 @@ public class HeartCollectible : MonoBehaviour
     {
         if (other.TryGetComponent(out DogManager dog)) { dog.playerHealth.Heal(10);
             //audioSource.PlayDelayed(.2f);
-            SoundManager.Play2DSound(SoundManager.Sound.HeartCollected);
+            SoundManager.Play2DSound(SoundManager.Sound.HeartCollected, heartVolume);
             gameObject.SetActive(false);}
 
         /*if (other.GetComponent<CharacterController>())

@@ -5,6 +5,8 @@ public class CogCollectible : MonoBehaviour
     public int cogValue;
     public float cogSpinSpeed;
 
+    public float cogVolume;
+
     private void Start()
     {
         GameManager.Instance.CountCogsInLevel();
@@ -22,7 +24,7 @@ public class CogCollectible : MonoBehaviour
         {
             
             GameManager.Instance.AddToCollection(cogValue);
-            SoundManager.Play2DSound(SoundManager.Sound.CogCollected);
+            SoundManager.Play2DSound(SoundManager.Sound.CogCollected, cogVolume);
             gameObject.SetActive(false);
             
         }

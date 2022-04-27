@@ -11,6 +11,10 @@ public class AIAttack : MonoBehaviour
     [SerializeField] private float attackDelay = 1;
     [SerializeField] private Animator ai_Attack;
     [SerializeField] AudioSource as_attack;
+
+    [Header("SFX Volume")]
+    public float attackVolume;
+
     
     private bool _isDistanceCheck = false;
     
@@ -28,7 +32,8 @@ public class AIAttack : MonoBehaviour
        
         as_attack.Play();
         ai_Attack.SetBool("Attack", true);
-        
+        SoundManager.Play3DSound(SoundManager.Sound.EnemyAttack, transform.position, attackVolume);
+
         dogManager.playerHealth.Damage(attackDamage);
 
     }
