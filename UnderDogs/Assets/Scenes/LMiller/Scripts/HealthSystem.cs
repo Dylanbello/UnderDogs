@@ -5,6 +5,7 @@ public class HealthSystem
 {
     public event EventHandler OnHealthChanged;
     public event EventHandler OnDead;
+    public event EventHandler OnHealthDamaged;
 
     int healthMax;
     int health;
@@ -37,6 +38,7 @@ public class HealthSystem
         }
 
         if (OnHealthChanged != null) OnHealthChanged(this, EventArgs.Empty);
+        if (OnHealthDamaged != null) OnHealthDamaged(this, EventArgs.Empty);
     }
 
     public void Heal(int amount)

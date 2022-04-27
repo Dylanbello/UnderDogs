@@ -35,6 +35,12 @@ public class DogManager : MonoBehaviour
 
         playerHealth.OnDead += PlayerHealth_OnDead;
         playerHealth.OnHealthChanged += PlayerHealth_OnHealthChanged;
+        playerHealth.OnHealthDamaged += PlayerHealth_OnHealthDamaged;
+    }
+
+    private void PlayerHealth_OnHealthDamaged(object sender, System.EventArgs e)
+    {
+        SoundManager.Play2DSound(SoundManager.Sound.PlayerTakeDamage);
     }
 
     private void PlayerHealth_OnHealthChanged(object sender, System.EventArgs e)
@@ -52,9 +58,10 @@ public class DogManager : MonoBehaviour
     
     IEnumerator ded()
     { 
-        charController.enabled = false;
+        
         animator.SetTrigger("Die");
         Debug.Log(animator.GetBool("Die"));
+        charController.enabled = false;
         yield return new WaitForSeconds(4);
 
         
@@ -70,6 +77,7 @@ public class DogManager : MonoBehaviour
     {
         animator.SetTrigger("GetUp");
         animator.CrossFade("SpinAttack",0);//Get spin attack in animator
+        SoundManager.Play2DSound(SoundManager.Sound.PlayerAttack);
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         for(int i=0;i<colliders.Length;i++)
         {
@@ -79,6 +87,11 @@ public class DogManager : MonoBehaviour
             if (rigidbody) { rigidbody.AddExplosionForce(power, transform.position, radius, 3, ForceMode.Impulse); }
             if (aiHealth) { aiHealth.healthSystem.Damage(attackDamage); }
         }
+    }
+
+    public void TakeDamage()
+    {
+        playerHealth.Damage(attackDamage);
     }
 
     void ResetHealth()

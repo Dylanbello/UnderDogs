@@ -69,5 +69,8 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 8b07250d785236c49ba7e9a0e0bd85a2, type: 3}
     particleEffect: {fileID: 0}
   - sound: 4
+    audioClip: {fileID: 8300000, guid: 0629922fb0cb1ed4f98c10acda63871a, type: 3}
+    particleEffect: {fileID: 0}
+  - sound: 5
     audioClip: {fileID: 8300000, guid: c42a02462ed93ec4bbf8bf763cdb4dce, type: 3}
     particleEffect: {fileID: 0}

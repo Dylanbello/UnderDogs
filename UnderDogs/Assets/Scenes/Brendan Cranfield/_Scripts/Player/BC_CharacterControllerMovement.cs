@@ -115,7 +115,11 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     {
 
         //Stop Falling
-        if (playerVelocity.y < 0 && grounded) { playerVelocity.y = 0; }
+        if (playerVelocity.y < 0 && grounded) 
+        { 
+            playerVelocity.y = 0;
+        }
+
 
         //Applies gravity
         playerVelocity.y += gravityValue * gravityScale;
@@ -149,6 +153,7 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     {
         animator.SetBool("Jumping", false);
         jumping = false;
+        
     }
 
     public void Jump()
@@ -160,6 +165,7 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         SoundManager.Play2DSound(SoundManager.Sound.PlayerJump);
 
         Invoke("EndJumping", 0.3f);
+        
     }
 
     #endregion
@@ -183,6 +189,7 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     public void PlayJumpParticles()
     {
+        SoundManager.Play2DSound(SoundManager.Sound.PlayerLand);
         landingParticles.Play();
     }
 }

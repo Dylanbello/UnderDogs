@@ -30,6 +30,7 @@ public class AIAttack : MonoBehaviour
         ai_Attack.SetBool("Attack", true);
         
         dogManager.playerHealth.Damage(attackDamage);
+
     }
 
     private void OnTriggerExit(Collider other)
