@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [AddComponentMenu("Player/Player Manager")]
 public class DogManager : MonoBehaviour
@@ -25,6 +26,8 @@ public class DogManager : MonoBehaviour
     public float damageVolume;
     public float attackVolume;
 
+    [Header("Health Bar Component")]
+    public Image healthBarIcon;
 
     private void Awake()
     {
@@ -50,13 +53,14 @@ public class DogManager : MonoBehaviour
     private void PlayerHealth_OnHealthChanged(object sender, System.EventArgs e)
     {
         Debug.Log(playerHealth.GetHealth());
+        healthBarIcon.fillAmount = (float)playerHealth.GetHealth() / 100f;
     }
 
     private void PlayerHealth_OnDead(object sender, System.EventArgs e)
     {
         Debug.Log($"{gameObject.name} is dead");
         StartCoroutine(ded());
-        
+        healthBarIcon.fillAmount = 1f;
         //ResetHealth();
     }
     

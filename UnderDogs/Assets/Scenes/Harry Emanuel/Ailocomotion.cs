@@ -73,7 +73,7 @@ public class Ailocomotion : MonoBehaviour
     bool m_CaughtPlayer;                            //  if the enemy has caught the player
     bool m_DetectedPlayer;
     bool canDisplayIcon;
-    
+    bool playOnce = false;
 
     void Start(){
         m_PlayerPosition = Vector3.zero;
@@ -100,12 +100,18 @@ public class Ailocomotion : MonoBehaviour
  
         if (!m_IsPatrol)
         {
+            if(playOnce == false)
+            {
+                StartCoroutine(DetectionSound());
+                Debug.Log("Played Once");
+                playOnce = true;
+            }
             if (playerPos == null) { playerPos = GameObject.FindWithTag("character1").transform; }
-
             Chasing();
         }
         else
         {
+            playOnce = false;
             playerPos = null;
             Patroling();
         }
@@ -170,7 +176,7 @@ public class Ailocomotion : MonoBehaviour
         else
         {
             canDisplayIcon = true;
-            m_PlayerNear = false;                       //  The player is no near when the enemy is platroling
+            m_PlayerNear = false;                       //  The player is not near when the enemy is patroling
             playerLastPosition = Vector3.zero;
             navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);    //  Set the enemy destination to the next waypoint             
             if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
