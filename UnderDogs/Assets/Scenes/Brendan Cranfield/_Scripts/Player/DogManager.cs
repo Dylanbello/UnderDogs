@@ -55,7 +55,7 @@ public class DogManager : MonoBehaviour
         charController.enabled = false;
         animator.SetTrigger("Die");
         Debug.Log(animator.GetBool("Die"));
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(4);
 
         
         transform.position = spawnPoint;
@@ -97,10 +97,7 @@ public class DogManager : MonoBehaviour
                 break;
 
             case "respawn":
-                charController.enabled = false;
-                transform.position = spawnPoint;
-                charController.enabled = true;
-                ResetHealth();
+                playerHealth.Damage(100);
                 
                 break;
 

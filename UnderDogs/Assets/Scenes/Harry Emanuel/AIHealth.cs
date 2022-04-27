@@ -14,6 +14,9 @@ public class AIHealth : MonoBehaviour
     [Space(10)]
     [SerializeField] List<Slider> healthSliders;
 
+    public float damageVolume;
+    public float enemyDieVolume;
+
     void Awake() { SoundManager.Initialize();}
 
     void Start()
@@ -24,20 +27,22 @@ public class AIHealth : MonoBehaviour
 
         healthSliders[0].maxValue = maxHeatlh;
         healthSliders[1].maxValue = maxHeatlh;
+
+        
     }
 
     private void HealthSystem_OnHealthChanged(object sender, System.EventArgs e) // This method is called when the AI's health changes via damage, healing, etc.
     {
         healthSliders[0].value = healthSystem.GetHealth();
         healthSliders[1].value = healthSystem.GetHealth();
-        SoundManager.Play3DSound(SoundManager.Sound.EnemyTakeDamage, transform.position);
+        SoundManager.Play3DSound(SoundManager.Sound.EnemyTakeDamage, transform.position, damageVolume);
 
     }
 
     private void HealthSystem_OnDead(object sender, System.EventArgs e) // This method is called when the AI dies.
     {
         partSpawns();
-        SoundManager.Play3DSound(SoundManager.Sound.EnemyDie, transform.position);
+        SoundManager.Play3DSound(SoundManager.Sound.EnemyDie, transform.position, enemyDieVolume);
         Instantiate(Heart,transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

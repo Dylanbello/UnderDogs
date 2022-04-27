@@ -39,16 +39,18 @@ public static class SoundManager
     }
 
     //Play 3D Sound
-    public static void Play3DSound(Sound sound, Vector3 position)
+    public static void Play3DSound(Sound sound, Vector3 position, float volume)
     {
         if (canPlaySound(sound))
         {
             GameObject soundGameObject = new GameObject("Sound");
             soundGameObject.transform.position = position;
             AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
+            audioSource.volume = volume;
             //ParticleSystem particleEffect = soundGameObject.AddComponent<ParticleSystem>();
             audioSource.clip = GetAudioClip(sound);
             //particleEffect = GetParticleEffect(sound);
+            //audioSource.volume = 0.3f;
             audioSource.spatialBlend = 1f;
             audioSource.time = .15f;
             audioSource.pitch = Random.Range(0.5f, 0.6f);

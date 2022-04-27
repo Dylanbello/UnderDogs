@@ -23,13 +23,21 @@ public class AIAttack : MonoBehaviour
         DogManager dogManager = other.GetComponent<DogManager>();
         if(!dogManager || attackTimer < attackDelay) {return;}
         
-        attackTimer = 0;
+        attackTimer = 0f;
 
        
         as_attack.Play();
-        dogManager.playerHealth.Damage(attackDamage);
         ai_Attack.SetBool("Attack", true);
+        
+        dogManager.playerHealth.Damage(attackDamage);
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        ai_Attack.SetBool("Attack", false);
+    }
+
+
 
 
 }
