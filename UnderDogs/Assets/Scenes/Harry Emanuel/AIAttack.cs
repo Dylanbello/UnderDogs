@@ -25,13 +25,13 @@ public class AIAttack : MonoBehaviour
         
         attackTimer = 0;
 
-        if(dogManager==true)
+        if (dogManager == true)
         {
             as_attack.Play();
             dogManager.playerHealth.Damage(attackDamage);
             ai_Attack.SetBool("Attack", true);
         }
-        else()
+        else
         {
             ai_Attack.SetBool("Attack", false);
             as_attack.Stop();
