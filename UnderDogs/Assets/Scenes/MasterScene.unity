@@ -31768,7 +31768,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 736360114}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 564b7489076230e4ab9bc46592c46d05, type: 3}
@@ -32512,6 +32512,10 @@ PrefabInstance:
       propertyPath: m_StoppingDistance
       value: 2.3
       objectReference: {fileID: 0}
+    - target: {fileID: 2711713068270668259, guid: bdc473dde159954458b13b94040dd430, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2711713068270668269, guid: bdc473dde159954458b13b94040dd430, type: 3}
       propertyPath: as_attack
       value: 
@@ -32610,7 +32614,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8298603683116596317, guid: bdc473dde159954458b13b94040dd430, type: 3}
       propertyPath: attackVolume
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8394442103689711791, guid: bdc473dde159954458b13b94040dd430, type: 3}
       propertyPath: m_Volume
@@ -45568,7 +45572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8298603683116596317, guid: bdc473dde159954458b13b94040dd430, type: 3}
       propertyPath: attackVolume
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdc473dde159954458b13b94040dd430, type: 3}
@@ -46083,19 +46087,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1108388699679670736, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.9502713
+      value: -0.9502712
       objectReference: {fileID: 0}
     - target: {fileID: 1108388699679670736, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.3114235
+      value: -0.31142354
       objectReference: {fileID: 0}
     - target: {fileID: 1108388699679670736, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000015869737
+      value: -0.00000154227
       objectReference: {fileID: 0}
     - target: {fileID: 1108388699679670736, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000052154064
+      value: 0.00000051222736
       objectReference: {fileID: 0}
     - target: {fileID: 1108388699679670742, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_Layer
@@ -46131,15 +46135,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1108388700196146299, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.36414936
+      value: -0.3641494
       objectReference: {fileID: 0}
     - target: {fileID: 1108388700196146299, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000015348196
+      value: -0.000001527369
       objectReference: {fileID: 0}
     - target: {fileID: 1108388700196146299, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000005904585
+      value: 0.00000059604645
       objectReference: {fileID: 0}
     - target: {fileID: 4439769350720418357, guid: 80d90d2b0a2e6a54593792251cdd5805, type: 3}
       propertyPath: m_Height
@@ -94922,7 +94926,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8298603683116596317, guid: bdc473dde159954458b13b94040dd430, type: 3}
       propertyPath: attackVolume
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdc473dde159954458b13b94040dd430, type: 3}
