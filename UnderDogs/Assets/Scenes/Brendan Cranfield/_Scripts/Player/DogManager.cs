@@ -25,6 +25,7 @@ public class DogManager : MonoBehaviour
     [Header("SFX Volume")]
     public float damageVolume;
     public float attackVolume;
+    public float deathVolume;
 
     [Header("Health Bar Component")]
     public Image healthBarIcon;
@@ -70,6 +71,7 @@ public class DogManager : MonoBehaviour
         animator.SetTrigger("Die");
         Debug.Log(animator.GetBool("Die"));
         charController.enabled = false;
+        SoundManager.Play2DSound(SoundManager.Sound.PlayerDie, deathVolume);
         yield return new WaitForSeconds(4);
 
         
