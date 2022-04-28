@@ -6,36 +6,60 @@ using UnityEngine;
 public class AIAttack : MonoBehaviour
 {
     Ailocomotion aiLocaomotion;
-    private float attackTimer;
+    private float attackTimer = 0f;
     [SerializeField] private int attackDamage = 50;
-    [SerializeField] private float attackDelay = 1;
+    [SerializeField] private float attackDelay = 2.2f;
     [SerializeField] private Animator ai_Attack;
     [SerializeField] AudioSource as_attack;
 
+    //For the Attack Function
+    bool isAttacking = false;
+
+    DogManager dogManager;
+
     [Header("SFX Volume")]
     public float attackVolume;
-
     
     private bool _isDistanceCheck = false;
     
     private void Awake() { aiLocaomotion = GetComponent<Ailocomotion>();}
     
-    private void Update(){ attackTimer += Time.deltaTime;}
+    private void Update()
+    {
+        //For the attack Function
+        if(ai_Attack.GetBool("Attack") == true)
+        {
+            isAttacking = true;
+        }
+        if (ai_Attack.GetBool("Attack") == false)
+        {
+            isAttacking = false;
+        }
+    }
 
     private void OnTriggerStay(Collider other)
     {
-        DogManager dogManager = other.GetComponent<DogManager>();
-        if(!dogManager || attackTimer < attackDelay) {return;}
-        
-        attackTimer = 0f;
+        attackTimer += Time.deltaTime;
+        dogManager = other.GetComponent<DogManager>();
+        if(!dogManager) {return;}
 
-       
+        //For the Attack Function
+        if(isAttacking == true && attackTimer >= attackDelay)
+        {
+            
+            attackTimer = 0f;
+            Attack();
+        }
+
         as_attack.Play();
         ai_Attack.SetBool("Attack", true);
         SoundManager.Play3DSound(SoundManager.Sound.EnemyAttack, transform.position, attackVolume);
+    }
 
+    private void Attack()
+    {
         dogManager.playerHealth.Damage(attackDamage);
-
+        Debug.Log("isAttacking");
     }
 
     private void OnTriggerExit(Collider other)

@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyAttackAudio : MonoBehaviour
 {
     public float attackVolume;
-
+    public bool attack = false;
    
 
     public void OnEnable()
