@@ -97,6 +97,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cogValue: 1
   cogSpinSpeed: 70
+  cogVolume: 0
+  cogParticles: {fileID: 4648200037603652038, guid: fd9199281c831504698089c97083eba2, type: 3}
 --- !u!136 &4163391921136502438
 CapsuleCollider:
   m_ObjectHideFlags: 0

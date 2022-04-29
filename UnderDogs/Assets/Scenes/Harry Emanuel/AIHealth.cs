@@ -10,6 +10,7 @@ public class AIHealth : MonoBehaviour
     public HealthSystem healthSystem;
     
     public GameObject head, body,L_Track,R_Track,L_Wheels,R_Wheels,Heart; //Prefabs that will Instantiate from enemy
+    [SerializeField] GameObject explosionParticle;
 
     [Space(10)]
     [SerializeField] List<Slider> healthSliders;
@@ -48,6 +49,7 @@ public class AIHealth : MonoBehaviour
     }
 
     void partSpawns(){//Body parts that spawn with their attached script to fly off
+        Instantiate(explosionParticle, transform.position, Quaternion.identity);
         Instantiate(head, transform.position, Quaternion.identity);
         Instantiate(body, transform.position, Quaternion.identity);
         Instantiate(L_Track, transform.position, Quaternion.identity);

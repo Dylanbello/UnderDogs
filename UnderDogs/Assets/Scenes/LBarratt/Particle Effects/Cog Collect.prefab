@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4648200037603652037}
   - component: {fileID: 4648200037603652036}
   - component: {fileID: 4648200037603652039}
+  - component: {fileID: -2987293457897335853}
   m_Layer: 0
   m_Name: Cog Collect
   m_TagString: Untagged
@@ -4862,3 +4863,15 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-2987293457897335853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4648200037603652038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3383c5156c9967644ae1ecfb17e978b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

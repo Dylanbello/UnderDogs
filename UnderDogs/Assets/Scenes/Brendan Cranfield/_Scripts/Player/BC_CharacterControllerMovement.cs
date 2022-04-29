@@ -11,6 +11,7 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     CharacterController controller;
     Transform cam;
     CinemachineFreeLook cmFreeLook;
+    AudioSource as_Player;
     [HideInInspector] public Animator animator;
 
     Vector3 playerVelocity;
@@ -36,14 +37,12 @@ public class BC_CharacterControllerMovement : MonoBehaviour
     [SerializeField] ParticleSystem landingParticles;
     [SerializeField] ParticleSystem movementParticles;
 
+    [Space(15)]
+    [SerializeField] AudioClip[] playerFootsteps;
+
     [Header("SFX Volume")]
     public float jumpVolume;
     public float landVolume;
-
-
-    private const string startJump = "Jump_Launch";
-    private const string InAir = "Jump_Air";
-    private const string landJump = "Jump_Land";
 
 
     private void Awake()
@@ -53,6 +52,7 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         cam = GetComponentInChildren<Camera>().transform;
         cmFreeLook = GetComponentInChildren<CinemachineFreeLook>();
+        as_Player = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -78,19 +78,10 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     void HandleSprinting()
     {
-        if (grounded)
-        {
-            if (!isSprinting)
-            {
-                moveSpeed = 5;
-                if (movementParticles.isPlaying) movementParticles.Stop();
-            }
-            else
-            {
-                moveSpeed = sprintSpeed;
-                if(movementParticles.isPlaying) movementParticles.Play();
-            }
-        }
+        if (!grounded) { return; }
+
+        if (!isSprinting) { moveSpeed = 5; }
+        else { moveSpeed = sprintSpeed; }
     }
 
     #endregion
@@ -184,25 +175,18 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         else if(moveInput.x > 0.55f || moveInput.y > 0.55f) { CharMoveSpeed = 1; }
         else if(moveInput.x < 0 && moveInput.x > -0.55f || moveInput.y < 0 && moveInput.y > -0.55f) { CharMoveSpeed = 0.5f; }
         else if(moveInput.x < -0.55f || moveInput.y < -0.55f) { CharMoveSpeed = 1; }
-        else { CharMoveSpeed = 0; }
+        else { CharMoveSpeed = 0.01f; }
+
+        Mathf.Clamp01(CharMoveSpeed);
 
         animator.SetFloat("Move", CharMoveSpeed, .1f, Time.deltaTime);
     }
-
-    #endregion
-
     public void PlayJumpParticles()
     {
         SoundManager.Play2DSound(SoundManager.Sound.PlayerLand, landVolume);
         landingParticles.Play();
     }
+    public void PlayerFootsteps() { as_Player.PlayOneShot(playerFootsteps[Random.Range(0, playerFootsteps.Length)]); }
 
-    public void TurnOnMovementParticles() { movementParticles.Play(); }
-
-    public void TurnOffMovementParticles() { movementParticles.Stop(); }
-
-    public void PlayerFootsteps()
-    {
-
-    }
+    #endregion
 }

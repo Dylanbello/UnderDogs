@@ -6,6 +6,7 @@ public class CogCollectible : MonoBehaviour
     public float cogSpinSpeed;
 
     public float cogVolume;
+    [SerializeField] GameObject cogParticles;
 
     private void Start()
     {
@@ -25,6 +26,7 @@ public class CogCollectible : MonoBehaviour
             
             GameManager.Instance.AddToCollection(cogValue);
             SoundManager.Play2DSound(SoundManager.Sound.CogCollected, cogVolume);
+            Instantiate(cogParticles, transform.position, Quaternion.identity);
             gameObject.SetActive(false);
             
         }
