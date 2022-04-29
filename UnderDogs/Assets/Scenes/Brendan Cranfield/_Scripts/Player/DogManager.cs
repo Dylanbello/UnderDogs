@@ -18,10 +18,6 @@ public class DogManager : MonoBehaviour
     [SerializeField] float radius = 1;
     Animator animator;
 
-    [Header("Pickup")]
-    [SerializeField] Transform currentPickedUp;
-    [HideInInspector] public bool pickupFlag;
-
     [Header("SFX Volume")]
     public float damageVolume;
     public float attackVolume;
@@ -62,7 +58,6 @@ public class DogManager : MonoBehaviour
         Debug.Log($"{gameObject.name} is dead");
         StartCoroutine(ded());
         healthBarIcon.fillAmount = 1f;
-        //ResetHealth();
     }
     
     IEnumerator ded()
@@ -108,7 +103,6 @@ public class DogManager : MonoBehaviour
     {
         int giveHealthAmount = maxHealth - playerHealth.GetHealth();
         playerHealth.Heal(giveHealthAmount);
-        //animator.ResetTrigger("Die");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -123,25 +117,6 @@ public class DogManager : MonoBehaviour
                 playerHealth.Damage(100);
                 
                 break;
-
-            case "pickupable":
-                
-                break;
         }
-    }
-
-    void PickupObject()
-    {
-
-    }
-
-    void DropObject()
-    {
-
-    }
-
-    void Interact()
-    {
-
     }
 }

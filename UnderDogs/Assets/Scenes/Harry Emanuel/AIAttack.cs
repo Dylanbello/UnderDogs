@@ -46,9 +46,7 @@ public class AIAttack : MonoBehaviour
         //For the Attack Function
         if(isAttacking == true && attackTimer >= attackDelay)
         {
-            
             attackTimer = 0f;
-            Attack();
         }
 
         as_attack.Play();
@@ -56,18 +54,15 @@ public class AIAttack : MonoBehaviour
         SoundManager.Play3DSound(SoundManager.Sound.EnemyAttack, transform.position, attackVolume);
     }
 
-    private void Attack()
-    {
-        dogManager.playerHealth.Damage(attackDamage);
-        Debug.Log("isAttacking");
-    }
-
     private void OnTriggerExit(Collider other)
     {
         ai_Attack.SetBool("Attack", false);
     }
 
-
-
-
+    public DogManager GetDogManager(out float damage)
+    {
+        damage = attackDamage;
+        if (dogManager == null) { return null; }
+        else { return dogManager; }
+    }
 }

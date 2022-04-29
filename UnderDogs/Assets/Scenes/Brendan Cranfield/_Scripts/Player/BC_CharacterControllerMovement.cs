@@ -196,4 +196,13 @@ public class BC_CharacterControllerMovement : MonoBehaviour
         SoundManager.Play2DSound(SoundManager.Sound.PlayerLand, landVolume);
         landingParticles.Play();
     }
+
+    public void TurnOnMovementParticles() { movementParticles.Play(); }
+
+    public void TurnOffMovementParticles() { movementParticles.Stop(); }
+
+    public void PlayerFootsteps()
+    {
+
+    }
 }
