@@ -114,7 +114,25 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -141,7 +159,25 @@ MonoBehaviour:
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -537,7 +573,25 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -564,7 +618,25 @@ MonoBehaviour:
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -654,7 +726,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc2579d919a8be4ab4f940b7cbe71a8, type: 3}
   m_Name: SubtitleClip(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
-  subtitleText: 'Those weird Cog things might help us find our way! '
+  subtitleText: Those Machines kept dropping those weird <color=yellow>Cog</color>
+    looking things.
 --- !u!114 &-8189934842887248568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4904,8 +4977,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc2579d919a8be4ab4f940b7cbe71a8, type: 3}
   m_Name: SubtitleClip(Clone)(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
-  subtitleText: If we keep looking for those Cogs we might  be able to find a way
-    home.
+  subtitleText: If we keep looking for those <color=yellow>Cogs</color> we might 
+    be able to find a way home!
 --- !u!114 &-1170212584154905702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4959,8 +5032,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc2579d919a8be4ab4f940b7cbe71a8, type: 3}
   m_Name: SubtitleClip(Clone)(Clone)(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
-  subtitleText: Hmm okay, hopefully we dont run into any more of those noisy Machines
-    though
+  subtitleText: Hmm okay, hopefully we dont run into any more of those noisy <color=red>Machines</color>
+    though.
 --- !u!114 &-756199039283828312
 MonoBehaviour:
   m_ObjectHideFlags: 1
