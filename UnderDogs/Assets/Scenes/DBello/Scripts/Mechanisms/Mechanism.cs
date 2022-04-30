@@ -17,9 +17,10 @@ public class Mechanism : MonoBehaviour
         Debug.Log("animating" + activate);
         animator.SetBool("Activate", activate);
 
-        if (activate == true)
-        {
-            audioSource.PlayDelayed(.2f);
-        }
+        //if (activate == true)
+        //{
+        //    audioSource.PlayDelayed(.2f);
+        //}
+       
     }
 }
