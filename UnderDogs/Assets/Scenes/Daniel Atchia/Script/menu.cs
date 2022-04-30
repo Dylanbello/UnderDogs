@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 public class menu : MonoBehaviour
 {
     public ChangeSceneButton changeScene;
@@ -9,6 +10,9 @@ public class menu : MonoBehaviour
     public TextMeshProUGUI option2;
     public TextMeshProUGUI option3;
     public TextMeshProUGUI option4;
+    public InputActionReference navigation;
+    public InputActionReference click;
+    public Vector2 navInput;
     public Image image1;
     public Image image2;
     public Image image3;
@@ -29,12 +33,46 @@ public class menu : MonoBehaviour
         image3.color = new Color32(0, 0, 0, 0);
         option4.color = new Color32(0, 0, 0, 255);
         image4.color = new Color32(0, 0, 0, 0);
+
+        click.action.performed += Action_performed;
+        navigation.action.canceled += Action_canceled;
+        navigation.action.performed += Action_performed1;
+    }
+
+    private void Action_canceled(InputAction.CallbackContext obj)
+    {
+        navInput.y = 0;
+        Debug.Log("nav");
+    }
+
+    private void Action_performed1(InputAction.CallbackContext obj)
+    {
+        navInput = obj.ReadValue<Vector2>();
+        updateNav();
+    }
+
+    private void Action_performed(InputAction.CallbackContext obj)
+    {
+        Debug.Log("Picked: " + selectedOption); //For testing as the switch statment does nothing right now.
+
+        switch (selectedOption) //Set the visual indicator for which option you are on.
+        {
+            case 1:
+                SceneManager.LoadScene("MasterScene");
+                break;
+            case 2:
+                /*Do option two*/
+                break;
+            case 3:
+                /*Do option two*/
+                break;
+        }
     }
 
     // Update is called once per frame
-    void Update()
+    void updateNav()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow) /*|| Controller input*/)
+        if (navInput.y < 0)
         { //Input telling it to go up or down.
             selectedOption += 1;
             if (selectedOption > numberOfOptions) //If at end of list go back to top
@@ -71,7 +109,7 @@ public class menu : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) /*|| Controller input*/)
+        if (navInput.y > 0)
         { //Input telling it to go up or down.
             selectedOption -= 1;
             if (selectedOption < 1) //If at end of list go back to top
@@ -105,24 +143,6 @@ public class menu : MonoBehaviour
                 case 4:
                     option4.color = new Color32(255, 255, 255, 255);
                     image4.color = new Color32(0, 0, 0, 100);
-                    break;
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
-        {
-            Debug.Log("Picked: " + selectedOption); //For testing as the switch statment does nothing right now.
-
-            switch (selectedOption) //Set the visual indicator for which option you are on.
-            {
-                case 1:
-                    SceneManager.LoadScene("MasterScene");
-                    break;
-                case 2:
-                    /*Do option two*/
-                    break;
-                case 3:
-                    /*Do option two*/
                     break;
             }
         }

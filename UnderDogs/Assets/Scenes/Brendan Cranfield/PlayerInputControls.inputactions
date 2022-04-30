@@ -641,7 +641,7 @@
                 {
                     "name": "",
                     "id": "22dce505-fe36-4de3-927f-8ce68a97b9ce",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
@@ -663,7 +663,7 @@
                 {
                     "name": "",
                     "id": "fb3bdb62-7bda-4a72-840e-5e1c6a43a0c6",
-                    "path": "<Touchscreen>/touch*/press",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Touch",
