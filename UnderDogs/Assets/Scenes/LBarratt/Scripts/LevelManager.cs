@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 
 public class LevelManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private GameObject _loaderCanvas;
     [SerializeField] private Image _progressBar;
+    private float _target;
+    private bool isLoading = false;
     
     // Reference To Youtube (Tarodev) Tutorial Link Used To Help Create This Script: https://www.youtube.com/watch?v=OmobsXZSRKo
     void Awake()
@@ -25,19 +28,33 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public async void LoadScene(string sceneName)
+    public async void LoadScene()
     {
-        var scene = SceneManager.LoadSceneAsync(sceneName);
-        scene.allowSceneActivation = false;
 
+        _target = 1;
+        _progressBar.fillAmount = 0;
+        var scene = SceneManager.LoadSceneAsync("MasterScene", LoadSceneMode.Single);
+        Debug.Log(scene.progress);
+        isLoading = true;
+        scene.allowSceneActivation = false;
+        
         _loaderCanvas.SetActive(true);
 
         do
-        { 
-            _progressBar.fillAmount = scene.progress;
-        } while (scene.progress < 0.9f);
+        {
+            await Task.Delay(100);
+        } while (_progressBar.fillAmount < 1f);
 
+        //await Task.Delay(1000);
         scene.allowSceneActivation = true;
+
         _loaderCanvas.SetActive(false);
+    }
+
+
+
+    private void Update()
+    {
+        _progressBar.fillAmount = Mathf.MoveTowards(_progressBar.fillAmount, _target, 0.2f * Time.deltaTime);
     }
 }

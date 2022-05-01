@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class ChangeSceneButton : MonoBehaviour
 {
-   public void ChangeScene(string sceneName)
+
+    public void ChangeScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        //LevelManager.Instance.LoadScene();
     }
 
     public void QuitGame()

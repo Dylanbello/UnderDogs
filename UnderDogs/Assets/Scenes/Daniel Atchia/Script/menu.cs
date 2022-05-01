@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 public class menu : MonoBehaviour
 {
-    public ChangeSceneButton changeScene;
     public TextMeshProUGUI option1;
     public TextMeshProUGUI option2;
     public TextMeshProUGUI option3;
@@ -17,6 +16,7 @@ public class menu : MonoBehaviour
     public Image image2;
     public Image image3;
     public Image image4;
+    public Canvas loadingScreen;
     private int numberOfOptions = 4;
 
     private int selectedOption;
@@ -58,7 +58,9 @@ public class menu : MonoBehaviour
         switch (selectedOption) //Set the visual indicator for which option you are on.
         {
             case 1:
-                SceneManager.LoadScene("MasterScene");
+                //SceneManager.LoadScene("MasterScene");
+                loadingScreen.enabled = true;
+                LevelManager.Instance.LoadScene();
                 break;
             case 2:
                 /*Do option two*/
