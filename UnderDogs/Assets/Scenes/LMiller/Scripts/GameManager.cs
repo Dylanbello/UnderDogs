@@ -14,6 +14,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject pauseMenuUI;
     [SerializeField] GameObject inGameUI;
     [SerializeField] TextMeshProUGUI cogCount;
+    [SerializeField] GameObject tutorialMenuUI;
+    [SerializeField] GameObject cogUIHints;
+    [SerializeField] GameObject bridgeUIHints;
+    [SerializeField] GameObject elevatorUIHints;
+    [SerializeField] GameObject robitsUIHints;
+    [SerializeField] GameObject tutorialOverview;
     public int currentCogCount;
     public int levelCogCount;
 
@@ -81,6 +87,50 @@ public class GameManager : MonoBehaviour
     public void LoadMenu()
     {
         SceneManager.LoadScene("Menu");
+    } 
+
+    public void HintsMenu()
+    {
+        pauseMenuUI.SetActive(false);
+        tutorialOverview.SetActive(true);
+        tutorialMenuUI.SetActive(true);
+
+    }
+
+    // The Next Button Script Will Look like a mess but I promise you it's not <3
+    public void HintsNext()
+    {
+        tutorialMenuUI.SetActive(false);
+        cogUIHints.SetActive(true);
+
+    }
+    public void HintsNext1()
+    {
+        cogUIHints.SetActive(false);
+        bridgeUIHints.SetActive(true);
+
+    }
+    public void HintsNext2()
+    {
+        bridgeUIHints.SetActive(false);
+        elevatorUIHints.SetActive(true);
+
+    }
+
+    public void HintsNext3()
+    {
+        bridgeUIHints.SetActive(false);
+        robitsUIHints.SetActive(true);
+
+    }
+
+    public void Return()
+    {
+        robitsUIHints.SetActive(false);
+        pauseMenuUI.SetActive(true);
+        tutorialOverview.SetActive(false);
+
+
     }
     public void QuitGame()
     {
