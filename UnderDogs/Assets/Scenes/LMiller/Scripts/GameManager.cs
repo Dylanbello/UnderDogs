@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject inGameUI;
     [SerializeField] TextMeshProUGUI cogCount;
     [SerializeField] GameObject tutorialMenuUI;
+    [SerializeField] GameObject backDropUI;
     [SerializeField] GameObject cogUIHints;
     [SerializeField] GameObject bridgeUIHints;
     [SerializeField] GameObject elevatorUIHints;
@@ -79,6 +80,8 @@ public class GameManager : MonoBehaviour
     }
     public void Resume()
     {
+        tutorialMenuUI.SetActive(false);
+        backDropUI.SetActive(false);
         pauseMenuUI.SetActive(false);
         inGameUI.SetActive(true);
         Time.timeScale = 1f;
@@ -92,6 +95,7 @@ public class GameManager : MonoBehaviour
     public void HintsMenu()
     {
         pauseMenuUI.SetActive(false);
+        backDropUI.SetActive(true);
         tutorialOverview.SetActive(true);
         tutorialMenuUI.SetActive(true);
 
@@ -127,6 +131,7 @@ public class GameManager : MonoBehaviour
     public void Return()
     {
         robitsUIHints.SetActive(false);
+        backDropUI.SetActive(false);
         pauseMenuUI.SetActive(true);
         tutorialOverview.SetActive(false);
 
