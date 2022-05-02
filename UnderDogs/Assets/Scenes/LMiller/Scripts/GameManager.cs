@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.Audio;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,7 +16,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject inGameUI;
     [SerializeField] TextMeshProUGUI cogCount;
     [SerializeField] GameObject tutorialMenuUI;
-    [SerializeField] GameObject backDropUI;
     [SerializeField] GameObject cogUIHints;
     [SerializeField] GameObject bridgeUIHints;
     [SerializeField] GameObject elevatorUIHints;
@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject tutorialOverview;
     public int currentCogCount;
     public int levelCogCount;
+    public AudioMixer audioMixer;
 
     #region singleton
     private static GameManager _instance;
@@ -81,7 +82,6 @@ public class GameManager : MonoBehaviour
     public void Resume()
     {
         tutorialMenuUI.SetActive(false);
-        backDropUI.SetActive(false);
         pauseMenuUI.SetActive(false);
         inGameUI.SetActive(true);
         Time.timeScale = 1f;
@@ -95,7 +95,6 @@ public class GameManager : MonoBehaviour
     public void HintsMenu()
     {
         pauseMenuUI.SetActive(false);
-        backDropUI.SetActive(true);
         tutorialOverview.SetActive(true);
         tutorialMenuUI.SetActive(true);
 
@@ -131,7 +130,6 @@ public class GameManager : MonoBehaviour
     public void Return()
     {
         robitsUIHints.SetActive(false);
-        backDropUI.SetActive(false);
         pauseMenuUI.SetActive(true);
         tutorialOverview.SetActive(false);
 
@@ -156,6 +154,11 @@ public class GameManager : MonoBehaviour
     public void CountCogsInLevel()
     {
         levelCogCount++;
+    }
+
+    public void SetVolume (float master)
+    {
+        audioMixer.SetFloat("MusicVolume", master);
     }
     #endregion
 }
