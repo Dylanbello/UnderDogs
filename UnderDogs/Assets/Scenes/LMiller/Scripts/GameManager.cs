@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.Audio;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +12,9 @@ public class GameManager : MonoBehaviour
     public GameState State;
     public static event Action<GameState> OnGameStateChanged;
     public bool GameIsPaused = false;
+
+    public Dropdown resolutionDropdown;
+    Resolution[] resolutions;
 
     [Header("UI")]
     [SerializeField] GameObject pauseMenuUI;
@@ -21,10 +26,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject elevatorUIHints;
     [SerializeField] GameObject robitsUIHints;
     [SerializeField] GameObject tutorialOverview;
+    [SerializeField] GameObject settingsMenu;
+
     public int currentCogCount;
     public int levelCogCount;
+
     public AudioMixer audioMixer;
 
+  
     #region singleton
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
@@ -38,28 +47,54 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         UpdateGameState(GameState.MainMenu);
-    }
+        resolutions = Screen.resolutions;
 
-    public void UpdateGameState(GameState newState)
-    {
-        State = newState;
+        resolutionDropdown.ClearOptions();
 
-        switch (newState)
+
+        List<string> options = new List<string>();
+
+
+        int currentResolutionIndex = 0;
+        for (int i = 0; i < resolutions.Length; i++)
         {
-            case GameState.MainMenu:
-                break;
-            case GameState.Cutscene:
-                break;
-            case GameState.Playing:
-                break;
-            case GameState.Paused:
-                break;
-            case GameState.GameOver:
-                break;
-        }
+            string option = resolutions[i].width + " x " + resolutions[i].height;
+            options.Add(option);
 
-        OnGameStateChanged?.Invoke(newState);
+            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+
+            {
+                currentResolutionIndex = i;
+            }
+          
+            resolutionDropdown.AddOptions(options);
+            resolutionDropdown.value = currentResolutionIndex;
+            resolutionDropdown.RefreshShownValue();
+
+        }
     }
+
+        public void UpdateGameState(GameState newState)
+        {
+            State = newState;
+
+            switch (newState)
+            {
+                case GameState.MainMenu:
+                    break;
+                case GameState.Cutscene:
+                    break;
+                case GameState.Playing:
+                    break;
+                case GameState.Paused:
+                    break;
+                case GameState.GameOver:
+                    break;
+            }
+
+            OnGameStateChanged?.Invoke(newState);
+        }
+    
 
     public enum GameState
     {
@@ -100,6 +135,13 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void SettingsMenu()
+    {
+        pauseMenuUI.SetActive(false);
+        settingsMenu.SetActive(true);
+
+    }
+
     // The Next Button Script Will Look like a mess but I promise you it's not <3
     public void HintsNext()
     {
@@ -132,6 +174,7 @@ public class GameManager : MonoBehaviour
         robitsUIHints.SetActive(false);
         pauseMenuUI.SetActive(true);
         tutorialOverview.SetActive(false);
+        settingsMenu.SetActive(false);
 
 
     }
@@ -156,9 +199,26 @@ public class GameManager : MonoBehaviour
         levelCogCount++;
     }
 
-    public void SetVolume (float master)
+    public void SetVolume (float volume)
     {
-        audioMixer.SetFloat("MusicVolume", master);
+        audioMixer.SetFloat("Master", volume);
+    }
+
+    public void SetQuality (int qualityIndex)
+    {
+        QualitySettings.SetQualityLevel(qualityIndex);
+    }
+
+    public void SetFullscreen (bool isFullscreen)
+    {
+        Screen.fullScreen = isFullscreen;
+    }
+
+    public void SetResolution (int resolutionIndex)
+    {
+        Resolution resolution = resolutions[resolutionIndex];
+
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
     #endregion
 }
