@@ -8,17 +8,19 @@ public class menu : MonoBehaviour
     public TextMeshProUGUI option1;
     public TextMeshProUGUI option2;
     public TextMeshProUGUI option3;
-    public TextMeshProUGUI option4;
+    //public TextMeshProUGUI option4;
     public InputActionReference navigation;
     public InputActionReference click;
+    public InputActionReference back;
     public Vector2 navInput;
     public Image image1;
     public Image image2;
     public Image image3;
-    public Image image4;
+    //public Image image4;
     public Canvas loadingScreen;
-    public Canvas credits;
-    private int numberOfOptions = 4;
+    public GameObject credits;
+    public GameObject mainMenu;
+    private int numberOfOptions = 3;
 
     private int selectedOption;
 
@@ -32,12 +34,22 @@ public class menu : MonoBehaviour
         image2.color = new Color32(0, 0, 0, 0);
         option3.color = new Color32(0, 0, 0, 255);
         image3.color = new Color32(0, 0, 0, 0);
-        option4.color = new Color32(0, 0, 0, 255);
-        image4.color = new Color32(0, 0, 0, 0);
+        //option4.color = new Color32(0, 0, 0, 255);
+        //image4.color = new Color32(0, 0, 0, 0);
 
         click.action.performed += Action_performed;
         navigation.action.canceled += Action_canceled;
         navigation.action.performed += Action_performed1;
+        back.action.performed += Back_Performed;
+    }
+
+    private void Back_Performed(InputAction.CallbackContext obj)
+    {
+        if (credits.activeInHierarchy)
+        {
+            credits.SetActive(false);
+            mainMenu.SetActive(true);
+        }
     }
 
     private void Action_canceled(InputAction.CallbackContext obj)
@@ -64,7 +76,7 @@ public class menu : MonoBehaviour
                 LevelManager.Instance.LoadScene();
                 break;
             case 2:
-                /*Do option two*/
+                credits.SetActive(true);
                 break;
             case 3:
                 Application.Quit();
@@ -86,11 +98,11 @@ public class menu : MonoBehaviour
             option1.color = new Color32(0, 0, 0, 255); //Make sure all others will be black (or do any visual you want to use to indicate this)
             option2.color = new Color32(0, 0, 0, 255);
             option3.color = new Color32(0, 0, 0, 255);
-            option4.color = new Color32(0, 0, 0, 255);
+            //option4.color = new Color32(0, 0, 0, 255);
             image1.color = new Color32(0, 0, 0, 0);
             image2.color = new Color32(0, 0, 0, 0);
             image3.color = new Color32(0, 0, 0, 0);
-            image4.color = new Color32(0, 0, 0, 0);
+            //image4.color = new Color32(0, 0, 0, 0);
             switch (selectedOption) //Set the visual indicator for which option you are on.
             {
                 case 1:
@@ -105,10 +117,10 @@ public class menu : MonoBehaviour
                     option3.color = new Color32(255, 255, 255, 255);
                     image3.color = new Color32(0, 0, 0, 100);
                     break;
-                case 4:
-                    option4.color = new Color32(255, 255, 255, 255);
-                    image4.color = new Color32(0, 0, 0, 100);
-                    break;
+                //case 4:
+                //    option4.color = new Color32(255, 255, 255, 255);
+                //    image4.color = new Color32(0, 0, 0, 100);
+                //    break;
             }
         }
 
@@ -123,11 +135,11 @@ public class menu : MonoBehaviour
             option1.color = new Color32(0, 0, 0, 255); //Make sure all others will be black (or do any visual you want to use to indicate this)
             option2.color = new Color32(0, 0, 0, 255);
             option3.color = new Color32(0, 0, 0, 255);
-            option4.color = new Color32(0, 0, 0, 255);
+            //option4.color = new Color32(0, 0, 0, 255);
             image1.color = new Color32(0, 0, 0, 0);
             image2.color = new Color32(0, 0, 0, 0);
             image3.color = new Color32(0, 0, 0, 0);
-            image4.color = new Color32(0, 0, 0, 0);
+            //image4.color = new Color32(0, 0, 0, 0);
 
             switch (selectedOption) //Set the visual indicator for which option you are on.
             {
@@ -143,10 +155,10 @@ public class menu : MonoBehaviour
                     option3.color = new Color32(255, 255, 255, 255);
                     image3.color = new Color32(0, 0, 0, 100);
                     break;
-                case 4:
-                    option4.color = new Color32(255, 255, 255, 255);
-                    image4.color = new Color32(0, 0, 0, 100);
-                    break;
+                //case 4:
+                //    option4.color = new Color32(255, 255, 255, 255);
+                //    image4.color = new Color32(0, 0, 0, 100);
+                //    break;
             }
         }
     }
