@@ -78,6 +78,8 @@ public class BC_CharacterControllerMovement : MonoBehaviour
 
     void HandleSprinting()
     {
+        if(moveInput == Vector3.zero) { isSprinting = false; }
+
         if (!grounded) { return; }
 
         if (!isSprinting) { moveSpeed = 5; }

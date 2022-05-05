@@ -33,7 +33,6 @@ public class InputController : MonoBehaviour
     }
     public void Sprint(InputAction.CallbackContext context) 
     {
-        if (context.started) characterControllerMovement.isSprinting = true;
-        else if(context.canceled) characterControllerMovement.isSprinting = false;
+        if (context.performed) { characterControllerMovement.isSprinting = true; }
     } //Causes the player to break into a sprint.
 }
