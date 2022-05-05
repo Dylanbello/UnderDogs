@@ -7,7 +7,7 @@ public class MainMenuLoader : MonoBehaviour
     // Start is called before the first frame update
     public void Awake()
     {
-        ChangeScene("LBarratt");
+        ChangeScene("MainMenu");
     }
     public void ChangeScene(string sceneName)
     {

@@ -17,6 +17,7 @@ public class menu : MonoBehaviour
     public Image image3;
     public Image image4;
     public Canvas loadingScreen;
+    public Canvas credits;
     private int numberOfOptions = 4;
 
     private int selectedOption;
@@ -66,7 +67,7 @@ public class menu : MonoBehaviour
                 /*Do option two*/
                 break;
             case 3:
-                /*Do option two*/
+                Application.Quit();
                 break;
         }
     }
