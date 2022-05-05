@@ -1542,8 +1542,10 @@ MonoBehaviour:
   power: 1
   attackDamage: 20
   radius: 1
-  currentPickedUp: {fileID: 0}
-  pickupFlag: 0
+  damageVolume: 0
+  attackVolume: 0
+  deathVolume: 0
+  healthBarIcon: {fileID: 0}
 --- !u!114 &6253421700279786896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1556,12 +1558,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde2057bac0404847a4440cbcd9fa5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   moveInput: {x: 0, y: 0, z: 0}
   isSprinting: 0
+  grounded: 0
+  jumping: 0
   moveSpeed: 5
   sprintSpeed: 10
   jumpHeight: 1
   turnSmoothTime: 5
+  isGroundedDistanceCheck: 0.1
+  groundedCheckOffset: {x: 0, y: 0, z: 0}
+  gravityScale: 0
+  landingParticles: {fileID: 0}
+  movementParticles: {fileID: 0}
+  playerFootsteps: []
+  jumpVolume: 0
+  landVolume: 0
 --- !u!114 &3403532609012560422
 MonoBehaviour:
   m_ObjectHideFlags: 0
