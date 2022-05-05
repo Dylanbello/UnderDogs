@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     public int currentCogCount;
     public int levelCogCount;
-
+    public Button controllerInput;
     public AudioMixer audioMixer;
 
   
@@ -116,6 +117,7 @@ public class GameManager : MonoBehaviour
     }
     public void Resume()
     {
+        Return();
         tutorialMenuUI.SetActive(false);
         pauseMenuUI.SetActive(false);
         inGameUI.SetActive(true);
@@ -147,7 +149,6 @@ public class GameManager : MonoBehaviour
     {
         tutorialMenuUI.SetActive(false);
         cogUIHints.SetActive(true);
-
     }
     public void HintsNext1()
     {
@@ -171,6 +172,9 @@ public class GameManager : MonoBehaviour
 
     public void Return()
     {
+        elevatorUIHints.SetActive(false);
+        bridgeUIHints.SetActive(false);
+        cogUIHints.SetActive(false);
         robitsUIHints.SetActive(false);
         pauseMenuUI.SetActive(true);
         tutorialOverview.SetActive(false);
