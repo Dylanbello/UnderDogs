@@ -29,7 +29,8 @@ public class AIHealth : MonoBehaviour
         healthSliders[0].maxValue = maxHeatlh;
         healthSliders[1].maxValue = maxHeatlh;
 
-        
+        healthSliders[0].value = maxHeatlh;
+        healthSliders[1].value = maxHeatlh;
     }
 
     private void HealthSystem_OnHealthChanged(object sender, System.EventArgs e) // This method is called when the AI's health changes via damage, healing, etc.
